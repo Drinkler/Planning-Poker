@@ -18,11 +18,13 @@
     <link rel="stylesheet" type="text/css" href="assets/css/styles.css">
     <link rel="stylesheet" type="text/css" href="assets/css/Testimonials.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/Wruczek/Bootstrap-Cookie-Alert@gh-pages/cookiealert.css">
+
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+
 </head>
 
 <body>
-
-    <!-- Modal -->
+    <!-- Modal LogIn -->
     <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -46,13 +48,46 @@
             </div>
         </div>
     </div>
+    <!-- End Modal LogIn -->
+    <!-- Modal SignUp -->
+    <div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="signupModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="signupModalLabel">Konto erstellen</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form method="post" action="signup.php">
+                    <div class="modal-body">
+                        <h2 class="sr-only">SignUp Form</h2>
+                        <div class="form-group"><input class="form-control" type="text" name="fname" placeholder="Vorname"></div>
+                        <div class="form-group"><input class="form-control" type="text" name="lname" placeholder="Nachname"></div>
+                        <div class="form-group"><input class="form-control" type="email" name="email" placeholder="Email"></div>
+                        <div class="form-group"><input class="form-control" type="password" name="password" placeholder="Password"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Schließen</button>
+                        <button type="submit" class="btn btn-primary">Erstellen</button>
+                    </div>
+                    <div class="form-group">
+                        <div class="g-recaptcha" data-sitekey="6LcbPuYUAAAAABSvTUYDZHeistTNRv0omkLpnMYK" data-callback="verifyRecaptchaCallback" data-expired-callback="expiredRecaptchaCallback"></div>
+                        <input class="form-control d-none" data-recaptcha="true" required data-error="Please complete the Captcha">
+                        <div class="help-block with-errors"></div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- End Modal SignUp -->
     <!-- Login Button -->
     <nav class="navbar navbar-light navbar-expand-md navigation-clean-button">
         <div class="container">
             <a class="navbar-brand" href="#">Planning Poker</a>
             <span class="actions">
                 <a class="login" data-toggle="modal" href="#loginModal">Log In</a>
-                <a class="btn btn-light action-button" role="button" href="#" style="background-color: #e87511;">Sign Up</a>
+                <a class="btn btn-light action-button" data-toggle="modal" data-target="#signupModal" role="button" href="#">Sign Up</a>
             </span>
         </div>
     </nav>
@@ -64,15 +99,15 @@
             </div>
             <div class="col text-center" style="margin-bottom: 60px;"><button class="btn btn-primary" type="button" style="background-color: #e87511;">Los geht's !</button></div>
             <div class="row features">
-                <div class="col-sm-6 col-lg-4 item"><i class="fa fa-clock-o icon" style="color: #e87511;"></i>
+                <div class="col-sm-6 col-lg-4 item"><i class="fa fa-clock-o icon"></i>
                     <h3 class="name">Hohe Verfügbarkeit</h3>
                     <p class="description">Durch die Nutzung von AWS als Backend wird eine hohe Verfügbarkeit des Services gewährleistet.</p>
                 </div>
-                <div class="col-sm-6 col-lg-4 item"><i class="fa fa-plane icon" style="color: #e87511;"></i>
+                <div class="col-sm-6 col-lg-4 item"><i class="fa fa-plane icon"></i>
                     <h3 class="name">Performant</h3>
                     <p class="description">Als Datenbank wird eine&nbsp; AWS RDS verwendet. Höchste Performance und Sicherheit sind für uns oberste Priorität.</p>
                 </div>
-                <div class="col-sm-6 col-lg-4 item"><i class="fa fa-phone icon" style="color: #e87511;"></i>
+                <div class="col-sm-6 col-lg-4 item"><i class="fa fa-phone icon"></i>
                     <h3 class="name">Mobile-first</h3>
                     <p class="description">Während des Entwicklungsprozesses wurde stets das Mobile-first Prinzip verfolgt. Dadruch ist eine Mobile Nutzung der Anwendung zu jeder Zeit möglich.</p>
                 </div>
