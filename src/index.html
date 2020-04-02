@@ -20,8 +20,40 @@
 </head>
 
 <body>
+
+    <!-- Modal -->
+    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="loginModalLabel">Login</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form method="post" action="signup.php">
+                    <div class="modal-body">
+                        <h2 class="sr-only">Login Form</h2>
+                        <div class="form-group"><input class="form-control" type="email" name="email" placeholder="Email"></div>
+                        <div class="form-group"><input class="form-control" type="password" name="password" placeholder="Password"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Schließen</button>
+                        <button type="submit" class="btn btn-primary">Log In</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Login Button -->
     <nav class="navbar navbar-light navbar-expand-md navigation-clean-button">
-        <div class="container"><a class="navbar-brand" href="#">Planning Poker</a><span class="actions"> <a class="login" href="#">Log In</a><a class="btn btn-light action-button" role="button" href="#" style="background-color: #e87511;">Sign Up</a></span></div>
+        <div class="container">
+            <a class="navbar-brand" href="#">Planning Poker</a>
+            <span class="actions">
+                <a class="login" data-toggle="modal" href="#loginModal">Log In</a>
+                <a class="btn btn-light action-button" role="button" href="#" style="background-color: #e87511;">Sign Up</a>
+            </span>
+        </div>
     </nav>
     <div class="features-clean">
         <div class="container">
@@ -103,7 +135,7 @@
                         </ul>
                     </div>
                     <div class="col-lg-3 item social"><a href="#"><i class="icon ion-social-facebook"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-instagram"></i></a>
-                        <p class="copyright">Luca Stanger, Florian Drinkler © 2020</p>
+                        <p class="copyright">Florian Drinkler, Luca Stanger © 2020</p>
                     </div>
                 </div>
             </div>
