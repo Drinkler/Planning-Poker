@@ -9,7 +9,6 @@ if (!empty($_POST["name"]) && !empty($_POST["surname"]) && !empty($_POST["email"
     $email = $mysqli->real_escape_string(htmlspecialchars($_POST["email"]));
     $password = password_hash($mysqli->real_escape_string(htmlspecialchars($_POST["password"])), PASSWORD_DEFAULT);
 }
-
 // Check if email already exists
 $query = "SELECT COUNT(*) FROM user WHERE email=?";
 $stmt = $mysqli->prepare($query);
