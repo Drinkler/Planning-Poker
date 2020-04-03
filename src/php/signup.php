@@ -24,6 +24,8 @@ if (!$result->fetch_array()[0]) {
     $stmt->bind_param("ssss", $name, $surname, $email, $password);
     $stmt->execute();
     $stmt->close();
+
+    header('Location: ../index.html');
 } else {
     echo "Email existiert bereits.";
 }
