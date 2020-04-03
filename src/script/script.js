@@ -35,7 +35,7 @@ function createReviewRows() {
         url: '../src/php/ajax/getLatestReviews.php',
         success: function (response) {
             for (let resp in response) {
-
+                console.log(resp)
             }
         },
         error: function (xhr, ajaxOptions, thrownError) {
