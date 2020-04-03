@@ -4,6 +4,7 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
         <title>Planning-Poker</title>
+        <link rel="shortcut icon" type="image/x-icon" href="assets/img/planning_icon.png">
         <link rel="stylesheet" type="text/css" href="assets/bootstrap/css/bootstrap.min.css" />
         <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic" />
         <link rel="stylesheet" type="text/css" href="assets/fonts/font-awesome.min.css" />
@@ -26,7 +27,7 @@
         <script src="script/script.js"></script>
     </head>
 
-    <body>
+    <body onload="createReviewRows()">
         <!-- Modal LogIn -->
         <div
             class="modal fade"
@@ -122,7 +123,7 @@
         <!-- Login Button -->
         <nav class="navbar navbar-light navbar-expand-md navigation-clean-button">
             <div class="container">
-                <a class="navbar-brand" href="#">Planning Poker</a>
+                <a class="navbar-brand" href="index">Planning Poker</a>
                 <span class="actions">
                     <a class="login" data-toggle="modal" href="#loginModal">Log In</a>
                     <a
@@ -146,7 +147,7 @@
                     </p>
                 </div>
                 <div class="col text-center" style="margin-bottom: 60px;">
-                    <button class="btn btn-primary" type="button" style="background-color: #e87511;">
+                    <button class="btn btn-primary" type="button">
                         Los geht's !
                     </button>
                 </div>
@@ -184,33 +185,7 @@
                     <h2 class="text-center">Nutzermeinungen</h2>
                     <p class="text-center">Unsere Nutzer lieben uns! Lies was sie zu sagen haben.&nbsp;</p>
                 </div>
-                <div class="row people" id="reviewContainer">
-                    <div class="col-md-6 col-lg-4 item">
-                        <div class="box">
-                            <p class="description">
-                                Super Tool! Hilft uns beim Planen unserer User-Storys immer wieder aufs neue!
-                            </p>
-                        </div>
-                        <div class="author">
-                            <img class="rounded-circle" src="assets/img/1.jpg" />
-                            <h5 class="name">Ben Johnson</h5>
-                            <p class="title">CEO von camos Software &amp; Beratung GmbH.</p>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-4 item">
-                        <div class="box">
-                            <p class="description">
-                                Hat beim ersten mal überzeugt und wird es auch beim nächsten mal tun! Sehr innovativ
-                                gestaltet.
-                            </p>
-                        </div>
-                        <div class="author">
-                            <img class="rounded-circle" src="assets/img/3.jpg" />
-                            <h5 class="name">Carl Kent</h5>
-                            <p class="title">CEO von Balluff GmbH.</p>
-                        </div>
-                    </div>
-                </div>
+                <div class="row people" id="reviewContainer"></div>
             </div>
         </div>
         <div class="footer-clean">
