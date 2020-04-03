@@ -1,104 +1,85 @@
-let canvas = document.getElementById("canvas");
-console.log(canvas);
-let ctx = canvas.getContext('2d');
+class Review {
+    constructor(username, content) {
+        this.username = username;
+        this.content = content;
+    }
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+    getUsername() {
+        return this.username;
+    }
 
-var stars = [], // Array that contains the stars
-    FPS = 60, // Frames per second
-    x = 100, // Number of stars
-    mouse = {
-        x: 0,
-        y: 0
-    };  // mouse location
+    getContent() {
+        return this.content;
+    }
+}
 
-// Push stars to array
-
-for (var i = 0; i < x; i++) {
-    stars.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        radius: Math.random() * 1 + 1,
-        vx: Math.floor(Math.random() * 50) - 25,
-        vy: Math.floor(Math.random() * 50) - 25
+function getLatestReviews() {
+    $.ajax({
+        type: 'POST',
+        url: '../src/php/ajax/getLatestReviews.php',
+        success: function (response) {
+            console.log(response);
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+            console.log(xhr.status);
+            console.log(thrownError);
+        }
     });
 }
 
-// Draw the scene
+function createReviewRows() {
+    let container = document.getElementById('reviewContainer');
 
-function draw() {
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-
-    ctx.globalCompositeOperation = "lighter";
-
-    for (var i = 0, x = stars.length; i < x; i++) {
-        var s = stars[i];
-
-        ctx.fillStyle = "#fff";
-        ctx.beginPath();
-        ctx.arc(s.x, s.y, s.radius, 0, 2 * Math.PI);
-        ctx.fill();
-        ctx.fillStyle = 'black';
-        ctx.stroke();
-    }
-
-    ctx.beginPath();
-    for (var i = 0, x = stars.length; i < x; i++) {
-        var starI = stars[i];
-        ctx.moveTo(starI.x,starI.y);
-        if(distance(mouse, starI) < 150) ctx.lineTo(mouse.x, mouse.y);
-        for (var j = 0, x = stars.length; j < x; j++) {
-            var starII = stars[j];
-            if(distance(starI, starII) < 150) {
-                //ctx.globalAlpha = (1 / 150 * distance(starI, starII).toFixed(1));
-                ctx.lineTo(starII.x,starII.y);
+    $.ajax({
+        type: 'POST',
+        url: '../src/php/ajax/getLatestReviews.php',
+        success: function (response) {
+            for (let resp in response) {
+                console.log(resp)
             }
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+            console.log(xhr.status);
+            console.log(thrownError);
         }
-    }
-    ctx.lineWidth = 0.05;
-    ctx.strokeStyle = 'white';
-    ctx.stroke();
+    });
 }
 
-function distance( point1, point2 ){
-    var xs = 0;
-    var ys = 0;
+function createReviewBracket(author, authorTitle, content) {
+    //<div class="col-md-6 col-lg-4 item">
+    //    <div class="box">
+    //      <p class="description">Super Tool! Hilft uns beim Planen unserer User-Storys immer wieder aufs neue!</p>
+    //    </div>
+    //    <div class="author"><img class="rounded-circle" src="assets/img/1.jpg">
+    //      <h5 class="name">Ben Johnson</h5>
+    //      <p class="title">CEO von camos Software &amp; Beratung GmbH.</p>
+    //    </div>
+    //</div>
+    let wrapperDiv = document.createElement('div');
+    wrapperDiv.classList.add('col-md-6', 'col-lg-4', 'item');
+    //
+    let boxDiv = document.createElement('div');
+    boxDiv.classList.add('box');
+    //
+    let description = document.createElement('p');
+    description.classList.add('description');
+    description.innerText = content;
+    //
+    let authorDiv = document.createElement('div');
+    authorDiv.classList.add('author');
+    //
+    let img = document.createElement('img');
+    //
+    let name = document.createElement('h5');
+    name.classList.add('name');
+    name.innerText = author;
+    //
+    let title = document.createElement('p');
+    title.classList.add('title');
+    title.innerText = authorTitle;
 
-    xs = point2.x - point1.x;
-    xs = xs * xs;
+    wrapperDiv.appendChild(boxDiv);
+    wrapperDiv.appendChild()
 
-    ys = point2.y - point1.y;
-    ys = ys * ys;
 
-    return Math.sqrt( xs + ys );
 }
-
-// Update star locations
-
-function update() {
-    for (var i = 0, x = stars.length; i < x; i++) {
-        var s = stars[i];
-
-        s.x += s.vx / FPS;
-        s.y += s.vy / FPS;
-
-        if (s.x < 0 || s.x > canvas.width) s.vx = -s.vx;
-        if (s.y < 0 || s.y > canvas.height) s.vy = -s.vy;
-    }
-}
-
-canvas.addEventListener('mousemove', function(e){
-    mouse.x = e.clientX;
-    mouse.y = e.clientY;
-});
-
-// Update and draw
-
-function tick() {
-    draw();
-    update();
-    requestAnimationFrame(tick);
-}
-
-tick();
