@@ -22,7 +22,7 @@ if (isset($email) && isset($challenge)) {
         $stmt->execute();
         $stmt->close();
 
-        header("Location: ../index.html");
+        header("Location: ../index.php");
     } else {
         echo "Benutzer nicht autorisiert.";
     }

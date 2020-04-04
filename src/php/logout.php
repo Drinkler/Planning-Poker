@@ -8,4 +8,4 @@ if (isset($_COOKIE[session_name()])) {
 $_SESSION = array();
 session_destroy();
 
-header('Location: ../../login.php');
+header('Location: ../index.php');
