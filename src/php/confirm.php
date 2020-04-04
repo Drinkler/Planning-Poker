@@ -24,8 +24,8 @@ if (isset($email) && isset($challenge)) {
 
         header("Location: ../index.html");
     } else {
-        echo "not authorized.";
+        echo "Benutzer nicht autorisiert.";
     }
 } else {
-    echo "Wrong Parameters";
+    echo "Get Parameter sind falsch.";
 }
