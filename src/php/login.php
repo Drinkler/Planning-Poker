@@ -36,3 +36,5 @@ if ($data = $results->fetch_assoc()) {
         echo "Wrong password";
     }
 }
+
+$mysqli->close();

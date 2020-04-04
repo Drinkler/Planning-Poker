@@ -1,24 +1,12 @@
-class Review {
-    constructor(username, content) {
-        this.username = username;
-        this.content = content;
-    }
-
-    getUsername() {
-        return this.username;
-    }
-
-    getContent() {
-        return this.content;
-    }
-}
 
 function getLatestReviews() {
     $.ajax({
         type: 'POST',
         url: '../src/php/ajax/getLatestReviews.php',
         success: function (response) {
-            console.log(response);
+            JSON.parse(response).forEach(
+                element => console.log(createReviewBracket(element.author, element.authorTitle, element.content))
+            );
         },
         error: function (xhr, ajaxOptions, thrownError) {
             console.log(xhr.status);
@@ -34,9 +22,11 @@ function createReviewRows() {
         type: 'POST',
         url: '../src/php/ajax/getLatestReviews.php',
         success: function (response) {
-            for (let resp in response) {
-                console.log(resp)
-            }
+            JSON.parse(response).forEach(
+                element => container.appendChild(
+                    createReviewBracket(element.author, element.authorTitle, element.content)
+                )
+            );
         },
         error: function (xhr, ajaxOptions, thrownError) {
             console.log(xhr.status);
@@ -45,16 +35,16 @@ function createReviewRows() {
     });
 }
 
+
+// TODO: Unit Test missing
+/**
+ *
+ * @param author - contains the author's name
+ * @param authorTitle - contains the position of the author
+ * @param content - contains string content of the review
+ * @returns {HTMLDivElement}
+ */
 function createReviewBracket(author, authorTitle, content) {
-    //<div class="col-md-6 col-lg-4 item">
-    //    <div class="box">
-    //      <p class="description">Super Tool! Hilft uns beim Planen unserer User-Storys immer wieder aufs neue!</p>
-    //    </div>
-    //    <div class="author"><img class="rounded-circle" src="assets/img/1.jpg">
-    //      <h5 class="name">Ben Johnson</h5>
-    //      <p class="title">CEO von camos Software &amp; Beratung GmbH.</p>
-    //    </div>
-    //</div>
     let wrapperDiv = document.createElement('div');
     wrapperDiv.classList.add('col-md-6', 'col-lg-4', 'item');
     //
@@ -69,6 +59,8 @@ function createReviewBracket(author, authorTitle, content) {
     authorDiv.classList.add('author');
     //
     let img = document.createElement('img');
+    img.classList.add('rounded-circle');
+    img.src = 'assets/img/2020-04-03 14_06_50-Window.png'; // TODO: IMG SOURCE
     //
     let name = document.createElement('h5');
     name.classList.add('name');
@@ -79,7 +71,11 @@ function createReviewBracket(author, authorTitle, content) {
     title.innerText = authorTitle;
 
     wrapperDiv.appendChild(boxDiv);
-    wrapperDiv.appendChild()
+    boxDiv.appendChild(description);
+    wrapperDiv.appendChild(authorDiv);
+    authorDiv.appendChild(img);
+    authorDiv.appendChild(name);
+    authorDiv.appendChild(title);
 
-
+    return wrapperDiv;
 }
