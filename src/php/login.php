@@ -32,7 +32,6 @@ if ($data = $results->fetch_assoc()) {
             $_SESSION["name"] = $data["name"];
             $_SESSION["surname"] = $data["surname"];
             $_SESSION["email"] = $data["email"];
-            $_SESSION["iduser"] = $data["iduser"];
 
             header("Location: ../index.php");
         }
