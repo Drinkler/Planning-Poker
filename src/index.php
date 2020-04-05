@@ -2,7 +2,7 @@
 session_start();
 
 if (isset($_SESSION['signed_in']) && $_SESSION['signed_in'] == true) {
-    echo "logged in";
+
 }
 ?>
 
@@ -105,10 +105,10 @@ if (isset($_SESSION['signed_in']) && $_SESSION['signed_in'] == true) {
     <nav class="navbar navbar-light navbar-expand-md navigation-clean-button">
         <div class="container">
             <a class="navbar-brand" href="#">Planning Poker</a>
-            <span class="actions">
-                <a class="login" data-toggle="modal" href="#loginModal">Log In</a>
-                <a class="btn btn-light action-button" data-toggle="modal" data-target="#signupModal" role="button" href="#">Sign Up</a>
-            </span>
+            <?php
+                include_once("php/checkLoginForNavBar.php");
+            ?>
+
         </div>
     </nav>
     <div class="features-clean">
@@ -121,7 +121,7 @@ if (isset($_SESSION['signed_in']) && $_SESSION['signed_in'] == true) {
                 </p>
             </div>
             <div class="col text-center" style="margin-bottom: 60px;">
-                <button class="btn btn-primary" type="button" style="background-color: #e87511;">
+                <button class="btn btn-primary" type="button">
                     Los geht's !
                 </button>
             </div>
