@@ -1,13 +1,10 @@
 <?php
 session_start();
 
-if (isset($_SESSION['signed_in']) && $_SESSION['signed_in'] == true) {
-
-}
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="de">
 
 <head>
     <meta charset="utf-8" />
