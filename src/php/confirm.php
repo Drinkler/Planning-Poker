@@ -22,10 +22,10 @@ if (isset($email) && isset($challenge)) {
         $stmt->execute();
         $stmt->close();
 
-        header("Location: ../index.html");
+        header("Location: ../index.php");
     } else {
-        echo "not authorized.";
+        echo "Benutzer nicht autorisiert.";
     }
 } else {
-    echo "Wrong Parameters";
+    echo "Get Parameter sind falsch.";
 }

@@ -1,24 +1,45 @@
 <?php
+session_start();
 
+require('session.php');
 require('database.php');
 
-// $email = $mysqli->real_escape_string(htmlspecialchars($_POST["login"]));
-// $password = htmlspecialchars($_POST["password"]);
-$email = "flo.drinkler@gmail.com";
-$password = "test";
+// User already logged in
+if (isset($_SESSION['signed_in']) && $_SESSION['signed_in'] == true) {
+    header('Location: ../index.php');
+    exit();
+}
 
-if (isset($email) && isset($password)) {
-    $query = "SELECT * FROM user WHERE email=?";
-    $stmt = $mysqli->prepare($query);
-    $stmt->bind_param("s", $email);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $stmt->close();
+if (!empty($_POST["email"]) && !empty($_POST["password"])) {
+    $email = $mysqli->real_escape_string(htmlspecialchars($_POST["email"]));
+    $password = htmlspecialchars($_POST["password"]);
+}
 
-    if ($data = $result->fetch_assoc()) {
-        if (password_verify($password, $data["password"])) {
+$query = "SELECT * FROM user WHERE email=?";
+$stmt = $mysqli->prepare($query);
+$stmt->bind_param("s", $email);
+$stmt->execute();
+$results = $stmt->get_result();
+$stmt->close();
+
+if ($data = $results->fetch_assoc()) {
+    if (password_verify($password, $data["password"])) {
+        if ($data["confirmed"] == 1) {
+            // User can login
+            echo "signed in";
+            $_SESSION["signed_in"] = true;
+            $_SESSION["iduser"] = $data["iduser"];
+            $_SESSION["name"] = $data["name"];
+            $_SESSION["surname"] = $data["surname"];
+            $_SESSION["email"] = $data["email"];
+
+            header("Location: ../index.php");
         }
+    } else {
+        echo "Wrong password";
     }
+} else {
+    echo "Email doesn't exists.";
 }
 
 $mysqli->close();
