@@ -35,6 +35,8 @@ if ($data = $results->fetch_assoc()) {
     } else {
         echo "Wrong password";
     }
+} else {
+    echo "Email doesn't exists.";
 }
 
 $mysqli->close();
