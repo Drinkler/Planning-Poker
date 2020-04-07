@@ -2,8 +2,8 @@
 
 class Issue
 {
-    var $title;
-    var $description;
+    private $title;
+    private $description;
 
     function __construct(string $title, string $description)
     {
