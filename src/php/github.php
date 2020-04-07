@@ -32,5 +32,6 @@ function getIssues(string $username, string $repository)
         array_push($issues, new Issue($issue->title, $issue->body));
     }
 
+    // reverse is used because the github api gives the issues in reversed order
     return array_reverse($issues);
 }
