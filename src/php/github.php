@@ -32,6 +32,6 @@ function getIssues(string $username, string $repository)
         array_push($issues, new Issue($issue->title, $issue->body));
     }
 
-    // reverse is used because the github api gives the issues in reversed order
+    // Reverse is used because the github api gives the newest issues first. Now it starts with the oldest.
     return array_reverse($issues);
 }

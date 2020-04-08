@@ -13,7 +13,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 
 $_SESSION['LAST_ACTIVITY'] = time();
 
 // After 30 minutes, renew session id
-// trying to prefent Session fixation
+// trying to prevent Session fixation
 if (!isset($_SESSION['CREATED'])) {
     $_SESSION['CREATED'] = time();
 } else if (time() - $_SESSION['CREATED'] > (30 * 60)) {
