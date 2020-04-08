@@ -2,32 +2,44 @@
 
 require("database.php");
 
-// Get required data
+// Check if required data is given
 if (!empty($_POST["name"]) && !empty($_POST["surname"]) && !empty($_POST["email"]) && !empty($_POST["password"])) {
-    $name = $mysqli->real_escape_string(htmlspecialchars($_POST["name"]));
-    $surname = $mysqli->real_escape_string(htmlspecialchars($_POST["surname"]));
-    $email = $mysqli->real_escape_string(htmlspecialchars($_POST["email"]));
-    $password = password_hash($mysqli->real_escape_string(htmlspecialchars($_POST["password"])), PASSWORD_DEFAULT);
+    $name = htmlspecialchars($_POST["name"]);
+    $surname = htmlspecialchars($_POST["surname"]);
+    $email = htmlspecialchars($_POST["email"]);
+    // hashing the password
+    $password = password_hash(htmlspecialchars($_POST["password"]), PASSWORD_DEFAULT);
+} else {
+    echo "Wrong input is given.";
+    exit();
 }
-// Check if email already exists
-$query = "SELECT COUNT(*) FROM user WHERE email=?";
-$stmt = $mysqli->prepare($query);
-$stmt->bind_param("s", $email);
+
+// Returns amount of how often the email is in the db.
+// Should be either 1 or 0, because duplicates shouldn't be working.
+$query = "SELECT COUNT(*) FROM user WHERE email=:email";
+$stmt = $pdo->prepare($query);
+$stmt->bindParam(":email", $email);
 $stmt->execute();
-$result = $stmt->get_result();
-$stmt->close();
 
-if (!$result->fetch_array()[0]) {
+// If the email is not yet in the db, user can sign up.
+if (!$stmt->fetch()[0]) {
 
+    // Create random value for confirmation.
     $challenge = md5(rand() . time());
 
-    $query = "INSERT INTO user (name ,surname ,email ,password, challenge) VALUES (?,?,?,?,?)";
-    $stmt = $mysqli->prepare($query);
-    $stmt->bind_param("sssss", $name, $surname, $email, $password, $challenge);
+    // Save new user in db.
+    $query = "INSERT INTO user (name ,surname ,email ,password, challenge) VALUES (:name, :surname, :email, :password, :challenge)";
+    $stmt = $pdo->prepare($query);
+    $stmt->bindParam(':name', $name);
+    $stmt->bindParam(':surname', $surname);
+    $stmt->bindParam(':email', $email);
+    $stmt->bindParam(':password', $password);
+    $stmt->bindParam(':challenge', $challenge);
     $stmt->execute();
-    $stmt->close();
 
+    // Link for email confirmation.
+    // Should be send in an email, read documentation to see why in this project it was not done by email.
     echo "<a href='confirm.php?email=$email&challenge=$challenge'>Confirm Account</a>";
 } else {
-    echo "Email existiert bereits.";
+    echo "Email already exists.";
 }
