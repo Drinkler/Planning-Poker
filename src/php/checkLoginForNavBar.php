@@ -49,5 +49,3 @@ if (isset($_SESSION['signed_in']) && $_SESSION['signed_in'] == true) {
                 <a class="btn btn-light action-button" data-toggle="modal" data-target="#signupModal" role="button" href="#">Sign Up</a>
             </span>';
 }
-
-

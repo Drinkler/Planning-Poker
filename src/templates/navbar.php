@@ -72,8 +72,5 @@
     <nav class=\"navbar navbar-light navbar-expand-md navigation-clean-button\">
         <div class=\"container\">
             <a class=\"navbar-brand\" href=\"index.php\">Planning Poker</a>";
-    echo include("php/checkLoginForNavBar.php");
-    echo "</div>
-    </nav>";
-
-
+    include("php/checkLoginForNavBar.php");
+    echo "</div></nav>";
