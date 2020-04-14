@@ -101,7 +101,7 @@ session_start();
     <!-- Login Button -->
     <nav class="navbar navbar-light navbar-expand-md navigation-clean-button">
         <div class="container">
-            <a class="navbar-brand" href="#">Planning Poker</a>
+            <a class="navbar-brand" href="index.php">Planning Poker</a>
             <?php
                 include_once("php/checkLoginForNavBar.php");
             ?>
@@ -118,9 +118,11 @@ session_start();
                 </p>
             </div>
             <div class="col text-center" style="margin-bottom: 60px;">
+                <a href="lobby.php">
                 <button class="btn btn-primary" type="button">
                     Los geht's !
                 </button>
+                </a>
             </div>
             <div class="row features">
                 <div class="col-sm-6 col-lg-4 item">
