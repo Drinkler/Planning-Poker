@@ -30,9 +30,9 @@ if (isset($_SESSION['signed_in']) && $_SESSION['signed_in'] == true) {
 
     echo '<span class="actions">
                 <div class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <button class="btn dropdown-toggle" data-toggle="dropdown">
                         <img src="'. get_gravatar($_SESSION['email']) .'" width="40" height="40" class="img-circle" alt="@username">
-                    </a>
+                    </button>
                     <div class="dropdown-menu">
                         <p class="dropdown-header">Angemeldet als: <br>' . $_SESSION['username'] .'</p>
                         <div class="dropdown-divider"></div>

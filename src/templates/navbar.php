@@ -69,7 +69,7 @@
     </div>
     <!-- End Modal SignUp -->
     <!-- Login Button -->
-    <nav class=\"navbar navbar-light navbar-expand-md navigation-clean-button\">
+    <nav class=\"navbar navbar-light navbar-expand-md navigation-clean-button dropleft\">
         <div class=\"container\">
             <a class=\"navbar-brand\" href=\"index.php\">Planning Poker</a>";
     include("php/checkLoginForNavBar.php");

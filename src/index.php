@@ -30,10 +30,7 @@ session_start();
 
 <body>
     <?php
-        ob_start();
         include("templates/navbar.php");
-        $html = ob_get_clean();
-        echo  $html;
     ?>
 
     <div class="features-clean">
