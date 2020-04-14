@@ -34,7 +34,7 @@ if (isset($_SESSION['signed_in']) && $_SESSION['signed_in'] == true) {
                         <img src="'. get_gravatar($_SESSION['email']) .'" width="40" height="40" class="img-circle" alt="@username">
                     </a>
                     <div class="dropdown-menu">
-                        <p class="dropdown-header">Angemeldet als: <br>' . $_SESSION['name'] . ' ' .$_SESSION['surname'] .'</p>
+                        <p class="dropdown-header">Angemeldet als: <br>' . $_SESSION['username'] .'</p>
                         <div class="dropdown-divider"></div>
                         <a href="#" class="dropdown-item">Dein Profil</a>
                         <a href="#" class="dropdown-item">Deine Lobbys</a>
@@ -49,5 +49,3 @@ if (isset($_SESSION['signed_in']) && $_SESSION['signed_in'] == true) {
                 <a class="btn btn-light action-button" data-toggle="modal" data-target="#signupModal" role="button" href="#">Sign Up</a>
             </span>';
 }
-
-

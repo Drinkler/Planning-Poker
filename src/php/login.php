@@ -38,6 +38,7 @@ if ($result = $stmt->fetch()) {
             $_SESSION["name"] = $result["name"];
             $_SESSION["surname"] = $result["surname"];
             $_SESSION["email"] = $result["email"];
+            $_SESSION["username"] = $_SESSION["name"] . " " . $_SESSION["surname"];
 
             header("Location: ../index.php");
             exit();
