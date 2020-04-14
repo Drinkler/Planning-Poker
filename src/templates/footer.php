@@ -1,5 +1,5 @@
 <?php
-    echo "<div class=\"footer-clean\">
+    echo "<div class=\"footer-clean fixed-bottom\">
     <footer>
         <div class=\"container\">
             <div class=\"row justify-content-center\">
