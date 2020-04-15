@@ -34,7 +34,18 @@ session_start();
 <?php
 include_once("templates/navbar.php");
 ?>
+<?php
+    require('php/session.php');
+    require("php/database.php");
+    // Testing with all available lobbies
+    $query = "SELECT * FROM lobby";
+    $stmt = $pdo->prepare($query);
+    $stmt->execute();
 
+    echo json_encode($stmt->fetch());
+
+
+?>
 <?php
 include_once("templates/footer.php");
 ?>
