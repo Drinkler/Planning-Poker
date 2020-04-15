@@ -1,9 +1,9 @@
 <?php
 
-include "issue.php";
-
 function getIssues(string $username, string $repository)
 {
+    require("Issue.php");
+
     $issues = array();
 
     /**
