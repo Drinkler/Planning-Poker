@@ -71,6 +71,16 @@
     <!-- Login Button -->
     <nav class=\"navbar navbar-light navbar-expand-md navigation-clean-button dropleft\">
         <div class=\"container\">
-            <a class=\"navbar-brand\" href=\"index.php\">Planning Poker</a>";
+            <a class=\"navbar-brand\" href=\"index.php\">
+            <img src='assets/img/planning_icon.png' width=\"30px\" height=\"30px\" class=\"d-inline-block align-top\" alt=\"\">
+            Planning Poker
+            </a>    
+            <div class=\"collapse navbar-collapse\" id=\"navbarNav\">
+            <ul class=\"navbar-nav\">
+              <li class=\"nav-item active\">
+                <a class=\"nav-link\" href=\"#\">Sessions <span class=\"sr-only\">(current)</span></a>
+              </li>
+            </ul>
+          </div>";
     include("php/checkLoginForNavBar.php");
     echo "</div></nav>";
