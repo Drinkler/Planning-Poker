@@ -79,7 +79,7 @@ $cardSets = [
                             <select class="form-control" id="exampleFormControlSelect1">
                                 <?php
                                     foreach ($cardSets as $key=>$cardSet) {
-                                        echo "<option>" . json_encode($cardSet) . "</option>";
+                                        echo "<option value=$key>" . json_encode($cardSet) . "</option>";
                                     }
                                 ?>
                             </select>
