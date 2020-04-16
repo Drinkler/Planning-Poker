@@ -1,6 +1,6 @@
 <?php
 
-require("Issue.php");
+require("classes/Issue.php");
 
 function getIssues(string $username, string $repository)
 {

@@ -1,7 +1,7 @@
 <?php
 
 require("database.php");
-require("Review.php");
+require("classes/Review.php");
 
 function getReviews()
 {
