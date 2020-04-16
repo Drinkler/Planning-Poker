@@ -70,14 +70,14 @@ $cardSets = [
                     <h4 class="card-title">Erstelle eine Sitzung</h4>
                     <p class="card-text"> Gib deiner Sitzung einen Namen und wähle die Karte aus, welche du benutzen möchtest. Teile anschließend die erhaltene ID deinen Teilnehmern mit.</p>
                     <!-- TODO: Lobby per click erzeugen -->
-                    <form action="">
+                    <form action="php/createLobby.php" method="POST">
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Sitzungs Name:</label>
-                            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Meine Session">
+                            <input type="text" class="form-control" id="lobbyName" placeholder="Meine Session">
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlSelect1">Karten:</label>
-                            <select class="form-control" id="exampleFormControlSelect1">
+                            <select class="form-control" id="cards">
                                 <?php
                                     foreach ($cardSets as $key=>$cardSet) {
                                         echo "<option value=$key>" . json_encode($cardSet) . "</option>";
