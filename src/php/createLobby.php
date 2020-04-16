@@ -25,3 +25,6 @@ $stmt->bindParam(':name', $lobbyName);
 $stmt->bindParam(':creator', $_SESSION["iduser"], PDO::PARAM_INT);
 $stmt->bindParam(':deck', $cards, PDO::PARAM_INT);
 $stmt->execute();
+
+header('Location: ../sessions.php');
+exit();

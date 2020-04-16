@@ -72,14 +72,15 @@ $cardSets = [
                         <!-- TODO: Lobby per click erzeugen -->
                         <form action="php/createLobby.php" method="POST">
                             <div class="form-group">
-                                <label for="exampleFormControlInput1">Sitzungs Name:</label>
-                                <input type="text" class="form-control" name="lobbyName" placeholder="Meine Session">
+                                <label for="formLabelSelect">Sitzungs Name:</label>
+                                <input type="text" class="form-control" name="lobbyName" id="formLabelSelect" placeholder="Meine Session">
                             </div>
                             <div class="form-group">
-                                <label for="exampleFormControlSelect1">Karten:</label>
-                                <select class="form-control" name="cards">
+                                <label for="formControlSelect">Karten:</label>
+                                <select class="form-control" name="cards" id="formControlSelect">
                                     <?php
                                     foreach ($cardSets as $key => $cardSet) {
+                                        $key += 1;
                                         echo "<option value=$key>" . json_encode($cardSet) . "</option>";
                                     }
                                     ?>
