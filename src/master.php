@@ -1,7 +1,18 @@
 <?php
 session_start();
 
-// TODO: Überprüfen ob User angemeldet ist, falls nicht -> Location index.php
+function __autoload($className) {
+    $class = 'php/classes/' . $className. '.php';
+    if (file_exists($class))
+    {
+        echo $class;
+        include $class;
+    }
+
+    $controller = new Controller();
+}
+
+
 
 ?>
 
