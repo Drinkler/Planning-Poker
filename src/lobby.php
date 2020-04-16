@@ -69,7 +69,8 @@ $cardSets = [
                 <div class="card-body">
                     <h4 class="card-title">Erstelle eine Sitzung</h4>
                     <p class="card-text"> Gib deiner Sitzung einen Namen und wähle die Karte aus, welche du benutzen möchtest. Teile anschließend die erhaltene ID deinen Teilnehmern mit.</p>
-                    <form>
+                    <!-- TODO: Lobby per click erzeugen -->
+                    <form action="">
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Sitzungs Name:</label>
                             <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Meine Session">

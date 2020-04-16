@@ -34,18 +34,45 @@ session_start();
 <?php
 include_once("templates/navbar.php");
 ?>
-<?php
-    require('php/session.php');
+    <div class="container">
+        <div class="row">
+        <?php
+    require("php/session.php");
     require("php/database.php");
-    // Testing with all available lobbies
-    $query = "SELECT * FROM lobby";
+
+    $query = "SELECT idlobby, creator, lobby.created, lobby.name, user.name as uname, user.surname FROM lobby, user where creator =  iduser";
     $stmt = $pdo->prepare($query);
     $stmt->execute();
 
-    echo json_encode($stmt->fetch());
+    $result = $stmt->fetchAll();
 
+    echo "<table class=\"table\">
+              <thead>
+                <tr>
+                  <th scope=\"col\">#</th>
+                  <th scope=\"col\">Host</th>
+                  <th scope=\"col\">Created</th>
+                  <th scope=\"col\">Name</th>
+                </tr>
+              </thead>
+              <tbody>";
+
+    foreach ($result as $key=>$lobby) {
+        echo "<tr>
+                <th scope='row'>$key</th>";
+        # echo "<td>" . $lobby["idlobby"]. "</td>";
+        echo "<td>" . $lobby["uname"] . " ". $lobby["surname"] . "</td>";
+        echo "<td>" . $lobby["created"]. "</td>";
+        echo "<td>" . $lobby["name"]. "</td>";
+        echo "</tr>";
+    }
+
+    echo "</tbody>
+         </table>";
 
 ?>
+        </div>
+    </div>
 <?php
 include_once("templates/footer.php");
 ?>
