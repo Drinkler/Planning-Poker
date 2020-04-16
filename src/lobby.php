@@ -11,13 +11,13 @@ $cardSets = [
     // Special card set with '?' for unclear stories
     ['1', '2', '3', '5', '8', '13', '20', '40', '?'],
     // Powers of two used by other teams
-    ['0' ,'1', '2', '4', '8', '16', '32', '64'],
+    ['0', '1', '2', '4', '8', '16', '32', '64'],
     // Card set used to estimate hours as different fractions and multiples of a working day
     ['1', '2', '4', '8', '12', '16', '24', '32', '40'],
     // Demonstration of the coffee cup card
     ['&#9749;', '1', '2', '3', '5', '8', '13', '20', '?'],
     // T-shirt Size
-    ['XXS','XS', 'S', 'M', 'L', 'XL', 'XXL', '?'],
+    ['XXS', 'XS', 'S', 'M', 'L', 'XL', 'XXL', '?'],
     // Fibonacci number
     ['1', '2', '3', '5', '8', '13', '21', '34', '55', '89', '144', '&#9749;', '?'],
     // Fibonaci series including 0.5
@@ -27,7 +27,7 @@ $cardSets = [
     // Standard fibonacci with shrug
     ['1', '2', '3', '5', '8', '13', '&#F937;'],
     //Salesforce Estimates
-    ['0.5','1','3','5','8']
+    ['0.5', '1', '3', '5', '8']
 ];
 
 ?>
@@ -63,56 +63,56 @@ $cardSets = [
     ?>
 
     <div class="container">
-    <div class="row">
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title">Erstelle eine Sitzung</h4>
-                    <p class="card-text"> Gib deiner Sitzung einen Namen und wähle die Karte aus, welche du benutzen möchtest. Teile anschließend die erhaltene ID deinen Teilnehmern mit.</p>
-                    <!-- TODO: Lobby per click erzeugen -->
-                    <form action="php/createLobby.php" method="POST">
-                        <div class="form-group">
-                            <label for="exampleFormControlInput1">Sitzungs Name:</label>
-                            <input type="text" class="form-control" id="lobbyName" placeholder="Meine Session">
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleFormControlSelect1">Karten:</label>
-                            <select class="form-control" id="cards">
-                                <?php
-                                    foreach ($cardSets as $key=>$cardSet) {
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Erstelle eine Sitzung</h4>
+                        <p class="card-text"> Gib deiner Sitzung einen Namen und wähle die Karte aus, welche du benutzen möchtest. Teile anschließend die erhaltene ID deinen Teilnehmern mit.</p>
+                        <!-- TODO: Lobby per click erzeugen -->
+                        <form action="php/createLobby.php" method="POST">
+                            <div class="form-group">
+                                <label for="exampleFormControlInput1">Sitzungs Name:</label>
+                                <input type="text" class="form-control" name="lobbyName" placeholder="Meine Session">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleFormControlSelect1">Karten:</label>
+                                <select class="form-control" name="cards">
+                                    <?php
+                                    foreach ($cardSets as $key => $cardSet) {
                                         echo "<option value=$key>" . json_encode($cardSet) . "</option>";
                                     }
-                                ?>
-                            </select>
-                        </div>
-                        <br>
-                        <button type="button" class="btn btn-secondary">Erstellen</button>
-                    </form>
+                                    ?>
+                                </select>
+                            </div>
+                            <br>
+                            <button type="submit" class="btn btn-secondary">Erstellen</button>
+                        </form>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title">Tritt einer Sitzung bei</h4>
-                    <p class="card-text"> Du hast eine Sitzungs-ID? Gib sie hier ein um der Sitzung beizutreten</p>
-                    <form>
-                        <div class="form-group">
-                            <label for="exampleFormControlInput1">Sitzungs-ID:</label>
-                            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="z.B. 123456789">
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleFormControlInput1">Dein Name:</label>
-                            <input type="text" class="form-control" id="exampleFormControlInput1" value="<?php echo $_SESSION["username"]?>">
-                        </div>
-                        <br>
-                        <button type="button" class="btn btn-secondary">Beitreten</button>
-                    </form>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Tritt einer Sitzung bei</h4>
+                        <p class="card-text"> Du hast eine Sitzungs-ID? Gib sie hier ein um der Sitzung beizutreten</p>
+                        <form>
+                            <div class="form-group">
+                                <label for="exampleFormControlInput1">Sitzungs-ID:</label>
+                                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="z.B. 123456789">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleFormControlInput1">Dein Name:</label>
+                                <input type="text" class="form-control" id="exampleFormControlInput1" value="<?php echo $_SESSION["username"] ?>">
+                            </div>
+                            <br>
+                            <button type="button" class="btn btn-secondary">Beitreten</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
     <?php
     include_once("templates/footer.php");
