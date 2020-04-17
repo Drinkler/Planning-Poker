@@ -9,7 +9,7 @@ class Database
      * @var $_pdo
      * contains the database connection
      */
-    protected $_pdo;
+    public $_pdo;
 
     /**
      * Database constructor.
@@ -62,7 +62,7 @@ class Database
         }
     }
 
-    public function query($_sql, $_params, $_fetchMode = 'PDO::FETCH_ASSOC') {
+    public function query($_sql, $_params) {
         // Guards
         if (!$_sql) {
             return 'Please submit a proper sql query';
@@ -78,12 +78,12 @@ class Database
             // Bind params
             if (isset($_params)) {
                 foreach ($_params as $key=>$param) {
-                    $stmt->bindParam($key, $param);
+                    $tRet = $stmt->bindParam($key, $param);
                 }
             }
 
             // Execute statement
-            $stmt->execute();
+            $tRet = $stmt->execute();
 
             // Store result in array
             $returnArray = array();
