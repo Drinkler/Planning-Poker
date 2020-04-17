@@ -17,6 +17,7 @@ class User
      * @return bool returns true if user got logged in successfully
      */
     public static function login($_email, $_password) {
+        //TODO: Check if user is already signed in
         $_email = htmlspecialchars($_email);
         $_password = htmlspecialchars($_password);
         // Prepare params
