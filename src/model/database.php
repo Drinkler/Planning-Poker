@@ -12,7 +12,7 @@ class Database
     public $_pdo;
 
     /**
-     * Database constructor.
+     * database constructor.
      * @param $_dbhost
      * @param $_dbport
      * @param $_dbname
@@ -232,3 +232,12 @@ class Database
 
 
 }
+
+return new Database(
+    $_SERVER['RDS_HOSTNAME'],
+    $_SERVER['RDS_PORT'],
+    $_SERVER['RDS_DB_NAME'],
+    $_SERVER['RDS_USERNAME'],
+    $_SERVER['RDS_PASSWORD'],
+    'utf8'
+);
