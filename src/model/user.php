@@ -5,21 +5,31 @@ class User
 {
     private static $_db;
 
-
-
-    public static function newUser() {
+    public static function create() {
 
     }
 
+
     /**
+     * Logs in the submitted user
      * @param $_email string doesn't need to be htmlspecialchars
      * @param $_password string doesn't need to be htmlspecialchars
      * @return bool returns true if user got logged in successfully
      */
     public static function login($_email, $_password) {
-        //TODO: Check if user is already signed in
-        $_email = htmlspecialchars($_email);
-        $_password = htmlspecialchars($_password);
+        // Check if user is already logged in
+        if (isset($_SESSION['signed_in']) && $_SESSION['signed_in'] == true) {
+            header('Location: ../index.php');
+            return false;
+        }
+        // Escape input
+        if (!empty($_email) && !empty($_password)) {
+            $_email = htmlspecialchars($_email);
+            $_password = htmlspecialchars($_password);
+        } else {
+            echo "Wrong input is given.";
+            return false;
+        }
         // Prepare params
         $params = array(
             ':email' => $_email
@@ -51,11 +61,47 @@ class User
             print_r('Wrong password.');
             return false;
         }
+    }
+
+    /**
+     * Logs out the current user
+     */
+    public static function logout() {
+        if (isset($_COOKIE[session_name()])) {
+            setcookie(session_name(), '', time() - 42000, '/');
+        } else {
+            return false;
+        }
+
+        $_SESSION = array();
+        session_destroy();
+
+        header('Location: ../index.php');
+
+        return true;
+    }
+
+    /**
+     * Deletes the current user account
+     */
+    public static function delete() {
+        // Prepare params
+        $params = array(
+            ':iduser' => $_SESSION['iduser']
+        );
+
+        //Prepare query
+        $query = 'DELETE FROM user WHERE iduser = :iduser';
+
+        $result = self::$_db->query($query, $params);
+    }
+
+    public static function changeUserPassword() {
 
     }
 
-    public static function logout() {
-
+    public static function sendNewPassword() {
+        
     }
 
     /**
