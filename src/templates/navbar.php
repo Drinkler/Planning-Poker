@@ -9,7 +9,7 @@
                         <span aria-hidden=\"true\">&times;</span>
                     </button>
                 </div>
-                <form method=\"post\" action=\"php/login.php\">
+                <form method=\"post\" action=\"php/login2.php\">
                     <div class=\"modal-body\">
                         <h2 class=\"sr-only\">Login Form</h2>
                         <div class=\"form-group\">

@@ -40,6 +40,11 @@ class Database
         try {
 
             $pdo = new PDO($_dsn, $_username, $_password);
+            /**
+             * https://www.php.net/manual/en/pdo.error-handling.php
+             *
+             * Set Error Mode. At the moment it's in debug mode.
+             */
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             // Return the connection if it was successfully established
             return $pdo;
