@@ -5,7 +5,86 @@ class User
 {
     private static $_db;
 
-    public static function create() {
+    public static function create($_name, $_surname, $_email, $_password, $_hashType = PASSWORD_DEFAULT) {
+
+        if (!empty($_name) && !empty($_surname && !empty($_email) && !empty($_password))) {
+            // Escape parameters
+            $_name = htmlspecialchars($_name);
+            $_surname = htmlspecialchars($_surname);
+            $_email = htmlspecialchars($_email);
+            $_password = password_hash(htmlspecialchars($_password), $_hashType);
+        } else {
+            return false;
+        }
+
+        // Prepare params
+        $params = array(
+            ':email' => $_email
+        );
+
+        // Prepare query
+        $query = "SELECT COUNT(*) FROM user WHERE email=:email";
+
+        $result = self::$_db->query($query, $params);
+
+        if (!$result[0][0]) {
+
+            // Create random value for confirmation.
+            $challenge = md5(rand() . time());
+
+            // Prepare params
+            $params = array(
+              ':name' => $_name,
+              ':surname' => $_surname,
+              ':email' => $_email,
+              ':password' => $_password,
+              ':challenge' => $challenge
+            );
+
+            // Prepare query
+            $query = "INSERT INTO user (name ,surname ,email ,password, challenge) VALUES (:name, :surname, :email, :password, :challenge)";
+
+            $result = self::$_db->query($query, $params);
+
+            return "<a href='" . self::confirm($_email, $challenge)  . "'>Confirm Account</a>";
+
+        }
+    }
+
+    public static function confirm($_email, $_challenge) {
+        // Escape parameters
+        $_email = htmlspecialchars($_email);
+        $_challenge = htmlspecialchars($_challenge);
+
+        if (!empty($_email) && !empty($_challenge)) {
+
+            // Prepare params
+            $params = array(
+              ':email' => $_email
+            );
+
+            // Prepare query
+            $query = "SELECT challenge FROM user WHERE email=:email";
+
+            // Execute query
+            $result = self::$_db->query($query, $params);
+
+            // If the returned challenge is equal, confirm user
+            if ($result[0]['challenge'] == $_challenge) {
+                // Prepare query
+                $query = "UPDATE user SET confirmed = 1 WHERE email=:email";
+
+                // Execute query
+                self::$_db->query($query, $params);
+
+                // TODO: Check if proper using of header here?
+                header("Location: ../index.php");
+            } else {
+                return 'User not authorized.';
+            }
+        } else {
+            return 'Wrong input is given';
+        }
 
     }
 
@@ -101,7 +180,20 @@ class User
     }
 
     public static function sendNewPassword() {
-        
+
+    }
+
+    public static function get_gravatar( $email, $s = 80, $d = 'retro', $r = 'g', $img = false, $atts = array() ) {
+        $url = 'https://www.gravatar.com/avatar/';
+        $url .= md5( strtolower( trim( $email ) ) );
+        $url .= "?s=$s&d=$d&r=$r";
+        if ( $img ) {
+            $url = '<img src="' . $url . '"';
+            foreach ( $atts as $key => $val )
+                $url .= ' ' . $key . '="' . $val . '"';
+            $url .= ' />';
+        }
+        return $url;
     }
 
     /**

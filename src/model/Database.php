@@ -35,6 +35,12 @@ class Database
         $this->_pdo = $this->establishPDO($this->getDsn(), $this->getUsername(), $this->getPassword());
     }
 
+    #public function __destruct()
+    #{
+    #    // Closes the pdo connection
+    #    if ($this->_pdo!==null) { $this->_pdo = null; }
+    #}
+
     private function establishPDO($_dsn, $_username, $_password)
     {
         try {
@@ -85,6 +91,10 @@ class Database
             // Execute statement
             $tRet = $stmt->execute();
 
+            ob_start();
+            $stmt->debugDumpParams();
+            // TODO: vagrant php auf 7.2 updaten um debuggen zu können
+            $temp = ob_get_contents();
             // Store result in array
             $returnArray = array();
 
