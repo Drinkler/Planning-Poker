@@ -68,4 +68,3 @@ class Lobby
     }
 }
 
-echo random_int(100000000, 999999999);
