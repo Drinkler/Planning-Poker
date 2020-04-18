@@ -1,6 +1,6 @@
 <?php
 
-include "issue.php";
+require("classes/Issue.php");
 
 function getIssues(string $username, string $repository)
 {

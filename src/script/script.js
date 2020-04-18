@@ -35,7 +35,6 @@ function createReviewRows() {
     });
 }
 
-
 // TODO: Unit Test missing
 /**
  *

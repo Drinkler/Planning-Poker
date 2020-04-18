@@ -2,10 +2,8 @@
 session_start();
 session_regenerate_id(); // Against hijacking
 
-if (isset($_COOKIE[session_name()])) {
-    setcookie(session_name(), '', time() - 42000, '/');
-}
-$_SESSION = array();
-session_destroy();
+spl_autoload_register(function ($class_name) {
+    include '../model/' . $class_name . '.php';
+});
 
-header('Location: ../index.php');
+User::logout();
