@@ -5,6 +5,15 @@ class User
 {
     private static $_db;
 
+    /**
+     * Creates a new user
+     * @param $_name
+     * @param $_surname
+     * @param $_email
+     * @param $_password
+     * @param string $_hashType
+     * @return bool|string
+     */
     public static function create($_name, $_surname, $_email, $_password, $_hashType = PASSWORD_DEFAULT) {
 
         if (!empty($_name) && !empty($_surname && !empty($_email) && !empty($_password))) {
@@ -51,6 +60,12 @@ class User
         }
     }
 
+    /**
+     * Confirms the submitted useraccount if the challenge is correct
+     * @param $_email
+     * @param $_challenge
+     * @return string
+     */
     public static function confirm($_email, $_challenge) {
         // Escape parameters
         $_email = htmlspecialchars($_email);
