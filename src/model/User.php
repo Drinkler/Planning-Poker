@@ -1,10 +1,8 @@
 <?php
 
 
-class User
+class User extends Model
 {
-    private static $_db;
-
     /**
      * Creates a new user
      * @param $_name
@@ -209,21 +207,5 @@ class User
             $url .= ' />';
         }
         return $url;
-    }
-
-    /**
-     * @return mixed
-     */
-    public static function getDb()
-    {
-        return self::$_db;
-    }
-
-    /**
-     * @param mixed $db
-     */
-    public static function setDb($db)
-    {
-        self::$_db = $db;
     }
 }
