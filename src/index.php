@@ -3,6 +3,8 @@
 
 session_start();
 
+require_once "init.php";
+
 spl_autoload_register(function ($class_name) {
     if (substr($class_name, 0, 14) !== 'PlanningPoker\\') {
         // Not our business

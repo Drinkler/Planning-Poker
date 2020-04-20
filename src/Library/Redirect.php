@@ -1,7 +1,7 @@
 <?php
 
 
-namespace PlanningPoker\Utility;
+namespace PlanningPoker\Library;
 
 
 class Redirect
@@ -19,6 +19,7 @@ class Redirect
                 header('HTTP/1.0 404 Not Found');
                 include 'views/_template/404.php';
             } else {
+                header_remove();
                 header("Location: " . $location);
             }
             exit();
