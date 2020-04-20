@@ -21,6 +21,10 @@ class IndexController implements Controller
         ]);
     }
 
+    public function loginAction() {
+        User::login($_POST['email'], $_POST['password']);
+    }
+
     public function showUserAction() {
         $uid = (int)(isset($_GET['uid']) ? $_GET['uid'] : '');
 

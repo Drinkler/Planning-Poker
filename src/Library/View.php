@@ -4,6 +4,8 @@
 namespace PlanningPoker\Library;
 
 
+use PlanningPoker\Utility\Redirect;
+
 class View
 {
     protected $path, $controller, $action, $vars = [];
@@ -20,7 +22,7 @@ class View
         $fileName = $this->path.DIRECTORY_SEPARATOR.$this->controller.DIRECTORY_SEPARATOR.$this->action.'.phtml';
 
         if (!file_exists($fileName)) {
-            throw new NotFoundExpression();
+            Redirect::to(404);
         }
 
         foreach ($this->vars as $key => $val) {

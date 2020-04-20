@@ -1,15 +1,11 @@
 <?php
 
-spl_autoload_register(function ($class_name) {
-    include 'ModelBase/' . $class_name . '.php';
-});
-
 if (isset($_SESSION['signed_in']) && $_SESSION['signed_in'] == true) {
 
     echo '<span class="actions">
                 <div class="dropdown">
                     <button class="btn dropdown-toggle" data-toggle="dropdown">
-                        <img src="'. User::get_gravatar($_SESSION['email']) .'" width="40" height="40" class="img-circle" alt="@username">
+                        <img src="'. \PlanningPoker\Model\User::get_gravatar($_SESSION['email']) .'" width="40" height="40" class="img-circle" alt="@username">
                     </button>
                     <div class="dropdown-menu">
                         <p class="dropdown-header">Angemeldet als: <br>' . $_SESSION['username'] .'</p>
@@ -17,7 +13,7 @@ if (isset($_SESSION['signed_in']) && $_SESSION['signed_in'] == true) {
                         <a href="#" class="dropdown-item">Dein Profil</a>
                         <a href="#" class="dropdown-item">Deine Lobbys</a>
                         <div class="dropdown-divider"></div>
-                        <a href="php/logout.php" class="dropdown-item">Abmelden</a>
+                        <a href="user/logout" class="dropdown-item">Abmelden</a>
                     </div>
                 </div>
             </span>';

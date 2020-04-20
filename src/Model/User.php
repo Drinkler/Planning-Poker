@@ -36,7 +36,7 @@ class User extends ModelBase
         // Prepare query
         $query = "SELECT COUNT(*) FROM user WHERE email=:email";
 
-        $result = self::$_db->query($query, $params);
+        $result = (new User)->getPdo()->query($query, $params);
 
         if (!$result[0][0]) {
 
@@ -55,7 +55,7 @@ class User extends ModelBase
             // Prepare query
             $query = "INSERT INTO user (name ,surname ,email ,password, challenge) VALUES (:name, :surname, :email, :password, :challenge)";
 
-            $result = self::$_db->query($query, $params);
+            $result = (new User)->getPdo()->query($query, $params);
 
             return "<a href='" . self::confirm($_email, $challenge)  . "'>Confirm Account</a>";
 
@@ -84,7 +84,7 @@ class User extends ModelBase
             $query = "SELECT challenge FROM user WHERE email=:email";
 
             // Execute query
-            $result = self::$_db->query($query, $params);
+            $result = (new User)->getPdo()->query($query, $params);
 
             // If the returned challenge is equal, confirm user
             if ($result[0]['challenge'] == $_challenge) {
@@ -92,7 +92,7 @@ class User extends ModelBase
                 $query = "UPDATE user SET confirmed = 1 WHERE email=:email";
 
                 // Execute query
-                self::$_db->query($query, $params);
+                (new User)->getPdo()->query($query, $params);
 
                 // TODO: Check if proper using of header here?
                 header("Location: ../index.php");
@@ -114,7 +114,6 @@ class User extends ModelBase
     public static function login($_email, $_password) {
         // Check if user is already logged in
         if (isset($_SESSION['signed_in']) && $_SESSION['signed_in'] == true) {
-            header('Location: ../index.php');
             return false;
         }
         // Escape input
@@ -132,7 +131,7 @@ class User extends ModelBase
         // Prepare query
         $query = 'SELECT * FROM user WHERE email=:email';
         // Execute query on database
-        $result = self::$_db->query($query, $params);
+        $result = (new User)->getPdo()->query($query, $params);
         // Verify return
         if (password_verify($_password, $result[0]['password'])) {
             // Email needs to be confirmed
@@ -146,7 +145,6 @@ class User extends ModelBase
                 $_SESSION["email"] = $result[0]["email"];
                 $_SESSION["username"] = $_SESSION["name"] . " " . $_SESSION["surname"];
 
-                header("Location: ../index.php");
                 return true;
             } else {
                 print_r('E-Mail is not confirmed.');
@@ -171,8 +169,6 @@ class User extends ModelBase
         $_SESSION = array();
         session_destroy();
 
-        header('Location: ../index.php');
-
         return true;
     }
 
@@ -188,7 +184,7 @@ class User extends ModelBase
         //Prepare query
         $query = 'DELETE FROM user WHERE iduser = :iduser';
 
-        $result = self::$_db->query($query, $params);
+        $result = (new User)->getPdo()->query($query, $params);
     }
 
     public static function get_gravatar( $email, $s = 80, $d = 'retro', $r = 'g', $img = false, $atts = array() ) {

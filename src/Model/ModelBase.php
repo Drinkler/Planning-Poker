@@ -5,7 +5,7 @@ namespace PlanningPoker\Model;
 
 abstract class ModelBase
 {
-    protected static $_db;
+    private static $_db;
 
     public function getPdo() {
         if (self::$_db === null) {
