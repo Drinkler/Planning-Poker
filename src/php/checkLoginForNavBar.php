@@ -1,5 +1,9 @@
 <?php
 
+spl_autoload_register(function ($class_name) {
+    include 'ModelBase/' . $class_name . '.php';
+});
+
 if (isset($_SESSION['signed_in']) && $_SESSION['signed_in'] == true) {
 
     echo '<span class="actions">

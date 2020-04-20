@@ -1,7 +1,7 @@
 <?php
 
 spl_autoload_register(function ($class_name) {
-    $db = include '../model/' . $class_name . '.php';
+    $db = include '../ModelBase/' . $class_name . '.php';
 });
 
 $db = new Database(

@@ -1,5 +1,7 @@
 <?php
 
+namespace PlanningPoker\Model;
+
 class Issue
 {
     private $title;

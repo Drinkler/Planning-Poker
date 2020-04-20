@@ -1,6 +1,8 @@
 <?php
 
-class Review
+namespace PlanningPoker\Model;
+
+class Review extends ModelBase
 {
     private $title;
     private $description;
@@ -78,5 +80,10 @@ class Review
     public function getSurname(): string
     {
         return $this->surname;
+    }
+
+    public function getSource()
+    {
+        return 'review';
     }
 }

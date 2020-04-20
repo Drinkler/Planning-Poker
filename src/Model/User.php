@@ -1,8 +1,12 @@
 <?php
 
+namespace PlanningPoker\Model;
 
-class User extends Model
+class User extends ModelBase
 {
+    private $_id, $_name, $_surname, $_email, $_created;
+
+
     /**
      * Creates a new user
      * @param $_name
@@ -101,7 +105,6 @@ class User extends Model
 
     }
 
-
     /**
      * Logs in the submitted user
      * @param $_email string doesn't need to be htmlspecialchars
@@ -188,14 +191,6 @@ class User extends Model
         $result = self::$_db->query($query, $params);
     }
 
-    public static function changeUserPassword() {
-
-    }
-
-    public static function sendNewPassword() {
-
-    }
-
     public static function get_gravatar( $email, $s = 80, $d = 'retro', $r = 'g', $img = false, $atts = array() ) {
         $url = 'https://www.gravatar.com/avatar/';
         $url .= md5( strtolower( trim( $email ) ) );
@@ -207,5 +202,10 @@ class User extends Model
             $url .= ' />';
         }
         return $url;
+    }
+
+    public function getSource()
+    {
+        return 'user';
     }
 }

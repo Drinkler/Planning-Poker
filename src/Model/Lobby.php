@@ -1,6 +1,8 @@
 <?php
 
-class Lobby extends Model
+namespace PlanningPoker\Model;
+
+class Lobby extends ModelBase
 {
     private $name;
     private $deck;
@@ -91,6 +93,11 @@ class Lobby extends Model
     public function setCreator_surname(string $creator_surname)
     {
         $this->creator_surname = $creator_surname;
+    }
+
+    public function getSource()
+    {
+        return 'lobby';
     }
 }
 

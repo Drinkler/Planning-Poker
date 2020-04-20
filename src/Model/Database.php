@@ -1,14 +1,13 @@
 <?php
 
+namespace PlanningPoker\Model;
+
+use PDO;
 
 class Database
 {
     private $_dbhost, $_dbport, $_dbname, $_charset, $_dsn, $_username, $_password;
 
-    /**
-     * @var $_pdo
-     * contains the database connection
-     */
     public $_pdo;
 
     /**
@@ -247,11 +246,11 @@ class Database
 
 }
 
-return new Database(
-    $_SERVER['RDS_HOSTNAME'],
-    $_SERVER['RDS_PORT'],
-    $_SERVER['RDS_DB_NAME'],
-    $_SERVER['RDS_USERNAME'],
-    $_SERVER['RDS_PASSWORD'],
-    'utf8'
-);
+#return new Database(
+#    $_SERVER['RDS_HOSTNAME'],
+#    $_SERVER['RDS_PORT'],
+#    $_SERVER['RDS_DB_NAME'],
+#    $_SERVER['RDS_USERNAME'],
+#    $_SERVER['RDS_PASSWORD'],
+#    'utf8'
+#);

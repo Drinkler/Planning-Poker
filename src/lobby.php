@@ -3,6 +3,10 @@ session_start();
 
 // TODO: Überprüfen ob User angemeldet ist, falls nicht -> Location index.php
 
+spl_autoload_register(function ($class_name) {
+    include 'ModelBase/' . $class_name . '.php';
+});
+
 $cardSets = [
     // 1, 3, 5, 8
     ['1', '2', '3', '5', '8'],
