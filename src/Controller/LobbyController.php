@@ -1,11 +1,15 @@
 <?php
 
-
 namespace PlanningPoker\Controller;
-
 
 use PlanningPoker\Model\Lobby;
 
+/**
+ * Class LobbyController:
+ *
+ * @package PlanningPoker\Controller
+ * @author Luca Stanger
+ */
 class LobbyController extends ControllerBase implements Controller
 {
     public function sessionsAction() {

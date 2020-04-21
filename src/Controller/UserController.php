@@ -4,6 +4,12 @@ namespace PlanningPoker\Controller;
 
 use PlanningPoker\Model\User;
 
+/**
+ * Class UserController:
+ *
+ * @package PlanningPoker\Controller
+ * @author Luca Stanger
+ */
 class UserController extends ControllerBase
 {
     public function loginAction() {
