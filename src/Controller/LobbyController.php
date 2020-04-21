@@ -12,6 +12,13 @@ use PlanningPoker\Model\Lobby;
  */
 class LobbyController extends ControllerBase implements Controller
 {
+    /**
+     * Submits all active lobbies to the view
+     * @access public
+     * @example lobby/sessions
+     * @return void
+     * @author Luca Stanger
+     */
     public function sessionsAction() {
         $result = Lobby::findAll();
 
@@ -20,10 +27,24 @@ class LobbyController extends ControllerBase implements Controller
         }
     }
 
+    /**
+     * Creates a lobby
+     * @access public
+     * @example lobby/create
+     * @return void
+     * @author Luca Stanger
+     */
     public function createAction() {
         Lobby::create($_REQUEST["lobbyName"], (int) $_REQUEST["cards"], (int) $_SESSION["iduser"]);
     }
 
+    /**
+     * Joins a lobby
+     * @access public
+     * @example lobby/join
+     * @return void
+     * @author Luca Stanger
+     */
     public function joinAction() {
 
     }

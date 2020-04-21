@@ -2,6 +2,8 @@
 
 namespace PlanningPoker\Controller;
 
+use PlanningPoker\Library\View;
+
 /**
  * Interface Controller:
  *
@@ -10,5 +12,9 @@ namespace PlanningPoker\Controller;
  */
 interface Controller
 {
-    public function setView(\PlanningPoker\Library\View $view);
+    /**
+     * @param View $view
+     * @return mixed
+     */
+    public function setView(View $view);
 }

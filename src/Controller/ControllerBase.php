@@ -2,6 +2,8 @@
 
 namespace PlanningPoker\Controller;
 
+use PlanningPoker\Library\View;
+
 /**
  * Class ControllerBase:
  *
@@ -10,13 +12,25 @@ namespace PlanningPoker\Controller;
  */
 abstract class ControllerBase implements Controller
 {
+    /**
+     * Contains the current view
+     * @var $view
+     */
     protected $view;
 
+    /**
+     * index method for any controller class
+     */
     public function indexAction() {
 
     }
 
-    public function setView(\PlanningPoker\Library\View $view) {
+    /**
+     * Sets the view of the current controller
+     * @param View $view
+     * @return mixed|void
+     */
+    public function setView(View $view) {
         $this->view = $view;
     }
 }
