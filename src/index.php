@@ -55,7 +55,13 @@ try {
     $view->addParams($params);
 
     $controller->$actionMethodName();
-    $view->render();
+
+    // Added specific cases for login and logout
+    if ($url == "user/logout" || $url == "user/login") {
+        $view->renderWithoutHeaderAndFooter();
+    } else {
+        $view->render();
+    }
 
 
 }  catch (PlanningPoker\Library\NotFoundExpression $e) {

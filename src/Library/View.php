@@ -53,6 +53,22 @@ class View
         $this->getFile(DEFAULT_FOOTER_PATH);
     }
 
+    /**
+     * render function for instant redirect pages
+     */
+    public function renderWithoutHeaderAndFooter() {
+        $fileName = $this->path.DIRECTORY_SEPARATOR.$this->controller.DIRECTORY_SEPARATOR.$this->action.'.phtml';
+
+        if (!file_exists($fileName)) {
+            Redirect::to(404);
+        }
+
+        $this->addCSS($this->basic_css);
+        $this->addJS($this->basic_js);
+
+        $this->getFile($this->controller.DIRECTORY_SEPARATOR.$this->action);
+    }
+
     public function setVars(array $_vars) {
         foreach ($_vars as $key => $val) {
             $this->vars[$key] = $val;
