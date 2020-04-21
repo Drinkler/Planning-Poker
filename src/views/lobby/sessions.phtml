@@ -1,0 +1,26 @@
+<div class="container">
+    <div class="row">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Host</th>
+                <th scope="col">Created</th>
+                <th scope="col">Name</th>
+            </tr>
+            </thead>
+            <tbody>
+                <?php
+                    foreach ($this->vars as $key=>$lobby) {
+                        echo "<tr><th scope='row'>$key</th>";
+                        # echo "<td>" . $lobby["idlobby"]. "</td>";
+                        echo "<td>" . $lobby["uname"] . " ". $lobby["surname"] . "</td>";
+                        echo "<td>" . $lobby["created"]. "</td>";
+                        echo "<td>" . $lobby["name"]. "</td>";
+                        echo "</tr>";
+                    }
+                ?>
+            </tbody>
+        </table>
+    </div>
+</div>

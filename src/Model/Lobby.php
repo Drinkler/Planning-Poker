@@ -37,11 +37,10 @@ class Lobby extends ModelBase
 
             try {
                 // Execute query
-                $result = self::$_db->query($query, $params);
+                (new PDOBase)->getPdo()->queryWithoutFetch($query, $params);
 
-                header('Location: ../sessions.php');
                 return true;
-            } catch (Exception $exception) {
+            } catch (\Exception $exception) {
                 echo $exception->getMessage();
                 return false;
             }
@@ -50,6 +49,20 @@ class Lobby extends ModelBase
             echo 'Wrong input is given.';
         }
 
+    }
+
+    public static function findAll() {
+        // Prepare empty params array for query function
+        $params = array();
+        // Prepare query
+        $query = "SELECT user.name as uname, user.surname as surname, lobby.created as created, lobby.name FROM user, lobby WHERE user.iduser = lobby.creator";
+
+        try {
+            return (new PDOBase)->getPdo()->query($query, $params);
+        } catch (\Exception $exception) {
+            echo $exception->getMessage();
+            return false;
+        }
     }
 
 
