@@ -182,8 +182,7 @@ class User extends ModelBase
             return false;
         }
 
-        Session::destroy();
-        Session::init();
+        Session::delete("signed_in");
 
         return true;
     }
