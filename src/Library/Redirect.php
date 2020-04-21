@@ -11,10 +11,11 @@ namespace PlanningPoker\Library;
 class Redirect
 {
     /**
-     * To: Redirects to a specific path.
+     * Logs the posted user in
      * @access public
-     * @param string $location [optional]
+     * @param string $location Contains the location, Default = ""
      * @return void
+     * @author Luca Stanger
      */
     public static function to($location = "") {
         if ($location) {

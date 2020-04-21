@@ -14,6 +14,7 @@ class Session
      * Delete: Deletes the value of a specific key of the session.
      * @access public
      * @param string $key
+     * @author Luca Stanger
      * @return boolean
      */
     public static function delete($key) {
@@ -27,6 +28,7 @@ class Session
     /**
      * Destroy: Deletes the session.
      * @access public
+     * @author Luca Stanger
      * @return void
      */
     public static function destroy() {
@@ -37,6 +39,7 @@ class Session
      * Exists: Checks if a specific key of a session exists.
      * @access public
      * @param string $key
+     * @author Luca Stanger
      * @return boolean
      */
     public static function exists($key) {
@@ -47,6 +50,7 @@ class Session
      * Get: Returns the value of a specific key of the session if it exists.
      * @access public
      * @param string $key
+     * @author Luca Stanger
      * @return string|nothing
      */
     public static function get($key) {
@@ -58,6 +62,7 @@ class Session
     /**
      * Init: Starts the session.
      * @access public
+     * @author Luca Stanger
      * @return void
      */
     public static function init() {
@@ -72,6 +77,7 @@ class Session
      * @access public
      * @param string $key
      * @param string $value
+     * @author Luca Stanger
      * @return string
      */
     public static function put($key, $value) {

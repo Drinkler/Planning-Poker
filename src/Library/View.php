@@ -18,6 +18,14 @@ class View
     public $basic_params = array();
 
 
+    /**
+     * View constructor.
+     * @param $path
+     * @param $controller
+     * @param $action
+     * @author Luca Stanger
+     * @return void
+     */
     public function __construct($path, $controller, $action) {
         $this->path = $path;
         $this->controller = $controller;
@@ -43,6 +51,11 @@ class View
         );
     }
 
+    /**
+     * Render: renders the submitted view
+     * @author Luca Stanger
+     * @return void
+     */
     public function render() {
         $fileName = $this->path.DIRECTORY_SEPARATOR.$this->controller.DIRECTORY_SEPARATOR.$this->action.'.phtml';
 
@@ -59,7 +72,9 @@ class View
     }
 
     /**
-     * render function for instant redirect pages
+     * RenderWithoutHeaderAndFooter: renders the submitted view without header and footer
+     * @author Luca Stanger
+     * @return void
      */
     public function renderWithoutHeaderAndFooter() {
         $fileName = $this->path.DIRECTORY_SEPARATOR.$this->controller.DIRECTORY_SEPARATOR.$this->action.'.phtml';
@@ -74,12 +89,24 @@ class View
         $this->getFile($this->controller.DIRECTORY_SEPARATOR.$this->action);
     }
 
+    /**
+     * SetVars: sets variables to the view
+     * @param array $_vars
+     * @author Luca Stanger
+     * @return void
+     */
     public function setVars(array $_vars) {
         foreach ($_vars as $key => $val) {
             $this->vars[$key] = $val;
         }
     }
 
+    /**
+     * AddParams: adds additional parameters to the view
+     * @param $params
+     * @author Luca Stanger
+     * @return void
+     */
     public function addParams($params) {
         if (!is_array($params)) {
             $params = (array) $params;
@@ -87,6 +114,12 @@ class View
         $this->basic_params = $params;
     }
 
+    /**
+     * AddCSS: adds css files to the view
+     * @param $files
+     * @author Luca Stanger
+     * @return void
+     */
     public function addCSS($files) {
         if (!is_array($files)) {
             $files = (array) $files;
@@ -98,6 +131,12 @@ class View
         }
     }
 
+    /**
+     * AddJS: adds JS files to the view
+     * @param $files
+     * @author Luca Stanger
+     * @return void
+     */
     public function addJS($files) {
 
         // Cast the value of $files to type array if it is not already.
@@ -114,6 +153,12 @@ class View
         }
     }
 
+    /**
+     * MakeURL: prettifies the submitted path and makes it accessible for mvc
+     * @param string $path
+     * @author Luca Stanger
+     * @return string
+     */
     public function makeURL($path = "") {
         if (is_array($path)) {
             return(APP_URL . implode("/", $path));
@@ -121,14 +166,30 @@ class View
         return(APP_URL . $path);
     }
 
+    /**
+     * GetJS: gets all js files contained by the view
+     * @author Luca Stanger
+     * @return mixed
+     */
     public function getJS() {
         return($this->_scriptTags);
     }
 
+    /**
+     * GetCSS: gets all css files contained by the view
+     * @author Luca Stanger
+     * @return mixed
+     */
     public function getCSS() {
         return($this->_linkTags);
     }
 
+    /**
+     * GetFile: requires the submitted file
+     * @param $filepath
+     * @author Luca Stanger
+     * @return void
+     */
     public function getFile($filepath) {
         $filename = VIEW_PATH . $filepath . ".phtml";
         if (file_exists($filename)) {
