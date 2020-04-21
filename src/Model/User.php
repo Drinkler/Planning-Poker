@@ -14,7 +14,7 @@ class User extends ModelBase
      * @param $_email
      * @param $_password
      * @param string $_hashType
-     * @return bool|string
+     * @return array
      */
     public static function create($_name, $_surname, $_email, $_password, $_hashType = PASSWORD_DEFAULT) {
 
@@ -25,7 +25,7 @@ class User extends ModelBase
             $_email = htmlspecialchars($_email);
             $_password = password_hash(htmlspecialchars($_password), $_hashType);
         } else {
-            return false;
+            return array();
         }
 
         // Prepare params
@@ -55,9 +55,12 @@ class User extends ModelBase
             // Prepare query
             $query = "INSERT INTO user (name ,surname ,email ,password, challenge) VALUES (:name, :surname, :email, :password, :challenge)";
 
-            $result = (new User)->getPdo()->query($query, $params);
-
-            return "<a href='" . self::confirm($_email, $challenge)  . "'>Confirm Account</a>";
+            $result = (new User)->getPdo()->queryWithoutFetch($query, $params);
+            // TODO: Return only if user was created successfully
+            return array(
+                'email' => $_email,
+                'challenge' => $challenge
+            );
 
         }
     }

@@ -17,9 +17,8 @@ class Redirect
         if ($location) {
             if ($location === 404) {
                 header('HTTP/1.0 404 Not Found');
-                include 'views/_template/404.php';
+                include 'views/_template/404.phtml';
             } else {
-                header_remove();
                 header("Location: " . $location);
             }
             exit();

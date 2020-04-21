@@ -80,24 +80,16 @@ class Database
             // Prepare statement
             $stmt = $this->_pdo->prepare($_sql);
 
-            ob_start();
             // Bind params
             if (isset($_params)) {
                 foreach ($_params as $key=>$param) {
                     $tRet = $stmt->bindValue($key, $param);
-                    $stmt->debugDumpParams();
-                    $temp = ob_get_contents();
                 }
             }
 
             // Execute statement
             $tRet = $stmt->execute();
 
-            ob_clean();
-            ob_start();
-            $stmt->debugDumpParams();
-            // TODO: vagrant php auf 7.2 updaten um debuggen zu können
-            $temp = ob_get_contents();
             // Store result in array
             $returnArray = array();
 
@@ -113,6 +105,39 @@ class Database
         }
 
 
+    }
+
+    public function queryWithoutFetch($_sql, $_params) {
+        // Guards
+        if (!$_sql) {
+            return 'Please submit a proper sql query';
+        }
+        if (!$this->_pdo) {
+            return 'No proper connection established';
+        }
+
+        try {
+            // Prepare statement
+            $stmt = $this->_pdo->prepare($_sql);
+
+            // Bind params
+            if (isset($_params)) {
+                foreach ($_params as $key=>$param) {
+                    $tRet = $stmt->bindValue($key, $param);
+                }
+            }
+
+            // Execute statement
+            $tRet = $stmt->execute();
+
+            // Store result in array
+            $returnArray = array();
+
+            return $returnArray;
+
+        } catch (Exception $exception) {
+            return 'Exception occured: ' . $exception->getMessage();
+        }
     }
 
     /**

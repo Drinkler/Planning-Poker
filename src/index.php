@@ -1,6 +1,10 @@
 <?php
 #https://poe-php.de/oop/mvc-einfuehrung-framework/6
 
+use PlanningPoker\Controller\Controller;
+use PlanningPoker\Library\NotFoundExpression;
+use PlanningPoker\Library\View;
+
 session_start();
 
 require_once "init.php";
@@ -31,16 +35,16 @@ $actionMethodName = ucfirst($actionName).'Action';
 
 try {
     if (!class_exists($controllerClassName)) {
-        throw new \PlanningPoker\Library\NotFoundExpression();
+        throw new NotFoundExpression();
     }
 
     $controller = new $controllerClassName();
 
-    if (!$controller instanceof \PlanningPoker\Controller\Controller || !method_exists($controller, $actionMethodName)) {
-        throw new \PlanningPoker\Library\NotFoundExpression();
+    if (!$controller instanceof Controller || !method_exists($controller, $actionMethodName)) {
+        throw new NotFoundExpression();
     }
 
-    $view = new \PlanningPoker\Library\View(__DIR__.DIRECTORY_SEPARATOR.'views', $controllerName, $actionName);
+    $view = new View(__DIR__.DIRECTORY_SEPARATOR.'views', $controllerName, $actionName);
     $controller->setView($view);
 
     $controller->$actionMethodName();

@@ -1,12 +1,10 @@
 <?php
 
-
 namespace PlanningPoker\Controller;
-
 
 use PlanningPoker\Model\User;
 
-class UserController extends ControllerBase implements Controller
+class UserController extends ControllerBase
 {
     public function loginAction() {
         User::login($_POST['email'], $_POST['password']);
@@ -17,7 +15,8 @@ class UserController extends ControllerBase implements Controller
     }
 
     public function createAction() {
-        User::create($_POST['name'], $_POST['surname'], $_POST['email'], $_POST['password']);
+        $ret = User::create($_POST['name'], $_POST['surname'], $_POST['email'], $_POST['password']);
+        $this->view->setVars($ret);
     }
 
 }

@@ -8,10 +8,33 @@ class View
     protected $path, $controller, $action, $vars = [];
     private $_linkTags, $_scriptTags;
 
+    public $basic_css = array();
+    public $basic_js = array();
+
+
     public function __construct($path, $controller, $action) {
         $this->path = $path;
         $this->controller = $controller;
         $this->action = $action;
+
+        $this->basic_css = array(
+            'bootstrap/css/bootstrap.min.css',
+            'fonts/font-awesome.min.css',
+            'fonts/ionicons.min.css',
+            'css/Features-Clean.css',
+            'css/Footer-Clean.css',
+            'css/Login-Form-Clean.css',
+            'css/Navigation-with-Button.css',
+            'css/Registration-Form-with-Photo.css',
+            'css/Social-Icons.css',
+            'css/styles.css',
+            'css/Testimonials.css'
+        );
+
+        $this->basic_js = array(
+            'js/jquery.min.js',
+            'bootstrap/js/bootstrap.min.js'
+        );
     }
 
     public function render() {
@@ -25,8 +48,12 @@ class View
             $$key = $val;
         }
 
+        $this->addCSS($this->basic_css);
+        $this->addJS($this->basic_js);
+
+
         $this->getFile(DEFAULT_HEADER_PATH);
-        require $fileName;
+        $this->getFile($this->controller.DIRECTORY_SEPARATOR.$this->action);
         $this->getFile(DEFAULT_FOOTER_PATH);
     }
 
@@ -79,7 +106,7 @@ class View
     }
 
     public function getFile($filepath) {
-        $filename = VIEW_PATH . $filepath . ".php";
+        $filename = VIEW_PATH . $filepath . ".phtml";
         if (file_exists($filename)) {
             require $filename;
         }

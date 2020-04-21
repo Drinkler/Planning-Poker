@@ -1,5 +1,6 @@
 <?php
+    $_POST["email"] = $this->Array["email"];
+    $_POST["challenge"] = $this->Array["challenge"];
+?>
 
-use PlanningPoker\Library\Redirect;
-
-Redirect::to('../index');
+<a href=<?= $this->makeURL("user/confirm")?>>Confirm Account</a>
