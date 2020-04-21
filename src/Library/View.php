@@ -1,8 +1,13 @@
 <?php
 
-
 namespace PlanningPoker\Library;
 
+/**
+ * Class View:
+ *
+ * @package PlanningPoker\Library
+ * @author Luca Stanger
+ */
 class View
 {
     public $path, $controller, $action, $vars = array();

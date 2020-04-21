@@ -1,9 +1,13 @@
 <?php
 
-
 namespace PlanningPoker\Library;
 
-
+/**
+ * Class Redirect:
+ *
+ * @package PlanningPoker\Library
+ * @author Luca Stanger
+ */
 class Redirect
 {
     /**

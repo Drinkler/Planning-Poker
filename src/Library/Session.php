@@ -1,13 +1,12 @@
 <?php
 
-
 namespace PlanningPoker\Library;
 
 /**
  * Class Session:
  *
  * @package PlanningPoker\Library
- * @author Luca Stanger <lstanger@gmx.de>
+ * @author Luca Stanger
  */
 class Session
 {
