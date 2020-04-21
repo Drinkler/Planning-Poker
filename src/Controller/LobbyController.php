@@ -2,6 +2,7 @@
 
 namespace PlanningPoker\Controller;
 
+use PlanningPoker\Library\Flash;
 use PlanningPoker\Library\Session;
 use PlanningPoker\Model\Lobby;
 
@@ -38,8 +39,9 @@ class LobbyController extends ControllerBase implements Controller
     public function createAction() {
         if (Session::get("signed_in")) {
             Lobby::create($_REQUEST["lobbyName"], (int) $_REQUEST["cards"], (int) $_SESSION["iduser"]);
+            Flash::success("Lobby wurde erfolgreich erstellt!");
         } else {
-
+            Flash::warning("Bitte melde dich an!");
         }
     }
 
