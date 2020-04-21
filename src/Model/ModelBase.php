@@ -12,6 +12,11 @@ abstract class ModelBase
 {
     private static $_db;
 
+    /**
+     * GetPDO: returns a PDO Connection
+     * @author Luca Stanger
+     * @return Database
+     */
     public function getPdo() {
         if (self::$_db === null) {
             self::$_db = new \PlanningPoker\Model\Database(
@@ -27,6 +32,12 @@ abstract class ModelBase
         return self::$_db;
     }
 
+    /**
+     * FindByID: generic method for finding a entry by its id
+     * @param $_id
+     * @author Luca Stanger
+     * @return array|bool|string
+     */
     public static function findById($_id)
     {
         $model = new static();
@@ -49,6 +60,10 @@ abstract class ModelBase
         #return $stmt->fetchObject(get_class($model));
     }
 
+    /**
+     * GetSource: returns the table name
+     * @return string
+     */
     abstract public function getSource();
 
 }

@@ -6,7 +6,7 @@ namespace PlanningPoker\Model;
  * Class Lobby:
  *
  * @package PlanningPoker\Model
- * @author Luca Stanger
+ * @author Florian Drinkler
  */
 class Lobby extends ModelBase
 {
@@ -17,6 +17,16 @@ class Lobby extends ModelBase
     private $creator_name;
     private $creator_surname;
 
+    /**
+     * Lobby constructor.
+     * @param string $name
+     * @param int $deck
+     * @param string $created
+     * @param string $creator_name
+     * @param string $creator_surname
+     * @author Florian Drinkler
+     * @return void
+     */
     public function __construct(string $name, int $deck, string $created, string $creator_name, string $creator_surname)
     {
         $this->setName($name);
@@ -26,6 +36,14 @@ class Lobby extends ModelBase
         $this->setCreator_surname($creator_surname);
     }
 
+    /**
+     * Create: creates a lobby
+     * @param $_name
+     * @param $_cards
+     * @param $_creator
+     * @author Luca Stanger
+     * @return bool
+     */
     public static function create($_name, $_cards, $_creator) {
         $_name = htmlspecialchars($_name);
         $_cards = htmlspecialchars($_cards);
@@ -57,6 +75,11 @@ class Lobby extends ModelBase
 
     }
 
+    /**
+     * FindAll: returns all lobbies
+     * @author Luca Stanger
+     * @return array|bool|string
+     */
     public static function findAll() {
         // Prepare empty params array for query function
         $params = array();

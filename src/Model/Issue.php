@@ -6,13 +6,20 @@ namespace PlanningPoker\Model;
  * Class Issue:
  *
  * @package PlanningPoker\Model
- * @author Luca Stanger
+ * @author Florian Drinkler
  */
 class Issue
 {
     private $title;
     private $description;
 
+    /**
+     * Issue constructor.
+     * @param string $title
+     * @param string $description
+     * @author Florian Drinkler
+     * @return void
+     */
     public function __construct(string $title, string $description)
     {
         $this->setTitle($title);

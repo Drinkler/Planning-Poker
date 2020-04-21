@@ -6,18 +6,23 @@ namespace PlanningPoker\Model;
  * Class Review:
  *
  * @package PlanningPoker\Model
- * @author Luca Stanger
+ * @author Florian Drinkler
  */
 class Review extends ModelBase
 {
-    private $title;
-    private $description;
-    private $date;
-    private $rating;
+    private $title, $description, $date, $rating, $name, $surname;
 
-    private $name;
-    private $surname;
-
+    /**
+     * Review constructor.
+     * @param string $title
+     * @param string $description
+     * @param string $date
+     * @param int $rating
+     * @param string $name
+     * @param string $surname
+     * @author Florian Drinkler
+     * @return void
+     */
     public function __construct(string $title, string $description, string $date, int $rating, string $name, string $surname)
     {
         $this->setTitle($title);

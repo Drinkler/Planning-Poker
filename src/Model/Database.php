@@ -8,7 +8,7 @@ use PDO;
  * Class Database:
  *
  * @package PlanningPoker\Model
- * @author Luca Stanger
+ * @author Florian Drinkler, Luca Stanger
  */
 class Database
 {
@@ -17,14 +17,15 @@ class Database
     public $_pdo;
 
     /**
-     * database constructor.
+     * Database constructor.
      * @param $_dbhost
      * @param $_dbport
      * @param $_dbname
-     * @param $_charset
-     * @param $_dsn
      * @param $_username
      * @param $_password
+     * @param string $_charset
+     * @author Florian Drinkler
+     * @return void
      */
     public function __construct($_dbhost, $_dbport, $_dbname, $_username, $_password, $_charset = 'utf8')
     {
@@ -40,6 +41,14 @@ class Database
         $this->_pdo = $this->establishPDO($this->getDsn(), $this->getUsername(), $this->getPassword());
     }
 
+    /**
+     * EstablishPDO: builds a pdo connection from scratch
+     * @param $_dsn
+     * @param $_username
+     * @param $_password
+     * @author Florian Drinkler
+     * @return PDO|null
+     */
     private function establishPDO($_dsn, $_username, $_password)
     {
         try {
@@ -67,6 +76,13 @@ class Database
         }
     }
 
+    /**
+     * Query: queries the submitted sql with dynamic binding of parameters
+     * @param $_sql
+     * @param $_params
+     * @author Luca Stanger
+     * @return array|string
+     */
     public function query($_sql, $_params) {
         // Guards
         if (!$_sql) {
@@ -107,6 +123,13 @@ class Database
 
     }
 
+    /**
+     * QueryWithoutFetch: queries the submitted sql with dynamic binding of parameters without fetching
+     * @param $_sql
+     * @param $_params
+     * @author Luca Stanger
+     * @return array|string
+     */
     public function queryWithoutFetch($_sql, $_params) {
         // Guards
         if (!$_sql) {

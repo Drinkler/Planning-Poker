@@ -22,6 +22,7 @@ class User extends ModelBase
      * @param $_email
      * @param $_password
      * @param string $_hashType
+     * @author Luca Stanger
      * @return array
      */
     public static function create($_name, $_surname, $_email, $_password, $_hashType = PASSWORD_DEFAULT) {
@@ -77,6 +78,7 @@ class User extends ModelBase
      * Confirms the submitted useraccount if the challenge is correct
      * @param $_email
      * @param $_challenge
+     * @author Luca Stanger
      * @return string
      */
     public static function confirm($_email, $_challenge) {
@@ -120,6 +122,7 @@ class User extends ModelBase
      * Logs in the submitted user
      * @param $_email string doesn't need to be htmlspecialchars
      * @param $_password string doesn't need to be htmlspecialchars
+     * @author Luca Stanger
      * @return bool returns true if user got logged in successfully
      */
     public static function login($_email, $_password) {
@@ -169,6 +172,8 @@ class User extends ModelBase
 
     /**
      * Logs out the current user
+     * @author Luca Stanger
+     * @return bool
      */
     public static function logout() {
         if (isset($_COOKIE[session_name()])) {
@@ -184,6 +189,8 @@ class User extends ModelBase
 
     /**
      * Deletes the current user account
+     * @author Luca Stanger
+     * @return void
      */
     public static function delete() {
         // Prepare params
@@ -197,6 +204,17 @@ class User extends ModelBase
         $result = (new User)->getPdo()->query($query, $params);
     }
 
+    /**
+     * Returns a gravtar for the submitted email
+     * @param $email
+     * @param int $s
+     * @param string $d
+     * @param string $r
+     * @param bool $img
+     * @param array $atts
+     * @author Luca Stanger
+     * @return string
+     */
     public static function get_gravatar( $email, $s = 80, $d = 'retro', $r = 'g', $img = false, $atts = array() ) {
         $url = 'https://www.gravatar.com/avatar/';
         $url .= md5( strtolower( trim( $email ) ) );
