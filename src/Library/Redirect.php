@@ -11,7 +11,6 @@ class Redirect
      * @access public
      * @param string $location [optional]
      * @return void
-     * @since 1.0.1
      */
     public static function to($location = "") {
         if ($location) {

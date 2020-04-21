@@ -34,12 +34,6 @@ class Database
         $this->_pdo = $this->establishPDO($this->getDsn(), $this->getUsername(), $this->getPassword());
     }
 
-    #public function __destruct()
-    #{
-    #    // Closes the pdo connection
-    #    if ($this->_pdo!==null) { $this->_pdo = null; }
-    #}
-
     private function establishPDO($_dsn, $_username, $_password)
     {
         try {
@@ -55,12 +49,12 @@ class Database
             return $pdo;
 
         }
-        catch (PDOException $PDOException) {
+        catch (\PDOException $PDOException) {
             // Return null if no connection was established
             echo 'Connection failed: ' . $PDOException->getMessage();
             return null;
         }
-        catch (Exception $exception) {
+        catch (\Exception $exception) {
             // Return null if no connection was established
             echo 'Unexpected exception occured: ' . $exception->getMessage();
             return null;
@@ -100,7 +94,7 @@ class Database
 
             return $returnArray;
 
-        } catch (Exception $exception) {
+        } catch (\Exception $exception) {
             return 'Exception occured: ' . $exception->getMessage();
         }
 
@@ -135,7 +129,7 @@ class Database
 
             return $returnArray;
 
-        } catch (Exception $exception) {
+        } catch (\Exception $exception) {
             return 'Exception occured: ' . $exception->getMessage();
         }
     }
@@ -270,12 +264,3 @@ class Database
 
 
 }
-
-#return new Database(
-#    $_SERVER['RDS_HOSTNAME'],
-#    $_SERVER['RDS_PORT'],
-#    $_SERVER['RDS_DB_NAME'],
-#    $_SERVER['RDS_USERNAME'],
-#    $_SERVER['RDS_PASSWORD'],
-#    'utf8'
-#);

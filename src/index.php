@@ -3,9 +3,8 @@
 
 use PlanningPoker\Controller\Controller;
 use PlanningPoker\Library\NotFoundExpression;
+use PlanningPoker\Library\Session;
 use PlanningPoker\Library\View;
-
-session_start();
 
 require_once "init.php";
 
@@ -20,6 +19,8 @@ spl_autoload_register(function ($class_name) {
         include $fileName;
     }
 });
+
+Session::init();
 
 // get requested url
 $url = (isset($_GET['_url']) ? $_GET['_url'] : '');

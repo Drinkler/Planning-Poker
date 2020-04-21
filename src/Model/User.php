@@ -2,6 +2,8 @@
 
 namespace PlanningPoker\Model;
 
+use PlanningPoker\Library\Session;
+
 class User extends ModelBase
 {
     private $_id, $_name, $_surname, $_email, $_created;
@@ -141,12 +143,12 @@ class User extends ModelBase
             if ($result[0]['confirmed'] == 1) {
                 // User can Login
                 // Save user data in session
-                $_SESSION["signed_in"] = true;
-                $_SESSION["iduser"] = $result[0]["iduser"];
-                $_SESSION["name"] = $result[0]["name"];
-                $_SESSION["surname"] = $result[0]["surname"];
-                $_SESSION["email"] = $result[0]["email"];
-                $_SESSION["username"] = $_SESSION["name"] . " " . $_SESSION["surname"];
+                Session::put("signed_in", true);
+                Session::put("iduser", $result[0]["iduser"]);
+                Session::put("name", $result[0]["name"]);
+                Session::put("surname", $result[0]["surname"]);
+                Session::put("email", $result[0]["email"]);
+                Session::put("username", $_SESSION["name"] . " " . $_SESSION["surname"]);
 
                 return true;
             } else {
@@ -169,8 +171,7 @@ class User extends ModelBase
             return false;
         }
 
-        $_SESSION = array();
-        session_destroy();
+        Session::destroy();
 
         return true;
     }
@@ -181,7 +182,7 @@ class User extends ModelBase
     public static function delete() {
         // Prepare params
         $params = array(
-            ':iduser' => $_SESSION['iduser']
+            ':iduser' => Session::get("iduser")
         );
 
         //Prepare query
