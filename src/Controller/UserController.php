@@ -3,6 +3,7 @@
 namespace PlanningPoker\Controller;
 
 use PlanningPoker\Library\Flash;
+use PlanningPoker\Library\Text;
 use PlanningPoker\Model\User;
 
 /**
@@ -34,7 +35,7 @@ class UserController extends ControllerBase
      */
     public function logoutAction() {
         User::logout();
-        Flash::info("Erfolgreich abgemeldet!");
+        Flash::info(Text::get("LOGOUT_USER_SUCCESSFUL"));
     }
 
     /**
@@ -48,7 +49,7 @@ class UserController extends ControllerBase
     public function createAction() {
         $vars = User::create($_POST['name'], $_POST['surname'], $_POST['email'], $_POST['password']);
         $this->view->setVars($vars);
-        Flash::success("Account wurde erfolgreich erstellt!");
+        Flash::success(Text::get("REGISTER_USER_CREATED"));
     }
 
     /**
@@ -60,7 +61,7 @@ class UserController extends ControllerBase
      */
     public function confirmAction() {
         User::confirm($this->view->basic_params[2], $this->view->basic_params[3]);
-        Flash::success("Account wurde bestätigt!");
+        Flash::success(Text::get("LOGIN_USER_CONFIRMED"));
     }
 
 }

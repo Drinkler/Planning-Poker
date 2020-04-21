@@ -35,11 +35,14 @@ return [
         // =====================================================================
         "LOGIN_INVALID_PASSWORD" => "The email / password combination you have entered is incorrect",
         "LOGIN_USER_NOT_FOUND" => "The email you have entered has not been found!",
-        "" => "",
+        "USER_LOGIN_REQUIRED" => "You have to be logged in to perform this action!",
+        "LOGIN_USER_CONFIRMED" => "Your account has been confirmed.",
+        "LOGOUT_USER_SUCCESSFUL" => "Signed out successfully",
         //
         // Register Model Texts
         // =====================================================================
         "REGISTER_USER_CREATED" => "Your account has been successfully created!",
+        "REGISTER_LOBBY_CREATED" => "Your lobby has been successfully created!",
         "" => "",
         //
         // User Model Texts
