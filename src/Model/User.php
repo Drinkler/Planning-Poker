@@ -4,6 +4,12 @@ namespace PlanningPoker\Model;
 
 use PlanningPoker\Library\Session;
 
+/**
+ * Class User:
+ *
+ * @package PlanningPoker\Model
+ * @author Luca Stanger
+ */
 class User extends ModelBase
 {
     private $_id, $_name, $_surname, $_email, $_created;

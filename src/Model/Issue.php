@@ -2,6 +2,12 @@
 
 namespace PlanningPoker\Model;
 
+/**
+ * Class Issue:
+ *
+ * @package PlanningPoker\Model
+ * @author Luca Stanger
+ */
 class Issue
 {
     private $title;

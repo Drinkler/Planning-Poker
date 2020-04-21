@@ -2,7 +2,12 @@
 
 namespace PlanningPoker\Model;
 
-
+/**
+ * Class ModelBase:
+ *
+ * @package PlanningPoker\Model
+ * @author Luca Stanger
+ */
 abstract class ModelBase
 {
     private static $_db;

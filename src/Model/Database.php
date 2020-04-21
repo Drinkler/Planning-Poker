@@ -4,6 +4,12 @@ namespace PlanningPoker\Model;
 
 use PDO;
 
+/**
+ * Class Database:
+ *
+ * @package PlanningPoker\Model
+ * @author Luca Stanger
+ */
 class Database
 {
     private $_dbhost, $_dbport, $_dbname, $_charset, $_dsn, $_username, $_password;

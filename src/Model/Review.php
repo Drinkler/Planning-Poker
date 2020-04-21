@@ -2,6 +2,12 @@
 
 namespace PlanningPoker\Model;
 
+/**
+ * Class Review:
+ *
+ * @package PlanningPoker\Model
+ * @author Luca Stanger
+ */
 class Review extends ModelBase
 {
     private $title;

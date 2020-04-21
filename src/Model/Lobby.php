@@ -2,6 +2,12 @@
 
 namespace PlanningPoker\Model;
 
+/**
+ * Class Lobby:
+ *
+ * @package PlanningPoker\Model
+ * @author Luca Stanger
+ */
 class Lobby extends ModelBase
 {
     private $name;
