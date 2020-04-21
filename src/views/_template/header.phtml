@@ -1,3 +1,9 @@
+<?php
+
+use PlanningPoker\Library\Config;
+use PlanningPoker\Library\Flash;
+
+?>
 <!DOCTYPE html>
 <html lang="de">
 
@@ -10,9 +16,54 @@
         <?= $this->getCSS(); ?>
         <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     </head>
-
+    <style>
+        .alert-fixed {
+            position:fixed;
+            top: 0px;
+            left: 0px;
+            width: 100%;
+            z-index:9999;
+            border-radius:0px
+        }
+    </style>
     <body>
-        <!-- Modal LogIn -->
+        <div id="content">
+            <div id="feedback" class="container">
+                <?php if (($danger = Flash::danger())): ?>
+                    <div class="alert alert-danger alert-dismissible fade show alert-fixed" role="alert"><strong><?= $this->escapeHTML($danger); ?>v<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>
+                <?php
+                endif;
+                if (($info = Flash::info())):
+                    ?>
+                    <div class="alert alert-info alert-dismissible fade show alert-fixed" role="alert"><strong><?= $this->escapeHTML($info); ?></strong><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>
+                <?php
+                endif;
+                if (($success = Flash::success())):
+                    ?>
+                    <div class="alert alert-success alert-dismissible fade show alert-fixed" role="alert"><strong><?= $this->escapeHTML($success); ?></strong><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>
+                <?php
+                endif;
+                if (($warning = Flash::warning())):
+                    ?>
+                    <div class="alert alert-warning alert-dismissible fade show alert-fixed" role="alert"><strong><?= $this->escapeHTML($warning); ?></strong><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>
+                <?php
+                endif;
+                if (($errors = Flash::session(Config::get("SESSION_ERRORS")))):
+                    ?>
+                    <div class="alert alert-danger alert-dismissible fade show alert-fixed" role="alert">
+                        <h4>Errors:</h4>
+                        <ul>
+                            <?php foreach ($errors as $key => $values): ?>
+                                <?php foreach ($values as $value): ?>
+                                    <li><?= $this->escapeHTML($value); ?></li>
+                                <?php endforeach; ?>
+                            <?php endforeach; ?>
+                        </ul>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                <?php endif; ?>
+            </div>
+
         <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -40,8 +91,6 @@
             </div>
         </div>
         </div>
-        <!-- End Modal LogIn -->
-        <!-- Modal SignUp -->
         <div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="signupModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -80,8 +129,6 @@
             </div>
             </div>
         </div>
-        <!-- End Modal SignUp -->
-        <!-- Login Button -->
         <nav class="navbar navbar-light navbar-expand-md navigation-clean-button dropleft">
             <div class="container">
                 <a class="navbar-brand" href="<?= $this->makeURL("index")?>">

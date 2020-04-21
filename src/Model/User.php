@@ -183,6 +183,7 @@ class User extends ModelBase
         }
 
         Session::destroy();
+        Session::init();
 
         return true;
     }

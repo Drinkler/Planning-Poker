@@ -196,5 +196,15 @@ class View
             require $filename;
         }
     }
+    /**
+     * Escape HTML: Converts all applicable characters to HTML entities.
+     * @param string $string
+     * @author Luca Stanger
+     * @return string
+     */
+    public function escapeHTML($string) {
+        return(htmlentities($string, HTMLENTITIES_FLAGS, HTMLENTITIES_ENCODING, HTMLENTITIES_DOUBLE_ENCODE));
+    }
+
 
 }
