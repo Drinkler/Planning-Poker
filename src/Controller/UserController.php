@@ -15,8 +15,12 @@ class UserController extends ControllerBase
     }
 
     public function createAction() {
-        $ret = User::create($_POST['name'], $_POST['surname'], $_POST['email'], $_POST['password']);
-        $this->view->setVars($ret);
+        $vars = User::create($_POST['name'], $_POST['surname'], $_POST['email'], $_POST['password']);
+        $this->view->setVars($vars);
+    }
+
+    public function confirmAction() {
+        User::confirm($this->view->basic_params[2], $this->view->basic_params[3]);
     }
 
 }

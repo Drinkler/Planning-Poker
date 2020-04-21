@@ -1,6 +1,1 @@
-<?php
-    $_POST["email"] = $this->Array["email"];
-    $_POST["challenge"] = $this->Array["challenge"];
-?>
-
-<a href=<?= $this->makeURL("user/confirm")?>>Confirm Account</a>
+<a href=<?= $this->makeURL("user/confirm/".$this->vars["email"]."/".$this->vars["challenge"])?>>Confirm Account</a>

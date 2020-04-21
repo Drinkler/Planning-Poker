@@ -5,11 +5,12 @@ namespace PlanningPoker\Library;
 
 class View
 {
-    protected $path, $controller, $action, $vars = [];
+    public $path, $controller, $action, $vars = array();
     private $_linkTags, $_scriptTags;
 
     public $basic_css = array();
     public $basic_js = array();
+    public $basic_params = array();
 
 
     public function __construct($path, $controller, $action) {
@@ -44,23 +45,25 @@ class View
             Redirect::to(404);
         }
 
-        foreach ($this->vars as $key => $val) {
-            $$key = $val;
-        }
-
         $this->addCSS($this->basic_css);
         $this->addJS($this->basic_js);
-
 
         $this->getFile(DEFAULT_HEADER_PATH);
         $this->getFile($this->controller.DIRECTORY_SEPARATOR.$this->action);
         $this->getFile(DEFAULT_FOOTER_PATH);
     }
 
-    public function setVars(array $vars) {
-        foreach ($vars as $key => $val) {
-            $this->$vars[$key] = $val;
+    public function setVars(array $_vars) {
+        foreach ($_vars as $key => $val) {
+            $this->vars[$key] = $val;
         }
+    }
+
+    public function addParams($params) {
+        if (!is_array($params)) {
+            $params = (array) $params;
+        }
+        $this->basic_params = $params;
     }
 
     public function addCSS($files) {

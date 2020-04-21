@@ -95,15 +95,15 @@ class User extends ModelBase
                 $query = "UPDATE user SET confirmed = 1 WHERE email=:email";
 
                 // Execute query
-                (new User)->getPdo()->query($query, $params);
+                (new User)->getPdo()->queryWithoutFetch($query, $params);
 
-                // TODO: Check if proper using of header here?
-                header("Location: ../index.php");
+                return true;
+
             } else {
-                return 'User not authorized.';
+                return false;
             }
         } else {
-            return 'Wrong input is given';
+            return false;
         }
 
     }

@@ -44,8 +44,15 @@ try {
         throw new NotFoundExpression();
     }
 
+    $params = array();
+    for ($i = 2; $i < count($urlParts); $i++) {
+        $params[$i] = $urlParts[$i];
+    }
+
     $view = new View(__DIR__.DIRECTORY_SEPARATOR.'views', $controllerName, $actionName);
     $controller->setView($view);
+
+    $view->addParams($params);
 
     $controller->$actionMethodName();
     $view->render();
