@@ -16,4 +16,12 @@ class LobbyController extends ControllerBase implements Controller
         }
     }
 
+    public function createAction() {
+        Lobby::create($_REQUEST["lobbyName"], (int) $_REQUEST["cards"], (int) $_SESSION["iduser"]);
+    }
+
+    public function joinAction() {
+
+    }
+
 }

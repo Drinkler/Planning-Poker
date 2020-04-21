@@ -65,7 +65,6 @@ class Lobby extends ModelBase
         }
     }
 
-
     // Getter-Setter
     public function getName(): string
     {
