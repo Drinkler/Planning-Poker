@@ -1,14 +1,17 @@
 <?php
 
-if (isset($_SESSION['signed_in']) && $_SESSION['signed_in'] == true) {
+use PlanningPoker\Library\Session;
+use PlanningPoker\Model\User;
 
+if (isset($_SESSION['signed_in']) && $_SESSION['signed_in'] == true) {
+    $user = Session::get("user");
     echo '<span class="actions">
                 <div class="dropdown">
                     <button class="btn dropdown-toggle" data-toggle="dropdown">
-                        <img src="'. \PlanningPoker\Model\User::get_gravatar($_SESSION['email']) .'" width="40" height="40" class="img-circle" alt="@username">
+                        <img src="'. User::get_gravatar($user->getEmail()) .'" width="40" height="40" class="img-circle" alt="@username">
                     </button>
                     <div class="dropdown-menu">
-                        <p class="dropdown-header">Angemeldet als: <br>' . $_SESSION['username'] .'</p>
+                        <p class="dropdown-header">Angemeldet als: <br>' .$user->getUsername().'</p>
                         <div class="dropdown-divider"></div>
                         <a href="#" class="dropdown-item">Dein Profil</a>
                         <a href="#" class="dropdown-item">Deine Lobbys</a>

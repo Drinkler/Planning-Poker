@@ -3,6 +3,7 @@
 namespace PlanningPoker\Controller;
 
 use PlanningPoker\Library\Flash;
+use PlanningPoker\Library\Session;
 use PlanningPoker\Library\Text;
 use PlanningPoker\Model\User;
 
@@ -62,6 +63,17 @@ class UserController extends ControllerBase
     public function confirmAction() {
         User::confirm($this->view->basic_params[2], $this->view->basic_params[3]);
         Flash::success(Text::get("LOGIN_USER_CONFIRMED"));
+    }
+
+    /**
+     * Sets the vars for profile view
+     * @access public
+     * @example user/profile
+     * @return void
+     * @author Luca Stanger
+     */
+    public function profileAction() {
+        Session::get("currentUser");
     }
 
 }
