@@ -12,7 +12,25 @@ use PlanningPoker\Library\Session;
  */
 class User extends ModelBase
 {
-    private $_id, $_name, $_surname, $_email, $_created;
+    private $_id, $_name, $_surname, $_email, $_created, $_username;
+
+    /**
+     * User constructor.
+     * @param $_id
+     * @param $_name
+     * @param $_surname
+     * @param $_email
+     * @author Luca Stanger
+     * @return void
+     */
+    public function __construct($_id, $_name, $_surname, $_email)
+    {
+        $this->_id = $_id;
+        $this->_name = $_name;
+        $this->_surname = $_surname;
+        $this->_email = $_email;
+        $this->_username = $this->_name . " " . $this->_surname;
+    }
 
 
     /**
@@ -145,19 +163,18 @@ class User extends ModelBase
         // Prepare query
         $query = 'SELECT * FROM user WHERE email=:email';
         // Execute query on database
-        $result = (new User)->getPdo()->query($query, $params);
+        $result = (new PDOBase)->getPdo()->query($query, $params);
         // Verify return
         if (password_verify($_password, $result[0]['password'])) {
             // Email needs to be confirmed
             if ($result[0]['confirmed'] == 1) {
                 // User can Login
                 // Save user data in session
+                $user = new User($result[0]["iduser"], $result[0]["name"], $result[0]["surname"], $result[0]["email"]);
+
+                Session::put("user", $user);
+
                 Session::put("signed_in", true);
-                Session::put("iduser", $result[0]["iduser"]);
-                Session::put("name", $result[0]["name"]);
-                Session::put("surname", $result[0]["surname"]);
-                Session::put("email", $result[0]["email"]);
-                Session::put("username", $_SESSION["name"] . " " . $_SESSION["surname"]);
 
                 return true;
             } else {
@@ -232,4 +249,102 @@ class User extends ModelBase
     {
         return 'user';
     }
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->_id;
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id): void
+    {
+        $this->_id = $id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getName()
+    {
+        return $this->_name;
+    }
+
+    /**
+     * @param mixed $name
+     */
+    public function setName($name): void
+    {
+        $this->_name = $name;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSurname()
+    {
+        return $this->_surname;
+    }
+
+    /**
+     * @param mixed $surname
+     */
+    public function setSurname($surname): void
+    {
+        $this->_surname = $surname;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEmail()
+    {
+        return $this->_email;
+    }
+
+    /**
+     * @param mixed $email
+     */
+    public function setEmail($email): void
+    {
+        $this->_email = $email;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCreated()
+    {
+        return $this->_created;
+    }
+
+    /**
+     * @param mixed $created
+     */
+    public function setCreated($created): void
+    {
+        $this->_created = $created;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUsername(): string
+    {
+        return $this->_username;
+    }
+
+    /**
+     * @param string $username
+     */
+    public function setUsername(string $username): void
+    {
+        $this->_username = $username;
+    }
+
+
 }
