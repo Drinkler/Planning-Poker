@@ -40,8 +40,12 @@ class UserController extends ControllerBase
      * @author Luca Stanger
      */
     public function logoutAction() {
-        User::logout();
-        Flash::info(Text::get("LOGOUT_USER_SUCCESSFUL"));
+        $tRet = User::logout();
+        if (tRet) {
+            Flash::success(Text::get("LOGOUT_USER_SUCCESSFUL"));
+        } else {
+            Flash::warning(Text::get("USER_LOGOUT_INVALID"));
+        }
     }
 
     /**
@@ -76,8 +80,12 @@ class UserController extends ControllerBase
      * @author Luca Stanger
      */
     public function confirmAction() {
-        User::confirm($this->view->basic_params[2], $this->view->basic_params[3]);
-        Flash::success(Text::get("LOGIN_USER_CONFIRMED"));
+        $tRet = User::confirm($this->view->basic_params[2], $this->view->basic_params[3]);
+        if ($tRet) {
+            Flash::success(Text::get("LOGIN_USER_CONFIRMED"));
+        } else {
+            Flash::warning(Text::get("USER_CONFIRMATION_INVALID"));
+        }
     }
 
     /**
