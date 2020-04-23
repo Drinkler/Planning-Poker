@@ -24,6 +24,7 @@ Session::init();
 $url = (isset($_GET['_url']) ? $_GET['_url'] : '');
 $urlParts = explode('/', $url);
 echo APP_URL;
+echo dirname($_SERVER["SCRIPT_NAME"]);
 
 // build the controller class
 $controllerName = (isset($urlParts[0]) && $urlParts[0] ? $urlParts[0] : 'index');
