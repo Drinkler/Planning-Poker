@@ -1,6 +1,4 @@
 <?php
-#https://poe-php.de/oop/mvc-einfuehrung-framework/6
-
 use PlanningPoker\Controller\Controller;
 use PlanningPoker\Library\NotFoundExpression;
 use PlanningPoker\Library\Session;
@@ -25,6 +23,7 @@ Session::init();
 // get requested url
 $url = (isset($_GET['_url']) ? $_GET['_url'] : '');
 $urlParts = explode('/', $url);
+echo $url;
 
 // build the controller class
 $controllerName = (isset($urlParts[0]) && $urlParts[0] ? $urlParts[0] : 'index');
@@ -72,4 +71,3 @@ try {
     http_response_code(500);
     echo 'Exception: <b>'.$e->getMessage().'</b><br><pre>'.$e->getTraceAsString().'</pre>';
 }
-?>
