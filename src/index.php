@@ -38,7 +38,6 @@ try {
     }
 
     $controller = new $controllerClassName();
-    echo "Controller: ".$controllerClassName;
 
     if (!$controller instanceof Controller || !method_exists($controller, $actionMethodName)) {
         throw new NotFoundExpression();
@@ -55,7 +54,6 @@ try {
     $view->addParams($params);
 
     $controller->$actionMethodName();
-    echo "<br>ActionMethodName: ".$actionMethodName;
 
     // Added specific cases for login and logout
     if ($url == "user/logout" || $url == "user/login" || $url == "user/confirm") {
