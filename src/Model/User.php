@@ -3,6 +3,7 @@
 namespace PlanningPoker\Model;
 
 use PlanningPoker\Library\Session;
+use PlanningPoker\Library\Text;
 
 /**
  * Class User:
@@ -40,10 +41,11 @@ class User extends ModelBase
      * @param $_email
      * @param $_password
      * @param string $_hashType
+     * @param array() $returnArray
+     * @return boolean
      * @author Luca Stanger
-     * @return array
      */
-    public static function create($_name, $_surname, $_email, $_password, $_hashType = PASSWORD_DEFAULT, &$retunArray) {
+    public static function create($_name, $_surname, $_email, $_password, $_hashType = PASSWORD_DEFAULT, array &$returnArray = array()) {
 
         if (!empty($_name) && !empty($_surname && !empty($_email) && !empty($_password))) {
             // Escape parameters
@@ -52,6 +54,10 @@ class User extends ModelBase
             $_email = htmlspecialchars($_email);
             $_password = password_hash(htmlspecialchars($_password), $_hashType);
         } else {
+            // Return false if one of the inputs is missing
+            $returnArray = array(
+              'error' => Text::get("USER_CREATE_MISSING_INPUT")
+            );
             return false;
         }
 
@@ -61,7 +67,8 @@ class User extends ModelBase
         );
 
         // Prepare query
-        $query = "SELECT COUNT(*) FROM user WHERE email=:email";
+        $query = /** @lang SQL*/
+            "SELECT COUNT(*) FROM user WHERE email=:email";
 
         $result = (new PDOBase)->getPdo()->query($query, $params);
 
@@ -80,18 +87,20 @@ class User extends ModelBase
             );
 
             // Prepare query
-            $query = "INSERT INTO user (name ,surname ,email ,password, challenge) VALUES (:name, :surname, :email, :password, :challenge)";
+            $query = /** @lang SQL */
+                "INSERT INTO user (name ,surname ,email ,password, challenge) VALUES (:name, :surname, :email, :password, :challenge)";
 
-            $result = (new PDOBase)->getPdo()->queryWithoutFetch($query, $params);
-            // TODO: Return only if user was created successfully
-            $retunArray = array(
+            // Execute query
+            (new PDOBase)->getPdo()->queryWithoutFetch($query, $params);
+
+            $returnArray = array(
                 'email' => $_email,
                 'challenge' => $challenge
             );
             return true;
         }
-        $retunArray = array(
-            'error' => USER_CREATE_EXCEPTION
+        $returnArray = array(
+            'error' => Text::get("USER_CREATE_EXCEPTION")
         );
         return false;
     }
@@ -116,7 +125,8 @@ class User extends ModelBase
             );
 
             // Prepare query
-            $query = "SELECT challenge FROM user WHERE email=:email";
+            $query = /** @lang SQL */
+                "SELECT challenge FROM user WHERE email=:email";
 
             // Execute query
             $result = (new PDOBase)->getPdo()->query($query, $params);
@@ -124,7 +134,8 @@ class User extends ModelBase
             // If the returned challenge is equal, confirm user
             if ($result[0]['challenge'] == $_challenge) {
                 // Prepare query
-                $query = "UPDATE user SET confirmed = 1 WHERE email=:email";
+                $query = /** @lang SQL */
+                    "UPDATE user SET confirmed = 1 WHERE email=:email";
 
                 // Execute query
                 (new PDOBase)->getPdo()->queryWithoutFetch($query, $params);
@@ -144,49 +155,68 @@ class User extends ModelBase
      * Logs in the submitted user
      * @param $_email string doesn't need to be htmlspecialchars
      * @param $_password string doesn't need to be htmlspecialchars
+     * @param array() $_returnArray
      * @author Luca Stanger
      * @return bool returns true if user got logged in successfully
      */
-    public static function login($_email, $_password) {
+    public static function login($_email, $_password, &$_returnArray = array()) {
         // Check if user is already logged in
         if (isset($_SESSION['signed_in']) && $_SESSION['signed_in'] == true) {
+            $_returnArray = array(
+              'error' => Text::get("USER_ALREADY_SINGED_IN")
+            );
             return false;
         }
+
         // Escape input
         if (!empty($_email) && !empty($_password)) {
             $_email = htmlspecialchars($_email);
             $_password = htmlspecialchars($_password);
         } else {
-            echo "Wrong input is given.";
+            $_returnArray = array(
+                'error' => Text::get("USER_CREATE_MISSING_INPUT")
+            );
             return false;
         }
+
         // Prepare params
         $params = array(
             ':email' => $_email
         );
+
         // Prepare query
-        $query = 'SELECT * FROM user WHERE email=:email';
+        $query = /** @lang SQL */
+            'SELECT * FROM user WHERE email=:email';
+
         // Execute query on database
         $result = (new PDOBase)->getPdo()->query($query, $params);
+
         // Verify return
         if (password_verify($_password, $result[0]['password'])) {
+
             // Email needs to be confirmed
             if ($result[0]['confirmed'] == 1) {
                 // User can Login
                 // Save user data in session
                 $user = new User($result[0]["iduser"], $result[0]["name"], $result[0]["surname"], $result[0]["email"]);
 
+                // Put user object into session
                 Session::put("user", $user);
 
+                // Change user to signed in
                 Session::put("signed_in", true);
 
                 return true;
             } else {
-                print_r('E-Mail is not confirmed.');
+                $_returnArray = array(
+                    'error' => Text::get("USER_NOT_CONFIRMED")
+                );
                 return false;
             }
         } else {
-            print_r('Wrong password.');
+            $_returnArray = array(
+                'error' => Text::get("USER_PASSWORD_INCORRECT")
+            );
             return false;
         }
     }
@@ -220,9 +250,12 @@ class User extends ModelBase
         );
 
         //Prepare query
-        $query = 'DELETE FROM user WHERE iduser = :iduser';
+        $query = /** @lang SQL */
+            'DELETE FROM user WHERE iduser = :iduser';
 
-        $result = (new User)->getPdo()->query($query, $params);
+        (new User)->getPdo()->query($query, $params);
+
+        return true;
     }
 
     /**
@@ -249,6 +282,9 @@ class User extends ModelBase
         return $url;
     }
 
+    /**
+     * @return string
+     */
     public function getSource()
     {
         return 'user';

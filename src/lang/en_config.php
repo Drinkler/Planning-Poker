@@ -50,8 +50,17 @@ return [
         // User Model Texts
         // =====================================================================
         "USER_CREATE_EXCEPTION" => "There was a problem creating this account!",
+        "USER_CREATE_MISSING_INPUT" => "Not all required fields were filled properly.",
+        "USER_NOT_CONFIRMED" => "Your account has not been confirmed.",
+        "USER_ALREADY_SINGED_IN" => "You are already signed in!",
         "USER_UPDATE_EXCEPTION" => "There was a problem updating this account!",
         "USER_LOGIN_EXCEPTION" => "There was a problem logging into this account!",
+        "USER_PASSWORD_INCORRECT" => "Wrong password.",
+        "" => "",
+        "" => "",
+        "" => "",
+        "" => "",
+        "" => "",
         "" => "",
         //
         // Input Utility Texts
