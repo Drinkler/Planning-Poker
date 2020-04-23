@@ -40,7 +40,8 @@ class LobbyController extends ControllerBase implements Controller
      */
     public function createAction() {
         if (Session::get("signed_in")) {
-            Lobby::create($_REQUEST["lobbyName"], (int) $_REQUEST["cards"], (int) $_SESSION["iduser"]);
+            $user = Session::get("user");
+            Lobby::create($_REQUEST["lobbyName"], (int) $_REQUEST["cards"], (int) $user->getId());
             Flash::success(Text::get("REGISTER_LOBBY_CREATED"));
         } else {
             Flash::warning(Text::get("USER_LOGIN_REQUIRED"));

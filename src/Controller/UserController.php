@@ -24,7 +24,7 @@ class UserController extends ControllerBase
      */
     public function loginAction() {
         User::login($_POST['email'], $_POST['password']);
-        Flash::info("Erfolgreich angemeldet!");
+        Flash::success("Erfolgreich angemeldet!");
     }
 
     /**
