@@ -161,8 +161,7 @@ class View
      */
     public function makeURL($path = "") {
         if (is_array($path)) {
-            # return(APP_URL . implode("/", $path));
-            return(APP_URL . $path);
+            return(APP_URL . implode("/", $path));
         }
         return(APP_URL . $path);
     }

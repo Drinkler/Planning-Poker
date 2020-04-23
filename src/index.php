@@ -23,10 +23,6 @@ Session::init();
 // get requested url
 $url = (isset($_GET['_url']) ? $_GET['_url'] : '');
 $urlParts = explode('/', $url);
-echo "AppProtocol ". APP_PROTOCOL;
-echo "<br>Server Host: " . $_SERVER["HTTP_HOST"];
-echo "<br>".APP_URL;
-echo "<br>".dirname($_SERVER["SCRIPT_NAME"]);
 
 // build the controller class
 $controllerName = (isset($urlParts[0]) && $urlParts[0] ? $urlParts[0] : 'index');
