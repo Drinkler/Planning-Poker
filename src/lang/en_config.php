@@ -37,7 +37,9 @@ return [
         "LOGIN_USER_NOT_FOUND" => "The email you have entered has not been found!",
         "USER_LOGIN_REQUIRED" => "You have to be logged in to perform this action!",
         "LOGIN_USER_CONFIRMED" => "Your account has been confirmed.",
-        "LOGOUT_USER_SUCCESSFUL" => "Signed out successfully",
+        "LOGOUT_USER_SUCCESSFUL" => "Signed out successfully.",
+        "USER_LOGIN_SUCCESS" => "You are now signed in.",
+        "" => "",
         //
         // Register Model Texts
         // =====================================================================
@@ -49,6 +51,7 @@ return [
         // =====================================================================
         "USER_CREATE_EXCEPTION" => "There was a problem creating this account!",
         "USER_UPDATE_EXCEPTION" => "There was a problem updating this account!",
+        "USER_LOGIN_EXCEPTION" => "There was a problem logging into this account!",
         "" => "",
         //
         // Input Utility Texts

@@ -43,7 +43,7 @@ class User extends ModelBase
      * @author Luca Stanger
      * @return array
      */
-    public static function create($_name, $_surname, $_email, $_password, $_hashType = PASSWORD_DEFAULT) {
+    public static function create($_name, $_surname, $_email, $_password, $_hashType = PASSWORD_DEFAULT, &$retunArray) {
 
         if (!empty($_name) && !empty($_surname && !empty($_email) && !empty($_password))) {
             // Escape parameters
@@ -52,7 +52,7 @@ class User extends ModelBase
             $_email = htmlspecialchars($_email);
             $_password = password_hash(htmlspecialchars($_password), $_hashType);
         } else {
-            return array();
+            return false;
         }
 
         // Prepare params
@@ -63,7 +63,7 @@ class User extends ModelBase
         // Prepare query
         $query = "SELECT COUNT(*) FROM user WHERE email=:email";
 
-        $result = (new User)->getPdo()->query($query, $params);
+        $result = (new PDOBase)->getPdo()->query($query, $params);
 
         if (!$result[0][0]) {
 
@@ -82,14 +82,18 @@ class User extends ModelBase
             // Prepare query
             $query = "INSERT INTO user (name ,surname ,email ,password, challenge) VALUES (:name, :surname, :email, :password, :challenge)";
 
-            $result = (new User)->getPdo()->queryWithoutFetch($query, $params);
+            $result = (new PDOBase)->getPdo()->queryWithoutFetch($query, $params);
             // TODO: Return only if user was created successfully
-            return array(
+            $retunArray = array(
                 'email' => $_email,
                 'challenge' => $challenge
             );
-
+            return true;
         }
+        $retunArray = array(
+            'error' => USER_CREATE_EXCEPTION
+        );
+        return false;
     }
 
     /**
@@ -115,7 +119,7 @@ class User extends ModelBase
             $query = "SELECT challenge FROM user WHERE email=:email";
 
             // Execute query
-            $result = (new User)->getPdo()->query($query, $params);
+            $result = (new PDOBase)->getPdo()->query($query, $params);
 
             // If the returned challenge is equal, confirm user
             if ($result[0]['challenge'] == $_challenge) {
@@ -123,7 +127,7 @@ class User extends ModelBase
                 $query = "UPDATE user SET confirmed = 1 WHERE email=:email";
 
                 // Execute query
-                (new User)->getPdo()->queryWithoutFetch($query, $params);
+                (new PDOBase)->getPdo()->queryWithoutFetch($query, $params);
 
                 return true;
 

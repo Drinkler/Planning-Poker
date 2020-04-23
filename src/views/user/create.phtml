@@ -1,1 +1,8 @@
-<a href=<?= $this->makeURL("user/confirm/".$this->vars["email"]."/".$this->vars["challenge"])?>>Confirm Account</a>
+<?php if (isset($this->vars["email"]) && isset($this->vars["challenge"])):
+        if (!empty($this->vars["email"]) && !empty($this->vars["challenge"])):  ?>
+            <a href=<?= $this->makeURL("user/confirm/".$this->vars["email"]."/".$this->vars["challenge"])?>>Confirm Account</a>
+        <?php
+        endif;
+    endif;
+?>
+

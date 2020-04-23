@@ -39,5 +39,11 @@
         </div>
         <script src="https://cdn.jsdelivr.net/gh/Wruczek/Bootstrap-Cookie-Alert@gh-pages/cookiealert.js"></script>
         <?= $this->getJS(); ?>
+        <script>
+            // Used to hide info bar after three seconds
+            $(".alert").delay(3500).slideUp(200, function() {
+                $(this).alert('close');
+            });
+        </script>
     </body>
 </html>

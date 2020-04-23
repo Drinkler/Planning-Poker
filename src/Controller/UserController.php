@@ -23,8 +23,13 @@ class UserController extends ControllerBase
      * @author Luca Stanger
      */
     public function loginAction() {
-        User::login($_POST['email'], $_POST['password']);
-        Flash::success("Erfolgreich angemeldet!");
+        $tRet = User::login($_POST['email'], $_POST['password']);
+        if ($tRet) {
+            Flash::success(Text::get("USER_LOGIN_SUCCESS"));
+        } else {
+            Flash::danger(Text::get("USER_LOGIN_EXCEPTION"));
+        }
+
     }
 
     /**
@@ -48,9 +53,19 @@ class UserController extends ControllerBase
      * @author Luca Stanger
      */
     public function createAction() {
-        $vars = User::create($_POST['name'], $_POST['surname'], $_POST['email'], $_POST['password']);
-        $this->view->setVars($vars);
-        Flash::success(Text::get("REGISTER_USER_CREATED"));
+        $vars = array();
+        if (!empty($_POST['name']) && !empty($_POST['surname']) && !empty($_POST['email']) && !empty($_POST['password'])) {
+            $tRet = User::create($_POST['name'], $_POST['surname'], $_POST['email'], $_POST['password'], PASSWORD_DEFAULT, $vars);
+            if ($tRet) {
+                $this->view->setVars($vars);
+                Flash::success(Text::get("REGISTER_USER_CREATED"));
+            } else {
+                Flash::danger(Text::get($vars["error"]));
+            }
+        } else {
+            Flash::danger(Text::get("VALIDATE_REQUIRED_RULE"));
+        }
+
     }
 
     /**
