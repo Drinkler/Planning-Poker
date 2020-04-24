@@ -17,7 +17,7 @@
                     echo "<td>" . $lobby["uname"] . " " . $lobby["surname"] . "</td>";
                     echo "<td>" . $lobby["name"] . "</td>";
                     echo "<td>" . $lobby["created"] . "</td>";
-                    if ($lobby["creator"] == $this->vars["userid"]) {
+                    if ($lobby["creator"] == \PlanningPoker\Library\Session::get("user")->getId()) {
                         echo "<td> <button class='primary'>Delete</button> </td>";
                     }
                     echo "</tr>";
