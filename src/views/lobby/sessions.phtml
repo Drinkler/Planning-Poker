@@ -17,10 +17,12 @@
                     echo "<td>" . $lobby["uname"] . " " . $lobby["surname"] . "</td>";
                     echo "<td>" . $lobby["name"] . "</td>";
                     echo "<td>" . $lobby["created"] . "</td>";
+                    // TODO: Center join and delete button
+                    echo "<td> <div class=''> <form method='post' action='" . $this->makeURL("lobby/join") . "' style='display:inline;'> <button type='submit' class='btn btn-outline-primary'>Join</button> </form>";
                     if ($lobby["creator"] == \PlanningPoker\Library\Session::get("user")->getId()) {
-                        echo "<td> <button class='primary'>Delete</button> </td>";
+                        echo "&nbsp; <form method='post' action='" . $this->makeURL("lobby/delete") . "' style='display:inline;'> <button type='submit' class='btn btn-outline-danger'>Delete</button> </form>";
                     }
-                    echo "</tr>";
+                    echo "</div></td></tr>";
                 }
                 ?>
             </tbody>

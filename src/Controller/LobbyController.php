@@ -63,8 +63,21 @@ class LobbyController extends ControllerBase implements Controller
      * @example lobby/join
      * @return void
      * @author Luca Stanger
+     * @author Florian Drinkler
      */
     public function joinAction()
+    {
+    }
+
+    /**
+     * Joins a lobby
+     * @access public
+     * @example lobby/join
+     * @return void
+     * @author Luca Stanger
+     * @author Florian Drinkler
+     */
+    public function deleteAction()
     {
     }
 }
