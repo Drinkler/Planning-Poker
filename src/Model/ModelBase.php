@@ -82,7 +82,6 @@ abstract class ModelBase
                 strval($id) => $_id
             );
 
-
             return $pdo->query($query, $params);
         }
         return false;
