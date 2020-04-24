@@ -11,20 +11,27 @@
                 </tr>
             </thead>
             <tbody>
-                <?php
-                foreach ($this->vars as $key => $lobby) {
-                    echo "<tr><th scope='row'>$key</th>";
-                    echo "<td>" . $lobby["uname"] . " " . $lobby["surname"] . "</td>";
-                    echo "<td>" . $lobby["name"] . "</td>";
-                    echo "<td>" . $lobby["created"] . "</td>";
-                    // TODO: Center join and delete button
-                    echo "<td> <div class=''> <form method='post' action='" . $this->makeURL("lobby/join") . "' style='display:inline;'> <button type='submit' class='btn btn-outline-primary'>Join</button> </form>";
-                    if ($lobby["creator"] == \PlanningPoker\Library\Session::get("user")->getId()) {
-                        echo "&nbsp; <form method='post' action='" . $this->makeURL("lobby/delete") . "' style='display:inline;'> <button type='submit' class='btn btn-outline-danger'>Delete</button> </form>";
-                    }
-                    echo "</div></td></tr>";
-                }
-                ?>
+                <?php foreach ($this->vars as $key => $lobby): ?>
+                    <tr>
+                        <th scope="row"> <?= $key ?></th>
+                        <td><?= $lobby["uname"] ?></td>
+                        <td><?= $lobby["name"] ?></td>
+                        <td><?= $lobby["created"] ?></td>
+                        <td>
+                            <div class="">
+                                <form method="post" action="<?= $this->makeURL("lobby/join") ?>" style="display:inline;">
+                                    <button type="submit" class="btn btn-outline-primary">Join</button>
+                                </form>
+                                <?php if ($lobby["creator"] == \PlanningPoker\Library\Session::get("user")->getId()): ?>
+                                &nbsp;
+                                <form method="post" action="<?= $this->makeURL("lobby/delete") ?>" style="display:inline;">
+                                    <button type="submit" class="btn btn-outline-danger">Delete</button>
+                                </form>
+                                <?php endif; ?>
+                            </div>
+                        </td>
+                    </tr>
+                <?php endforeach;?>
             </tbody>
         </table>
     </div>
