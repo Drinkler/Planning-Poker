@@ -88,7 +88,7 @@ class Lobby extends ModelBase
         // Prepare query
         $query =
             /** @lang SQL */
-            "SELECT user.name as uname, user.surname as surname, lobby.created as created, lobby.name FROM user, lobby WHERE user.iduser = lobby.creator";
+            "SELECT user.name as uname, user.surname as surname, lobby.created as created, lobby.name, lobby.creator as creator FROM user, lobby WHERE user.iduser = lobby.creator";
 
         try {
             $_returnArray = (new PDOBase)->getPdo()->query($query, $params);
@@ -113,7 +113,7 @@ class Lobby extends ModelBase
         // Prepare query
         $query =
             /** @lang SQL */
-            "SELECT user.name as uname, user.surname as surname, lobby.created as created, lobby.name FROM user, lobby WHERE user.iduser = lobby.creator AND creator = :creator;";
+            "SELECT user.name as uname, user.surname as surname, lobby.created as created, lobby.name, lobby.creator as creator FROM user, lobby WHERE user.iduser = lobby.creator AND creator = :creator;";
 
         try {
             $_returnArray = (new PDOBase)->getPdo()->query($query, $params);

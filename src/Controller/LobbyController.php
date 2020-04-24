@@ -35,6 +35,7 @@ class LobbyController extends ControllerBase implements Controller
         }
 
         if (!empty($vars)) {
+            $vars["userid"] = Session::get("user")->getId();
             $this->view->setVars($vars);
         }
     }
