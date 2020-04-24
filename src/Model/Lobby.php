@@ -79,6 +79,7 @@ class Lobby extends ModelBase
     /**
      * FindAll: returns all lobbies
      * @author Luca Stanger
+     * @author Florian Drinkler
      * @return array|bool|string
      */
     public static function findAll(&$_returnArray = array())
