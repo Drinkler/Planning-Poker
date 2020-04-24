@@ -2,6 +2,8 @@
 
 namespace PlanningPoker\Model;
 
+use PlanningPoker\Library\Session;
+
 /**
  * Class Lobby:
  *
@@ -44,7 +46,8 @@ class Lobby extends ModelBase
      * @author Luca Stanger
      * @return bool
      */
-    public static function create($_name, $_cards, $_creator) {
+    public static function create($_name, $_cards, $_creator)
+    {
         $_name = htmlspecialchars($_name);
         $_cards = htmlspecialchars($_cards);
 
@@ -68,11 +71,9 @@ class Lobby extends ModelBase
                 echo $exception->getMessage();
                 return false;
             }
-
         } else {
             echo 'Wrong input is given.';
         }
-
     }
 
     /**
@@ -80,14 +81,43 @@ class Lobby extends ModelBase
      * @author Luca Stanger
      * @return array|bool|string
      */
-    public static function findAll() {
+    public static function findAll(&$_returnArray = array())
+    {
         // Prepare empty params array for query function
         $params = array();
         // Prepare query
-        $query = "SELECT user.name as uname, user.surname as surname, lobby.created as created, lobby.name FROM user, lobby WHERE user.iduser = lobby.creator";
+        $query =
+            /** @lang SQL */
+            "SELECT user.name as uname, user.surname as surname, lobby.created as created, lobby.name FROM user, lobby WHERE user.iduser = lobby.creator";
 
         try {
-            return (new PDOBase)->getPdo()->query($query, $params);
+            $_returnArray = (new PDOBase)->getPdo()->query($query, $params);
+            return true;
+        } catch (\Exception $exception) {
+            echo $exception->getMessage();
+            return false;
+        }
+    }
+
+    /**
+     * FindByCreator: return all lobbies from Creator
+     * @author Florian Drinkler
+     * @return bool
+     */
+    public static function findByCreator(&$_returnArray = array())
+    {
+        // Prepare empty params array for query function
+        $params = array(
+            ":creator" => Session::get("user")->getId()
+        );
+        // Prepare query
+        $query =
+            /** @lang SQL */
+            "SELECT user.name as uname, user.surname as surname, lobby.created as created, lobby.name FROM user, lobby WHERE user.iduser = lobby.creator AND creator = :creator;";
+
+        try {
+            $_returnArray = (new PDOBase)->getPdo()->query($query, $params);
+            return true;
         } catch (\Exception $exception) {
             echo $exception->getMessage();
             return false;
@@ -141,4 +171,3 @@ class Lobby extends ModelBase
         return 'lobby';
     }
 }
-

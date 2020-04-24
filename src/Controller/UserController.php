@@ -22,14 +22,14 @@ class UserController extends ControllerBase
      * @return void
      * @author Luca Stanger
      */
-    public function loginAction() {
+    public function loginAction()
+    {
         $tRet = User::login($_POST['email'], $_POST['password']);
         if ($tRet) {
             Flash::success(Text::get("USER_LOGIN_SUCCESS"));
         } else {
             Flash::danger(Text::get("USER_LOGIN_EXCEPTION"));
         }
-
     }
 
     /**
@@ -39,9 +39,10 @@ class UserController extends ControllerBase
      * @return void
      * @author Luca Stanger
      */
-    public function logoutAction() {
+    public function logoutAction()
+    {
         $tRet = User::logout();
-        if (tRet) {
+        if ($tRet) {
             Flash::success(Text::get("LOGOUT_USER_SUCCESSFUL"));
         } else {
             Flash::warning(Text::get("USER_LOGOUT_INVALID"));
@@ -56,7 +57,8 @@ class UserController extends ControllerBase
      * @return void
      * @author Luca Stanger
      */
-    public function createAction() {
+    public function createAction()
+    {
         $vars = array();
         if (!empty($_POST['name']) && !empty($_POST['surname']) && !empty($_POST['email']) && !empty($_POST['password'])) {
             $tRet = User::create($_POST['name'], $_POST['surname'], $_POST['email'], $_POST['password'], PASSWORD_DEFAULT, $vars);
@@ -69,7 +71,6 @@ class UserController extends ControllerBase
         } else {
             Flash::danger(Text::get("VALIDATE_REQUIRED_RULE"));
         }
-
     }
 
     /**
@@ -79,7 +80,8 @@ class UserController extends ControllerBase
      * @return void
      * @author Luca Stanger
      */
-    public function confirmAction() {
+    public function confirmAction()
+    {
         $tRet = User::confirm($this->view->basic_params[2], $this->view->basic_params[3]);
         if ($tRet) {
             Flash::success(Text::get("LOGIN_USER_CONFIRMED"));
@@ -94,9 +96,16 @@ class UserController extends ControllerBase
      * @example user/profile
      * @return void
      * @author Luca Stanger
+     * @author Florian Drinkler
      */
-    public function profileAction() {
-        Session::get("currentUser");
-    }
+    public function profileAction()
+    {
+        $currentUser = Session::get("user");
+        $user = array(
+            "user" => $currentUser,
+            "avatar" => User::get_gravatar($currentUser->getEmail(), $s = 200)
+        );
 
+        $this->view->setVars($user);
+    }
 }

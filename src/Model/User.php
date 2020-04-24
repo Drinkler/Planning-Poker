@@ -45,7 +45,8 @@ class User extends ModelBase
      * @return boolean
      * @author Luca Stanger
      */
-    public static function create($_name, $_surname, $_email, $_password, $_hashType = PASSWORD_DEFAULT, array &$returnArray = array()) {
+    public static function create($_name, $_surname, $_email, $_password, $_hashType = PASSWORD_DEFAULT, array &$returnArray = array())
+    {
 
         if (!empty($_name) && !empty($_surname && !empty($_email) && !empty($_password))) {
             // Escape parameters
@@ -56,7 +57,7 @@ class User extends ModelBase
         } else {
             // Return false if one of the inputs is missing
             $returnArray = array(
-              'error' => Text::get("USER_CREATE_MISSING_INPUT")
+                'error' => Text::get("USER_CREATE_MISSING_INPUT")
             );
             return false;
         }
@@ -67,7 +68,8 @@ class User extends ModelBase
         );
 
         // Prepare query
-        $query = /** @lang SQL*/
+        $query =
+            /** @lang SQL*/
             "SELECT COUNT(*) FROM user WHERE email=:email";
 
         $result = (new PDOBase)->getPdo()->query($query, $params);
@@ -79,15 +81,16 @@ class User extends ModelBase
 
             // Prepare params
             $params = array(
-              ':name' => $_name,
-              ':surname' => $_surname,
-              ':email' => $_email,
-              ':password' => $_password,
-              ':challenge' => $challenge
+                ':name' => $_name,
+                ':surname' => $_surname,
+                ':email' => $_email,
+                ':password' => $_password,
+                ':challenge' => $challenge
             );
 
             // Prepare query
-            $query = /** @lang SQL */
+            $query =
+                /** @lang SQL */
                 "INSERT INTO user (name ,surname ,email ,password, challenge) VALUES (:name, :surname, :email, :password, :challenge)";
 
             // Execute query
@@ -112,7 +115,8 @@ class User extends ModelBase
      * @author Luca Stanger
      * @return string
      */
-    public static function confirm($_email, $_challenge) {
+    public static function confirm($_email, $_challenge)
+    {
         // Escape parameters
         $_email = htmlspecialchars($_email);
         $_challenge = htmlspecialchars($_challenge);
@@ -121,11 +125,12 @@ class User extends ModelBase
 
             // Prepare params
             $params = array(
-              ':email' => $_email
+                ':email' => $_email
             );
 
             // Prepare query
-            $query = /** @lang SQL */
+            $query =
+                /** @lang SQL */
                 "SELECT challenge FROM user WHERE email=:email";
 
             // Execute query
@@ -134,21 +139,20 @@ class User extends ModelBase
             // If the returned challenge is equal, confirm user
             if ($result[0]['challenge'] == $_challenge) {
                 // Prepare query
-                $query = /** @lang SQL */
+                $query =
+                    /** @lang SQL */
                     "UPDATE user SET confirmed = 1 WHERE email=:email";
 
                 // Execute query
                 (new PDOBase)->getPdo()->queryWithoutFetch($query, $params);
 
                 return true;
-
             } else {
                 return false;
             }
         } else {
             return false;
         }
-
     }
 
     /**
@@ -159,11 +163,12 @@ class User extends ModelBase
      * @author Luca Stanger
      * @return bool returns true if user got logged in successfully
      */
-    public static function login($_email, $_password, &$_returnArray = array()) {
+    public static function login($_email, $_password, &$_returnArray = array())
+    {
         // Check if user is already logged in
         if (isset($_SESSION['signed_in']) && $_SESSION['signed_in'] == true) {
             $_returnArray = array(
-              'error' => Text::get("USER_ALREADY_SINGED_IN")
+                'error' => Text::get("USER_ALREADY_SINGED_IN")
             );
             return false;
         }
@@ -185,7 +190,8 @@ class User extends ModelBase
         );
 
         // Prepare query
-        $query = /** @lang SQL */
+        $query =
+            /** @lang SQL */
             'SELECT * FROM user WHERE email=:email';
 
         // Execute query on database
@@ -226,7 +232,8 @@ class User extends ModelBase
      * @author Luca Stanger
      * @return bool
      */
-    public static function logout() {
+    public static function logout()
+    {
         if (isset($_COOKIE[session_name()])) {
             setcookie(session_name(), '', time() - 42000, '/');
         } else {
@@ -243,17 +250,19 @@ class User extends ModelBase
      * @author Luca Stanger
      * @return void
      */
-    public static function delete() {
+    public static function delete()
+    {
         // Prepare params
         $params = array(
             ':iduser' => Session::get("iduser")
         );
 
         //Prepare query
-        $query = /** @lang SQL */
+        $query =
+            /** @lang SQL */
             'DELETE FROM user WHERE iduser = :iduser';
 
-        (new User)->getPdo()->query($query, $params);
+        (new PDOBase)->getPdo()->query($query, $params);
 
         return true;
     }
@@ -269,13 +278,14 @@ class User extends ModelBase
      * @author Luca Stanger
      * @return string
      */
-    public static function get_gravatar( $email, $s = 80, $d = 'retro', $r = 'g', $img = false, $atts = array() ) {
+    public static function get_gravatar($email, $s = 80, $d = 'retro', $r = 'g', $img = false, $atts = array())
+    {
         $url = 'https://www.gravatar.com/avatar/';
-        $url .= md5( strtolower( trim( $email ) ) );
+        $url .= md5(strtolower(trim($email)));
         $url .= "?s=$s&d=$d&r=$r";
-        if ( $img ) {
+        if ($img) {
             $url = '<img src="' . $url . '"';
-            foreach ( $atts as $key => $val )
+            foreach ($atts as $key => $val)
                 $url .= ' ' . $key . '="' . $val . '"';
             $url .= ' />';
         }
@@ -385,6 +395,4 @@ class User extends ModelBase
     {
         $this->_username = $username;
     }
-
-
 }

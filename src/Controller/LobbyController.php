@@ -22,12 +22,20 @@ class LobbyController extends ControllerBase implements Controller
      * @example lobby/sessions
      * @return void
      * @author Luca Stanger
+     * @author Florian Drinkler
      */
-    public function sessionsAction() {
-        $result = Lobby::findAll();
+    public function sessionsAction()
+    {
+        $vars = array();
 
-        if (!empty($result)) {
-            $this->view->setVars($result);
+        if (isset($this->view->basic_params[2])) {
+            Lobby::findByCreator($vars);
+        } else {
+            Lobby::findAll($vars);
+        }
+
+        if (!empty($vars)) {
+            $this->view->setVars($vars);
         }
     }
 
@@ -38,7 +46,8 @@ class LobbyController extends ControllerBase implements Controller
      * @return void
      * @author Luca Stanger
      */
-    public function createAction() {
+    public function createAction()
+    {
         if (Session::get("signed_in")) {
             $user = Session::get("user");
             Lobby::create($_REQUEST["lobbyName"], (int) $_REQUEST["cards"], (int) $user->getId());
@@ -55,8 +64,7 @@ class LobbyController extends ControllerBase implements Controller
      * @return void
      * @author Luca Stanger
      */
-    public function joinAction() {
-
+    public function joinAction()
+    {
     }
-
 }
