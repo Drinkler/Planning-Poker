@@ -67,10 +67,11 @@ class LobbyController extends ControllerBase implements Controller
      */
     public function joinAction()
     {
+        $query = "INSERT INTO participants (iduser, idlobby) VALUES (:iduser, :idlobby);";
     }
 
     /**
-     * Joins a lobby
+     * Deletes a lobby
      * @access public
      * @example lobby/join
      * @return void
@@ -79,5 +80,6 @@ class LobbyController extends ControllerBase implements Controller
      */
     public function deleteAction()
     {
+        $query = "DELETE FROM lobby WHERE idlobby = :idlobby";
     }
 }
