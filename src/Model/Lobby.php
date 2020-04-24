@@ -44,6 +44,7 @@ class Lobby extends ModelBase
      * @param $_cards
      * @param $_creator
      * @author Luca Stanger
+     * @author Florian Drinkler
      * @return bool
      */
     public static function create($_name, $_cards, $_creator)
