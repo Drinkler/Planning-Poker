@@ -1,4 +1,21 @@
-<div class="container">
-    <p>Hallo hier ist das Profil von <?= $this->vars["user"]->getEmail() ?></p>
-    <img src="<?= $this->vars["avatar"] ?>" />
+<div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <img src="<?= $this->vars["avatar"] ?>" />
+                <h3><?= $this->vars["user"]->getUsername() ?></h3>
+            </div>
+            <div class="col-md-5">
+                <strong>Name:&nbsp;</strong><?= $this->vars["user"]->getName() ?><br>
+                <strong>Surname:&nbsp;</strong><?= $this->vars["user"]->getSurname() ?><br>
+                <strong>E-Mail:&nbsp;</strong><?= $this->vars["user"]->getEmail() ?><br>
+            </div>
+            <div class="col-md-4">
+            </div>
+        </div>
+    </div>
 </div>
