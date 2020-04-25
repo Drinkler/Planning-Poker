@@ -4,6 +4,7 @@ namespace PlanningPoker\Controller;
 
 use PlanningPoker\Library\Config;
 use PlanningPoker\Library\Flash;
+use PlanningPoker\Library\Redirect;
 use PlanningPoker\Library\Session;
 use PlanningPoker\Library\Text;
 use PlanningPoker\Model\Lobby;
@@ -80,6 +81,16 @@ class LobbyController extends ControllerBase implements Controller
      */
     public function deleteAction()
     {
-        $query = "DELETE FROM lobby WHERE idlobby = :idlobby";
+        $_id = $this->view->basic_params[1];
+
+        if (isset($_id)) {
+            Lobby::deleteById($_id);
+            //Flash::success(Text::get("SUCCESSFUL_DELETED"));
+            Flash::success("SUCCESSFUL_DELETED");
+
+            Redirect::to("lobby/index");
+        } else {
+            Flash::danger("NOT DELETED");
+        }
     }
 }
