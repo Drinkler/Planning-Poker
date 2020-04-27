@@ -22,12 +22,14 @@
                                 <form method="post" action="<?= $this->makeURL("lobby/join") ?>" style="display:inline;">
                                     <button type="submit" class="btn btn-outline-primary">Join</button>
                                 </form>
-                                <?php if ($lobby["creator"] == \PlanningPoker\Library\Session::get("user")->getId()): ?>
-                                &nbsp;
-                                <form method="post" action="<?= $this->makeURL("lobby/delete") ?>" style="display:inline;">
-                                    <button type="submit" class="btn btn-outline-danger">Delete</button>
-                                </form>
-                                <?php endif; ?>
+                                <?php if (!empty(\PlanningPoker\Library\Session::get("user"))): ?>
+                                    <?php if ($lobby["creator"] == \PlanningPoker\Library\Session::get("user")->getId()): ?>
+                                    &nbsp;
+                                    <form method="post" action="<?= $this->makeURL("lobby/delete") ?>" style="display:inline;">
+                                        <button type="submit" class="btn btn-outline-danger">Delete</button>
+                                    </form>
+                                    <?php endif; ?>
+                                <?php endif;?>
                             </div>
                         </td>
                     </tr>
