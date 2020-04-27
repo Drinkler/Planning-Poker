@@ -16,8 +16,6 @@ if (isset($_SESSION['signed_in']) && $_SESSION['signed_in'] == true) {
                         <a href="' . $this->makeURL("user/profile") . '" class="dropdown-item">Your profile</a>
                         <a href="' . $this->makeURL("lobby/sessions/own") . '" class="dropdown-item">Your sessions</a>
                         <div class="dropdown-divider"></div>
-                        <a href="' . $this->makeURL("user/delete") . '" class="dropdown-item text-danger"> Delete user</a>
-                        <div class="dropdown-divider"></div>
                         <a href=' . $this->makeURL("user/logout") . ' class="dropdown-item">Sign out</a>
                     </div>
                 </div>

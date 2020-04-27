@@ -108,4 +108,17 @@ class UserController extends ControllerBase
 
         $this->view->setVars($user);
     }
+
+    /**
+     *
+     */
+    public function deleteAction() {
+        $tRet = User::delete();
+        $this->logoutAction();
+        if ($tRet) {
+            Flash::info(Text::get("USER_DELETE_SUCCESS"));
+        } else {
+            Flash::warning(Text::get("USER_DELETE_FAILED"));
+        }
+    }
 }

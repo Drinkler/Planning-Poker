@@ -254,7 +254,7 @@ class User extends ModelBase
     {
         // Prepare params
         $params = array(
-            ':iduser' => Session::get("iduser")
+            ':iduser' => Session::get("user")->getId()
         );
 
         //Prepare query

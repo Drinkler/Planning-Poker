@@ -58,8 +58,8 @@ return [
         "USER_PASSWORD_INCORRECT" => "Wrong password.",
         "USER_CONFIRMATION_INVALID" => "Could not confirm your account.",
         "USER_LOGOUT_INVALID" => "Could not sign you out.",
-        "" => "",
-        "" => "",
+        "USER_DELETE_SUCCESS" => "User successfully deleted.",
+        "USER_DELETE_FAILED" => "Could not delete your account.",
         "" => "",
         "" => "",
         //

@@ -56,7 +56,7 @@ try {
     $controller->$actionMethodName();
 
     // Added specific cases for login and logout
-    if ($url == "user/logout" || $url == "user/login" || $url == "user/confirm") {
+    if ($url == "user/logout" || $url == "user/login" || $url == "user/confirm" || $url == "user/delete") {
         $view->renderWithoutHeaderAndFooter();
     } else {
         $view->render();
