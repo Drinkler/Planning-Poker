@@ -59,16 +59,42 @@ class LobbyController extends ControllerBase implements Controller
     }
 
     /**
+     * Joins or deletes a lobby
+     * @access public
+     * @example lobby/action
+     * @return void
+     * @author Luca Stanger
+     * @author Florian Drinkler
+     */
+    public function actionAction() {
+        // Prepare params
+        $params = array(
+            ":idlobby" => (isset($_POST["lobbyid"]) && $_POST["lobbyid"] ? $_POST["lobbyid"] : null),
+            ":iduser" => Session::get("user")->getId()
+        );
+
+        if ($_POST['action'] == 'Join') {
+            // Prepare Query
+            $query = /** @lang SQL */
+                "INSERT INTO participants (iduser, idlobby) VALUES (:iduser, :idlobby);";
+
+        } else if ($_POST['action'] == 'Delete') {
+            Lobby::deleteById($params[":idlobby"]);
+        }
+    }
+
+
+    /**
      * Joins a lobby
      * @access public
      * @example lobby/join
      * @return void
      * @author Luca Stanger
      * @author Florian Drinkler
+     * @deprecated
      */
     public function joinAction()
     {
-        $query = "INSERT INTO participants (iduser, idlobby) VALUES (:iduser, :idlobby);";
     }
 
     /**
@@ -78,6 +104,7 @@ class LobbyController extends ControllerBase implements Controller
      * @return void
      * @author Luca Stanger
      * @author Florian Drinkler
+     * @deprecated
      */
     public function deleteAction()
     {

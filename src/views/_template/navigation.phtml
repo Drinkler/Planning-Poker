@@ -2,6 +2,7 @@
 
 use PlanningPoker\Library\Session;
 use PlanningPoker\Model\User;
+// TODO: Refactor HTML Code
 
 if (isset($_SESSION['signed_in']) && $_SESSION['signed_in'] == true) {
     $user = Session::get("user");
