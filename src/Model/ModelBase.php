@@ -58,7 +58,6 @@ abstract class ModelBase
             return $pdo->query($query, $params);
         }
         return false;
-        #return $stmt->fetchObject(get_class($model));
     }
 
     /**

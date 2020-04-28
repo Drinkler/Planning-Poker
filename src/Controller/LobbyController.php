@@ -74,15 +74,12 @@ class LobbyController extends ControllerBase implements Controller
         );
 
         if ($_POST['action'] == 'Join') {
-            // Prepare Query
-            $query = /** @lang SQL */
-                "INSERT INTO participants (iduser, idlobby) VALUES (:iduser, :idlobby);";
+            # Lobby::join();
 
         } else if ($_POST['action'] == 'Delete') {
             Lobby::deleteById($params[":idlobby"]);
         }
     }
-
 
     /**
      * Joins a lobby
