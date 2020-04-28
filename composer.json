@@ -1,6 +1,9 @@
 {
     "name": "Planning-Poker",
     "autoload": {
+        "psr-4": {
+            "PlanningPoker\\": "src"
+        },
         "classmap": [
             "src/"
         ]
