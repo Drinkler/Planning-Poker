@@ -1,3 +1,6 @@
 # Ignore following folders
 .idea
 .vscode
+composer.lock
+vendor/
+src/.deprecated/
