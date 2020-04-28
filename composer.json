@@ -1,8 +1,12 @@
 {
+  "name": "Planning-Poker",
   "autoload": {
     "classmap": [
       "src/"
     ]
+  },
+  "require": {
+    "php": ">=7.3.0"
   },
   "require-dev": {
     "phpunit/phpunit": "^9"
