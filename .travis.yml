@@ -2,6 +2,6 @@ language: php
 php:
   - "7.3"
 before_script:
-  - npm install -g bowser
-  - bowser install
+  - npm install -g bower
+  - bower install
 script: phpunit tests
