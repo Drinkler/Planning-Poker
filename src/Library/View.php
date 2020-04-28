@@ -31,23 +31,24 @@ class View
         $this->controller = $controller;
         $this->action = $action;
 
+        //'assets/'
         $this->basic_css = array(
-            'bootstrap/css/bootstrap.min.css',
-            'fonts/font-awesome.min.css',
-            'fonts/ionicons.min.css',
-            'css/Features-Clean.css',
-            'css/Footer-Clean.css',
-            'css/Login-Form-Clean.css',
-            'css/Navigation-with-Button.css',
-            'css/Registration-Form-with-Photo.css',
-            'css/Social-Icons.css',
-            'css/styles.css',
-            'css/Testimonials.css'
+            'bower_components/bootstrap/dist/css/bootstrap.min.css',
+            'bower_components/fontawesome/css/fontawesome.min.css',
+            'assets/fonts/ionicons.min.css',
+            'assets/css/Features-Clean.css',
+            'assets/css/Footer-Clean.css',
+            'assets/css/Login-Form-Clean.css',
+            'assets/css/Navigation-with-Button.css',
+            'assets/css/Registration-Form-with-Photo.css',
+            'assets/css/Social-Icons.css',
+            'assets/css/styles.css',
+            'assets/css/Testimonials.css'
         );
 
         $this->basic_js = array(
-            'js/jquery.min.js',
-            'bootstrap/js/bootstrap.min.js'
+            'bower_components/jquery/dist/jquery.min.js',
+            'bower_components/bootstrap/dist/js/bootstrap.min.js'
         );
     }
 
@@ -125,9 +126,8 @@ class View
             $files = (array) $files;
         }
         foreach ($files as $file) {
-            if (file_exists(APP_ASSETS . $file)) {
-                $this->_linkTags .= '<link type="text/css" rel="stylesheet" href="' . $this->makeURL('assets/' . $file) . '" />' . "\n";
-            }
+            //if (file_exists(APP_ASSETS . $file)) {}
+            $this->_linkTags .= '<link type="text/css" rel="stylesheet" href="' . $this->makeURL($file) . '" />' . "\n";
         }
     }
 
@@ -147,9 +147,8 @@ class View
 
             // Check that the file exists in the public directory, creating the
             // <script> tag if it true.
-            if (file_exists(APP_ASSETS . $file)) {
-                $this->_scriptTags .= '<script type="text/javascript" src="' . $this->makeURL('assets/' . $file) . '"></script>' . "\n";
-            }
+            //if (file_exists(APP_ASSETS . $file)) {}
+            $this->_scriptTags .= '<script type="text/javascript" src="' . $this->makeURL($file) . '"></script>' . "\n";
         }
     }
 

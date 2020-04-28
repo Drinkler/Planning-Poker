@@ -1,0 +1,24 @@
+{
+  "name": "Planning-Poker",
+  "homepage": "https://github.com/Drinkler/Planning-Poker",
+  "authors": [
+    "Luca Stanger <lstanger@gmx.de>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "src/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "fontawesome": "^5.13.0",
+    "bootstrap": "^4.4.1",
+    "jquery": "^3.5.0"
+  }
+}

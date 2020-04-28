@@ -4,3 +4,9 @@
 composer.lock
 vendor/
 src/.deprecated/
+
+### Bower ###
+bower_components
+.bower-cache
+.bower-registry
+.bower-tmp
