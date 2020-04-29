@@ -1,5 +1,7 @@
 <?php
 
+namespace PlanningPoker\tests;
+
 use PHPUnit\Framework\TestCase;
 use PlanningPoker\Model\Database;
 use PlanningPoker\Model\PDOBase;
@@ -28,6 +30,7 @@ final class DatabaseTest extends TestCase
         );
     }
 
+<<<<<<< HEAD
     public function alwaysTrue()
     {
         $this->assertInstanceOf(
@@ -36,3 +39,6 @@ final class DatabaseTest extends TestCase
         );
     }
 }
+=======
+}
+>>>>>>> 1b3eb1fad8d79914309c49217e8ab975d37b7a34

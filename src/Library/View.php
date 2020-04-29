@@ -34,7 +34,13 @@ class View
         //'assets/'
         $this->basic_css = array(
             'bower_components/bootstrap/dist/css/bootstrap.min.css',
-            'bower_components/fontawesome/css/fontawesome.min.css',
+            'bower_components\components-font-awesome\css\fontawesome.min.css',
+            'bower_components\components-font-awesome\css\brands.min.css',
+            'bower_components\components-font-awesome\css\all.min.css',
+            'bower_components\components-font-awesome\css\regular.min.css',
+            'bower_components\components-font-awesome\css\solid.min.css',
+            'bower_components\components-font-awesome\css\svg-with-js.min.css',
+            'bower_components\components-font-awesome\css\v4-shims.min.css',
             'assets/fonts/ionicons.min.css',
             'assets/css/Features-Clean.css',
             'assets/css/Footer-Clean.css',
