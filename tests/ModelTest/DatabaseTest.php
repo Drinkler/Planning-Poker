@@ -11,7 +11,8 @@ final class DatabaseTest extends TestCase
      * @author Luca Stanger
      * @return void
      */
-    public function testCanBeConstructed() {
+    public function testCanBeConstructed()
+    {
 
         // Required env for database creation
         $_SERVER['RDS_HOSTNAME'] = "test";
@@ -27,9 +28,11 @@ final class DatabaseTest extends TestCase
         );
     }
 
-    public function alwaysTrue() {
+    public function alwaysTrue()
+    {
         $this->assertInstanceOf(
-            static::class, static::class
+            static::class,
+            static::class
         );
     }
 }
