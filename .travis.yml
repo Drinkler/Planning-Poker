@@ -2,10 +2,6 @@ language: php
 php:
   - 7.3
 
-install:
-  - curl -s http://getcomposer.org/installer | php
-  - php composer.phar install --dev --no-interaction
-
 before_script:
   - composer install
   - npm install -g bower
@@ -13,8 +9,3 @@ before_script:
 
 script:
   - ./vendor/bin/phpunit tests
-  - mkdir -p build/logs
-  - php vendor/bin/phpunit -c phpunit.xml.dist
-
-after_success:
-  - travis_retry ./vendor/bin/php-coveralls -v
