@@ -1,5 +1,6 @@
 {
-    "name": "Planning-Poker",
+    "name": "planningpoker/src",
+    "license": ["GPL-3.0-or-later"],
     "autoload": {
         "psr-4": {
             "PlanningPoker\\": "src",
