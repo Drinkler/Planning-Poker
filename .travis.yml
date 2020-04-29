@@ -10,9 +10,6 @@ before_script:
 script:
   - "./vendor/bin/phpunit tests"
 
-before_deploy:
-  - echo "$AWS_ACCESS_KEY_ID"
-
 deploy:
   provider: elasticbeanstalk
   access_key_id: $AWS_ACCESS_KEY_ID
