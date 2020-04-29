@@ -74,7 +74,12 @@ class LobbyController extends ControllerBase implements Controller
         );
 
         if ($_POST['action'] == 'Join') {
-            # Lobby::join();
+            $message = array();
+            if (Lobby::join($params, $message)) {
+                Flash::success($message["success"]);
+            } else {
+                Flash::danger($message["error"]);
+            }
 
         } else if ($_POST['action'] == 'Delete') {
             Lobby::deleteById($params[":idlobby"]);
