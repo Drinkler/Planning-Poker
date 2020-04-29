@@ -1,3 +1,8 @@
+<?php
+
+use PlanningPoker\Library\Session;
+
+?>
 <div class="container">
     <div class="row">
         <div class="col-md-6">
@@ -67,7 +72,7 @@
                         </div>
                         <div class="form-group">
                             <label for="userName">Dein Name:</label>
-                            <input type="text" class="form-control" id="userName" value="<?php echo (isset($_SESSION["username"]) && $_SESSION["username"] ? $_SESSION["username"] : 'Max Mustermann')  ?>">
+                            <input type="text" class="form-control" id="userName" value="<?php echo (isset($_SESSION["user"]) && Session::get("user")->getUsername() ? Session::get("user")->getUsername() : 'Max Mustermann')  ?>">
                         </div>
                         <br>
                         <button type="button" class="btn btn-secondary">Beitreten</button>
