@@ -8,16 +8,17 @@ before_script:
   - bower install
 
 script:
-  - ./vendor/bin/phpunit tests
+  - "./vendor/bin/phpunit tests"
 
 deploy:
   provider: elasticbeanstalk
-  access_key_id: $ACCESSKEYID
+  access_key_id:
+    secure: jYqpcU05hgVb6T1QuJZos1GK883Qjq45pE+w/5ClIfomlZ6YqfvFpS00pfjvFUg48Ynu0d0hat+5I/KNvT+7QULe3Y9RBf7G6iUXRbhSZsaDaPwf7iem9zhsrZ9e82QKqUoug6GI0Tg3HmqjyDdiza/wSO5hxtDrUj6XwESiOQNFGfER0FBoJfTua4aZCGo/70CTjOxvWnJqN4avZxr/tJIzkfwBJ16lR67qJfCZEE1yL85Ttobnai3ZXQKcSaF8cgYQjXcG2A2dDyQbf81WPaMhYPCEIu6oIANL1R28LtWXvtEPgH7EbJStBLqzMw+u2bOExf+9TEos+duXpKcLZWkuGRBwnVPuQr5+eHDpttgiLaZ+u7tpLFG65qXk5Z868Z6H5TVq2J4L2cfX6ueZ0V5bHgQnaQDLwxXvP+dHslCIXhmMXtWurov1zsNxcxtc+znFK5C3/wHChA55AOy1EaFzIUe+0ijwSWaYh6skfuV0Wy6cTUVHto8AiDdolgoMo4VPhn21cnCpveaS+sGawZLqcB8OERrWwefG3SHIOB5KDOxMpuQ7JJ0+B+DaPV7sh5cpT3gpNFaPNj5KaoJrHj41kyaAr/NFmsp9cqTuTcyqwdMV9dt9yBUahZ7uBsncSk7RJ/ROc/r2skvRHq8jwGT2WvjeOZxrlRcVbj+ZLY0=
   secret_access_key:
-    secure: "$SECRETACCESSKEY"
-  region: "eu-central-1"
-  app: "Planning-Poker"
-  env: "planning-poker"
-  bucket_name: "elasticbeanstalk-eu-central-1-168876705064"
+    secure: o+3aCu+oY78ytZ+pA4qG9ooov0uzlAHWUxLd3NqrRCvhordovMscg4aIXQCnvIv6wDOzaNDeqBGMRcruky6z+MAqxloRtJkvzq8myFC2IbNRAjFG61fTexsqJb6YXQon8zWdaHEKH4QfmQ9wbyt/VTxmofrV3RP9/xEqEONmSlyzcXGzZcalF1AF6k8+KO3YyVHuROB+US2/BKfa4cn9faPB/4MK1dSmOUkt/osgbHZ/YnZxOki5SbTePGFCT7j5JuxYn6e2eAMOkB9sKW7JKXAXhRjgjNthGNhHC3c9VDTwpiBuDo2rnZyFcK0AqoK6LI1LK+WWLTdzjFNiiFRHXjWG3jTkQcAIL10wd0zeI3AJhvNlCZdh5VR8YJA+1lgrRGGC0/wuefq+Cva4eubMhDUpBVU7LjRjEfC37FE5MM7uVUVJ8h+nKl3lTM5Tu+2mzbUryUqsf/Sl2z6c+7dR+KcXEcdIAxRHj56BYCwUBeGhhGx0BdEu3NDbhD7toUKe3x50x3ok3puuzuEHMRz0gFRoGY5bvdI6bvlu4y3cSCT3zh+mU9GOG1g/f80dBFSVGLR/p/aqUyrXFcCb7QdddGPCNQlitDizCubPEwNGfNDiVwGj0wOBvncpjRyoDJpjGcDDJ0XBhb1Ayh3h7rMCX60exsVBN8r/u4wTvKqTbiQ=
+  region: eu-central-1
+  env: planning-poker
+  bucket: elasticbeanstalk-eu-central-1-168876705064
   on:
     branch: master
+  edge: true
