@@ -2,7 +2,8 @@
     "name": "Planning-Poker",
     "autoload": {
         "psr-4": {
-            "PlanningPoker\\": "src"
+            "PlanningPoker\\": "src",
+            "PlanningPoker\\Model\\": "src/Model"
         }
     },
     "require": {
