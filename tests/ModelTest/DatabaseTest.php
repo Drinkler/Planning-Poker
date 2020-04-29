@@ -10,8 +10,8 @@ final class DatabaseTest extends TestCase
 {
     /**
      * testCanBeConstructed: tests if an instance of PDO can be constructed
-     * @author Luca Stanger
      * @return void
+     * @author Luca Stanger
      */
     public function testCanBeConstructed()
     {
@@ -29,16 +29,4 @@ final class DatabaseTest extends TestCase
             (new PDOBase)->getPdo()
         );
     }
-
-<<<<<<< HEAD
-    public function alwaysTrue()
-    {
-        $this->assertInstanceOf(
-            static::class,
-            static::class
-        );
-    }
 }
-=======
-}
->>>>>>> 1b3eb1fad8d79914309c49217e8ab975d37b7a34
