@@ -3,10 +3,7 @@
     "autoload": {
         "psr-4": {
             "PlanningPoker\\": "src"
-        },
-        "classmap": [
-            "src/"
-        ]
+        }
     },
     "require": {
         "php": ">=7.3.0"
