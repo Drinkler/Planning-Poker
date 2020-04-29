@@ -1,5 +1,7 @@
 <?php
 
+namespace PlanningPoker\tests;
+
 use PHPUnit\Framework\TestCase;
 use PlanningPoker\Model\Database;
 use PlanningPoker\Model\PDOBase;
@@ -10,6 +12,7 @@ final class DatabaseTest extends TestCase
      * testCanBeConstructed: tests if an instance of PDO can be constructed
      * @author Luca Stanger
      * @return void
+     */
     public function testCanBeConstructed() {
 
         // Required env for database creation
@@ -25,11 +28,5 @@ final class DatabaseTest extends TestCase
             (new PDOBase)->getPdo()
         );
     }
-     */
 
-    public function alwaysTrue() {
-        $this->assertInstanceOf(
-            static::class, static::class
-        );
-    }
 }
