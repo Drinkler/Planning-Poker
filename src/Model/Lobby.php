@@ -79,6 +79,48 @@ class Lobby extends ModelBase
     }
 
     /**
+     * Join: joins a specific participant into a lobby
+     * @access public
+     * @param $_params
+     * @param array $_returnArray
+     * @return bool
+     * @author Luca Stanger
+     * @author Florian Drinkler
+     */
+    public static function join($_params, &$_returnArray = array()) {
+        // Prepare query to check if user is already in this lobby
+        $query =
+            /** @lang SQL */
+            "SELECT * FROM participants WHERE iduser = :iduser AND idlobby = :idlobby";
+        try {
+            $result = (new PDOBase)->getPdo()->query($query, $_params);
+            if (!isset($result[0])) {
+                $query =
+                    /** @lang SQL */
+                    "INSERT INTO participants (iduser, idlobby) VALUES (:iduser, :idlobby)";
+                try {
+                    (new PDOBase)->getPdo()->queryWithoutFetch($query, $_params);
+                    return true;
+                } catch (\Exception $exception) {
+                    echo $exception->getMessage();
+                    return false;
+                }
+            } else {
+                $_returnArray = array(
+                  "error" => "User is already a participant"
+                );
+            }
+        } catch (\Exception $exception) {
+            echo $exception->getMessage();
+            return false;
+        }
+        $_returnArray = array(
+            "error" => "Something went wrong joining this lobby."
+        );
+        return false;
+    }
+
+    /**
      * FindAll: returns all lobbies
      * @param array $_returnArray
      * @return array|bool|string
