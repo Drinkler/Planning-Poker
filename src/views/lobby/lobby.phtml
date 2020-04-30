@@ -29,6 +29,10 @@ $cardSets = [
     ['0.5', '1', '3', '5', '8']
 ];
 
+
+// External Tools
+$externals = ["GitHub", "GitLab", "DevOps", "Jira"];
+
 $idlobby = $this->vars[":idlobby"];
 $iduser = $this->vars[":iduser"];
 $idcreator = $this->vars[":idcreator"];
@@ -40,29 +44,62 @@ $_SESSION["lobby"] = $idlobby;
 
 
 <?php if($iduser == $idcreator): ?>
-    <div>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4">
-                    <h1> Masterview </h1>
-                </div>
-                <div class="col-md-4"></div>
-                <div class="col-md-4">
-                    <h1 class="float-right"> LobbyID: <?= $idlobby ?></h1>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="loader">
-                        <table id="participants">
-                            <tr>
-                                <th>Teilnehmer</th>
-                            </tr>
-                        </table>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card" style="margin-bottom: 30px;">
+                    <div class="card-body">
+                        <h1> Masterview </h1>
                     </div>
                 </div>
-                <div class="col-md-4">Stories from GitHub</div>
-                <div class="col-md-4">
+            </div>
+            <div class="col-md-6">
+                <div class="card" style="margin-bottom: 30px;">
+                    <div class="card-body">
+                        <h1 class="float-right"> LobbyID: <?= $idlobby ?></h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card" style="margin-bottom: 30px;">
+                    <table id="participants" class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Participant</th>
+                                <th scope="col">Vote</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Luca</td>
+                                <td>3</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card" style="margin-bottom: 30px;">
+                    <nav>
+                        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                        <?php foreach($externals as $key=>$external): ?>
+                            <a class="nav-item nav-link <?php if ($key == 0) { echo "active";} ?>" id="nav-<?= strtolower($external) ?>-tab" data-toggle="tab" href="#nav-<?= strtolower($external) ?>" role="tab" aria-controls="nav-<?= strtolower($external) ?>" aria-selected="true"><?= $external ?></a>
+                        <?php endforeach; ?>
+                        </div>
+                    </nav>
+                    <div class="tab-content" id="nav-tabContent">
+                        <?php foreach($externals as $key=>$external): ?>
+                            <div class="tab-pane fade <?php if ($key == 0) { echo "show active";} ?>" id="nav-<?= strtolower($external) ?>" role="tabpanel" aria-labelledby="nav-<?= strtolower($external) ?>-tab">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1"><?= $external?> Repository Address</label>
+                                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="https://github.com/Drinkler/Planning-Poker">
+                                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
                 </div>
             </div>
         </div>
