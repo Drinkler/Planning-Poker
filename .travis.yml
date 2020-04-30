@@ -8,9 +8,10 @@ before_script:
   - bower install
 
 script:
-  - "./vendor/bin/phpunit --cover-xml"
+  - "./vendor/bin/phpunit"
 
 after_success:
+  - ls -la
   - bash <(curl -s https://codecov.io/bash)
 
 deploy:
