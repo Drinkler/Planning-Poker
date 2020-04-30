@@ -3,8 +3,7 @@
     "license": ["GPL-3.0-or-later"],
     "autoload": {
         "psr-4": {
-            "PlanningPoker\\": "src",
-            "PlanningPoker\\Model\\": "src/Model"
+            "PlanningPoker\\": "src"
         }
     },
     "require": {
