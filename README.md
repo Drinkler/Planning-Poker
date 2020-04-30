@@ -13,7 +13,7 @@ To keep track of the current build status, Travis CI is used. You can always see
 
 ## Coverage Status
 To keep track of the current coverage status, Coveralls.io is used. You can always see our coverage here: &nbsp;
-[![Coverage Status](https://coveralls.io/repos/github/Drinkler/Planning-Poker/badge.svg?branch=master)](https://coveralls.io/github/Drinkler/Planning-Poker?branch=master)
+[![codecov](https://codecov.io/gh/Drinkler/Planning-Poker/branch/master/graph/badge.svg)](https://codecov.io/gh/Drinkler/Planning-Poker)
 
 ## Copyright 
 Copyright 2020 Florian Drinkler, Luca Stanger
