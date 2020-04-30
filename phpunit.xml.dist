@@ -11,9 +11,9 @@
     </logging>
     <filter>
       <whitelist processUncoveredFilesFromWhitelist="true">
-        <directory suffix=".php">src</directory>
+        <directory>srx</directory>
         <exclude>
-          <file>src/autoload.php</file>
+          <file>vendor/autoload.php</file>
         </exclude>
       </whitelist>
     </filter>
