@@ -8,7 +8,7 @@ before_script:
   - bower install
 
 script:
-  - "./vendor/bin/phpunit"
+  - "./vendor/bin/phpunit --stderr"
 
 after_success:
   - ls -la

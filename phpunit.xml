@@ -7,7 +7,12 @@
          beStrictAboutCoversAnnotation="true"
          beStrictAboutOutputDuringTests="true"
          beStrictAboutTodoAnnotatedTests="true"
+         convertNoticesToExceptions="false"
          verbose="true">
+    <php>
+        <server name='SERVER_PROTOCOL' value='http/1.1' />
+        <server name='HTTP_HOST' value='localhost' />
+    </php>
     <testsuites>
         <testsuite name="default">
             <directory suffix="Test.php">tests</directory>
