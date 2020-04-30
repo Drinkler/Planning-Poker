@@ -166,6 +166,28 @@ class Lobby extends ModelBase
         return true;
     }
 
+
+    /**
+     * GetCardsByLobbyID
+     * @param $_id
+     * @param array $_returnArray
+     * @author Luca Stanger
+     * @return bool
+     */
+    public static function getCardsByLobbyID($_id, &$_returnArray = array()) {
+        $params = array(
+          ":idlobby" => $_id
+        );
+
+        $query =
+            /** @lang SQL */
+            "SELECT deck FROM lobby WHERE idlobby = :idlobby";
+
+        $_returnArray = (new PDOBase)->getPdo()->query($query, $params);
+
+        return true;
+    }
+
     /**
      * @param $_id
      * @param array $_returnArray

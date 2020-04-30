@@ -70,7 +70,7 @@ class LobbyController extends ControllerBase implements Controller
         // Prepare params
         $params = array(
             ":idlobby" => (isset($_POST["lobbyid"]) && $_POST["lobbyid"] ? $_POST["lobbyid"] : null),
-            ":iduser" => Session::get("user")->getId()
+            ":iduser" => Session::get("user")->getId(),
         );
 
         if ($_POST['action'] == 'Join') {
@@ -78,7 +78,7 @@ class LobbyController extends ControllerBase implements Controller
             if (Lobby::join($params, $message)) {
                 Flash::success("Joined");
             } else {
-                Flash::danger($message["error"]);
+                // Flash::danger($message["error"]);
             }
         } else if ($_POST['action'] == 'Delete') {
             Lobby::deleteById($params[":idlobby"]);
@@ -88,6 +88,10 @@ class LobbyController extends ControllerBase implements Controller
         // Find creator id for this lobby
         if (Lobby::getCreatorByLobbyID($params[":idlobby"], $tRet)) {
             $params[":idcreator"] = $tRet[0][0];
+        }
+        // Find card set for this lobby
+        if (Lobby::getCardsByLobbyID($params[":idlobby"], $tRet)) {
+            $params[":cards"] = $tRet[0][0];
         }
 
         $this->view->setVars($params);
