@@ -19,15 +19,14 @@
                         <td><?= $lobby["created"] ?></td>
                         <td>
                             <div class="">
-                                <form method="post" action="<?= $this->makeURL("lobby/action") ?>" style="display:inline;">
+                                <form method="post" action="<?= $this->makeURL("lobby/lobby") ?>" style="display:inline;">
                                     <input type="hidden" name="lobbyid" value="<?= $lobby['lobbyid'] ?>">
                                     <button type="submit" name="action" value="Join" class="btn btn-outline-primary">Join</button>
-                                <?php if (!empty(\PlanningPoker\Library\Session::get("user"))): ?>
-                                    <?php if ($lobby["creator"] == \PlanningPoker\Library\Session::get("user")->getId()): ?>
-                                    &nbsp;
-                                        <button type="submit" name="action" value="Delete" class="btn btn-outline-danger">Delete</button>
-                                    <?php endif; ?>
-                                <?php endif;?>
+                                    <?php if (!empty(\PlanningPoker\Library\Session::get("user"))): ?>
+                                        <?php if ($lobby["creator"] == \PlanningPoker\Library\Session::get("user")->getId()): ?>
+                                            <button type="submit" name="action" value="Delete" class="btn btn-outline-danger">Delete</button>
+                                        <?php endif; ?>
+                                    <?php endif;?>
                                 </form>
                             </div>
                         </td>

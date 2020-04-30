@@ -1,0 +1,41 @@
+<?php use PlanningPoker\Library\Redirect;
+use PlanningPoker\Library\Session;
+
+$idlobby = $this->vars[":idlobby"];
+$iduser = $this->vars[":iduser"];
+$idcreator = $this->vars[":idcreator"];
+
+$_SESSION["lobby"] = $idlobby;
+
+?>
+
+<?php if($iduser == $idcreator): ?>
+
+    <div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h1> Masterview </h1>
+                </div>
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    <h1 class="float-right"> LobbyID: <?= $idlobby ?></h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="loader">
+                        <table id="participants">
+                            <tr>
+                                <th>Teilnehmer</th>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-md-4">Stories from GitHub</div>
+                <div class="col-md-4">
+                </div>
+            </div>
+        </div>
+    </div>
+<?php endif; ?>

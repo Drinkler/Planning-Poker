@@ -109,15 +109,15 @@ class Lobby extends ModelBase
                 $_returnArray = array(
                   "error" => "User is already a participant"
                 );
+                return false;
             }
         } catch (\Exception $exception) {
             echo $exception->getMessage();
+            $_returnArray = array(
+                "error" => $exception->getMessage()
+            );
             return false;
         }
-        $_returnArray = array(
-            "error" => "Something went wrong joining this lobby."
-        );
-        return false;
     }
 
     /**
@@ -143,6 +143,47 @@ class Lobby extends ModelBase
             echo $exception->getMessage();
             return false;
         }
+    }
+
+    /**
+     * GetCreatorByLobbyID
+     * @param $_id
+     * @param array $_returnArray
+     * @author Luca Stanger
+     * @return bool
+     */
+    public static function getCreatorByLobbyID($_id, &$_returnArray = array()) {
+        $params = array(
+          ":idlobby" => $_id
+        );
+
+        $query =
+            /** @lang SQL */
+            "SELECT creator FROM lobby WHERE idlobby = :idlobby";
+
+        $_returnArray = (new PDOBase)->getPdo()->query($query, $params);
+
+        return true;
+    }
+
+    /**
+     * @param $_id
+     * @param array $_returnArray
+     * @author Luca Stanger
+     * @return bool
+     */
+    public static function getParticipants($_id, &$_returnArray = array()) {
+        $params = array(
+            ":idlobby" => $_id
+        );
+
+        $query =
+            /** @lang SQL */
+            "SELECT user.name, user.surname FROM participants, user WHERE idlobby = :idlobby AND participants.iduser = user.iduser";
+
+        $_returnArray = (new PDOBase)->getPdo()->query($query, $params);
+
+        return true;
     }
 
     /**

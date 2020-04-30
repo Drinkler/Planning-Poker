@@ -5,16 +5,16 @@
                          <div class="col-sm-4 col-md-3 item">
                             <h3>Services</h3>
                             <ul>
-                                <li><a href="services/webdesign">Web design</a></li>
-                                <li><a href="services/development">Entwicklung</a></li>
-                                <li><a href="services/hosting">Hosting</a></li>
+                                <li><a href="<?= $this->makeURL("services/webdesign"); ?>">Web design</a></li>
+                                <li><a href="<?= $this->makeURL("services/development"); ?>">Entwicklung</a></li>
+                                <li><a href="<?= $this->makeURL("services/hosting"); ?>">Hosting</a></li>
                             </ul>
                         </div>
                     <div class="col-sm-4 col-md-3 item">
                         <h3>Info</h3>
                         <ul>
-                            <li><a href="about/project">Projekt</a></li>
-                            <li><a href="about/team">Team</a></li>
+                            <li><a href="<?= $this->makeURL("about/project"); ?>">Projekt</a></li>
+                            <li><a href="<?= $this->makeURL("about/team"); ?>">Team</a></li>
                         </ul>
                     </div>
                         <div class="col-lg-3 item social">

@@ -66,7 +66,7 @@ class LobbyController extends ControllerBase implements Controller
      * @author Luca Stanger
      * @author Florian Drinkler
      */
-    public function actionAction() {
+    public function lobbyAction() {
         // Prepare params
         $params = array(
             ":idlobby" => (isset($_POST["lobbyid"]) && $_POST["lobbyid"] ? $_POST["lobbyid"] : null),
@@ -76,14 +76,21 @@ class LobbyController extends ControllerBase implements Controller
         if ($_POST['action'] == 'Join') {
             $message = array();
             if (Lobby::join($params, $message)) {
-                Flash::success($message["success"]);
+                Flash::success("Joined");
             } else {
                 Flash::danger($message["error"]);
             }
-
         } else if ($_POST['action'] == 'Delete') {
             Lobby::deleteById($params[":idlobby"]);
         }
+
+        $tRet = array();
+        // Find creator id for this lobby
+        if (Lobby::getCreatorByLobbyID($params[":idlobby"], $tRet)) {
+            $params[":idcreator"] = $tRet[0][0];
+        }
+
+        $this->view->setVars($params);
     }
 
     /**
@@ -114,7 +121,6 @@ class LobbyController extends ControllerBase implements Controller
 
         if (isset($_id)) {
             Lobby::deleteById($_id);
-            //Flash::success(Text::get("SUCCESSFUL_DELETED"));
             Flash::success("SUCCESSFUL_DELETED");
 
             Redirect::to("lobby/index");
