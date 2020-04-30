@@ -9,4 +9,12 @@
     <logging>
         <log type="coverage-clover" target="clover.xml"/>
     </logging>
+    <filter>
+      <whitelist processUncoveredFilesFromWhitelist="true">
+        <directory>srx</directory>
+        <exclude>
+          <file>vendor/autoload.php</file>
+        </exclude>
+      </whitelist>
+    </filter>
 </phpunit>
