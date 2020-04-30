@@ -8,7 +8,10 @@ before_script:
   - bower install
 
 script:
-  - "./vendor/bin/phpunit --coverage-clover=coverage.xml"
+  - "./vendor/bin/phpunit"
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
 
 deploy:
   provider: elasticbeanstalk
@@ -20,6 +23,3 @@ deploy:
   on:
     branch: master
   edge: true
-
-after_success:
-  - bash <(curl -s https://codecov.io/bash)
