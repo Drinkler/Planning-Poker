@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.1/phpunit.xsd"
-         bootstrap="vendor/autoload.php"
-         executionOrder="depends,defects"
-         forceCoversAnnotation="true"
-         beStrictAboutCoversAnnotation="true"
-         beStrictAboutOutputDuringTests="true"
-         beStrictAboutTodoAnnotatedTests="true"
-         convertNoticesToExceptions="false"
-         stderr="true"
-         verbose="true">
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.1/phpunit.xsd" 
+    bootstrap="vendor/autoload.php" 
+    executionOrder="depends,defects" 
+    forceCoversAnnotation="true" 
+    beStrictAboutCoversAnnotation="true" 
+    beStrictAboutOutputDuringTests="true" 
+    beStrictAboutTodoAnnotatedTests="true" 
+    convertNoticesToExceptions="false" 
+    stderr="true" 
+    verbose="true">
     <php>
-        <server name='SERVER_PROTOCOL' value='http/1.1' />
-        <server name='HTTP_HOST' value='localhost' />
+        <server name='SERVER_PROTOCOL' 
+            value='http/1.1' />
+        <server name='HTTP_HOST' 
+            value='localhost' />
     </php>
     <testsuites>
         <testsuite name="default">
@@ -20,7 +22,8 @@
         </testsuite>
     </testsuites>
     <logging>
-        <log type="coverage-clover" target="coverage.xml"/>
+        <log type="coverage-clover" 
+            target="coverage.xml"/>
     </logging>
     <filter>
         <whitelist processUncoveredFilesFromWhitelist="true">
