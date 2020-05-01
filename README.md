@@ -1,5 +1,7 @@
 # Planning-Poker :black_joker:
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/593c2cb72b1540b491176debcae6f180)](https://www.codacy.com/manual/Drinkler/Planning-Poker?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Drinkler/Planning-Poker&amp;utm_campaign=Badge_Grade)
+
 ## About
 Planning-Poker is a web based php app. The project emerged from the requirements of a study project. During the implementation we tried to use current best practices of software development and to get to know new ones.
 
