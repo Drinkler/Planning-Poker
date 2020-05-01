@@ -8,6 +8,7 @@
          beStrictAboutOutputDuringTests="true"
          beStrictAboutTodoAnnotatedTests="true"
          convertNoticesToExceptions="false"
+         stderr="true"
          verbose="true">
     <php>
         <server name='SERVER_PROTOCOL' value='http/1.1' />
