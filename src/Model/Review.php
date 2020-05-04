@@ -2,6 +2,9 @@
 
 namespace PlanningPoker\Model;
 
+use PlanningPoker\Library\Session;
+use PlanningPoker\Library\Text;
+
 /**
  * Class Review:
  *
@@ -10,7 +13,7 @@ namespace PlanningPoker\Model;
  */
 class Review extends ModelBase
 {
-    private $title, $description, $date, $rating, $name, $surname;
+    private $_title, $_description, $date, $_rating, $name, $surname;
 
     /**
      * Review constructor.
@@ -31,6 +34,87 @@ class Review extends ModelBase
         $this->setRating($rating);
         $this->setName($name);
         $this->setSurname($surname);
+    }
+
+    public static function create($_title, $_description, $_rating, &$_returnArray = array())
+    {
+        // Get data from view
+        if (!empty($_title) && !empty($_description) && !empty($_rating)) {
+            $_title = htmlspecialchars($_title);
+            $_description = htmlspecialchars($_description);
+            $_rating = htmlspecialchars($_rating);
+        } else {
+            // TODO: Add REVIEW_CREATE_MISSING_INPUT to Text
+            $_returnArray = array("error" => Text::get("REVIEW_CREATE_MISSING_INPUT"));
+            return false;
+        }
+
+        // Prepare params
+        $params = array(
+            ":iduser" => Session::get("user")->getId(),
+            ":title" => $_title,
+            ":description" => $_description,
+            ":rating" => $_rating
+        );
+
+        // Prepare query
+        $query =
+            /** @lang SQL */
+            "INSERT INTO review (iduser, title, description, rating) VALUES (:iduser, :title, :description, :rating);";
+
+        // Execute query
+        try {
+            (new PDOBase)->getPdo()->queryWithoutFetch($query, $params);
+        } catch (\Exception $exception) {
+            $_returnArray = array("error" => $exception->getMessage());
+            return false;
+        }
+
+        return true;
+    }
+
+    public static function delete($_idlobby, &$_returnArray = array())
+    {
+        // Prepare params
+        $params = array(
+            ":idreview" => $_idlobby
+        );
+
+        // Prepare query
+        $query =
+            /** @lang SQL */
+            "DELETE FROM review WHERE idreview = :idreview;";
+
+        // Execute query
+        try {
+            (new PDOBase)->getPdo()->queryWithoutFetch($query, $params);
+        } catch (\Exception $exception) {
+            $_returnArray = array("error" => $exception->getMessage());
+            return false;
+        }
+
+        return true;
+    }
+
+    public static function getAll(&$_returnArray = array())
+    {
+        // Prepare params
+        $params = array();
+
+        // Prepare query
+        $query =
+            /** @lang SQL */
+            "SELECT r.title, r.description, r.rating, r.created, u.name, u.surname FROM user u, review r WHERE u.iduser = r.iduser;";
+
+        // Execute query
+        try {
+            $_returnArray = (new PDOBase)->getPdo()->query($query, $params);
+        } catch (\Exception $exception) {
+            $_returnArray = array("error" => $exception->getMessage());
+            return false;
+        }
+
+        return true;
     }
 
     private function setTitle(string $title)
