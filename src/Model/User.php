@@ -44,6 +44,7 @@ class User extends ModelBase
      * @param array() $returnArray
      * @return boolean
      * @author Luca Stanger
+     * @author Florian Drinkler
      */
     public static function create($_name, $_surname, $_email, $_password, $_hashType = PASSWORD_DEFAULT, array &$returnArray = array())
     {
@@ -113,6 +114,7 @@ class User extends ModelBase
      * @param $_email
      * @param $_challenge
      * @author Luca Stanger
+     * @author Florian Drinkler
      * @return string
      */
     public static function confirm($_email, $_challenge)
@@ -161,6 +163,7 @@ class User extends ModelBase
      * @param $_password string doesn't need to be htmlspecialchars
      * @param array() $_returnArray
      * @author Luca Stanger
+     * @author Florian Drinkler
      * @return bool returns true if user got logged in successfully
      */
     public static function login($_email, $_password, &$_returnArray = array())
@@ -230,6 +233,7 @@ class User extends ModelBase
     /**
      * Logs out the current user
      * @author Luca Stanger
+     * @author Florian Drinkler
      * @return bool
      */
     public static function logout()
@@ -248,6 +252,7 @@ class User extends ModelBase
     /**
      * Deletes the current user account
      * @author Luca Stanger
+     * @author Florian Drinkler
      * @return void
      */
     public static function delete()
