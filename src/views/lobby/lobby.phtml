@@ -1,8 +1,11 @@
 <?php
 
-if (empty(\PlanningPoker\Library\Session::get("user"))) {
+use PlanningPoker\Library\Flash;
+use PlanningPoker\Library\Session;
+
+if (empty(Session::get("user"))) {
     echo '<meta http-equiv="Refresh" content="0; url=' . $this->makeURL("lobby/sessions") . '" />';
-    \PlanningPoker\Library\Flash::danger("You need to be logged in!");
+    Flash::danger("You need to be logged in!");
 } else {
 
 // TODO: Define this in a config file
