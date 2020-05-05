@@ -26,7 +26,17 @@ final class DatabaseTest extends TestCase
         // Assertion
         $this->assertInstanceOf(
             Database::class,
-            (new PDOBase)->getPdo()
+            (new PDOBase)->getPdo(),
+            "Couldn't establish a PDO Connection"
         );
+    }
+
+    /**
+     * testCanBeConstructedThroughConstructor: tests if an instance of PDO can be constructed
+     * @return void
+     * @author Luca Stanger
+     */
+    public function testCanBeConstructedThroughConstructor() {
+
     }
 }
