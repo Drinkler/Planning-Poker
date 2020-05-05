@@ -53,7 +53,9 @@ try {
 
     $view->addParams($params);
 
-    $controller->$actionMethodName();
+    $tRet = $controller->$actionMethodName();
+
+    // $params["authenticated"] = $tRet;
 
     // Added specific cases for login and logout
     if ($url == "user/logout" || $url == "user/login" || $url == "user/confirm" || $url == "user/delete" || $url == "lobby/action") {
