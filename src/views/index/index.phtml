@@ -73,17 +73,17 @@ use PlanningPoker\Library\Session;
                 <div class="card-body">
                     <h4 class="card-title">Tritt einer Sitzung bei</h4>
                     <p class="card-text"> Du hast eine Sitzungs-ID? Gib sie hier ein um der Sitzung beizutreten</p>
-                    <form action="<?= $this->makeURL("lobby/join") ?>" method="post">
+                    <form action="<?= $this->makeURL("lobby/lobby") ?>" method="post">
                         <div class="form-group">
                             <label for="sessionID">Sitzungs-ID:</label>
-                            <input type="text" class="form-control" id="sessionID" placeholder="z.B. 123456789">
+                            <input type="text" class="form-control" name="lobbyid" id="sessionID" placeholder="z.B. 123456789">
                         </div>
                         <div class="form-group">
                             <label for="userName">Dein Name:</label>
                             <input type="text" class="form-control" id="userName" value="<?php echo (isset($_SESSION["user"]) && Session::get("user")->getUsername() ? Session::get("user")->getUsername() : 'Max Mustermann')  ?>">
                         </div>
                         <br>
-                        <button type="button" class="btn btn-secondary">Beitreten</button>
+                        <button type="submit" name="action" value="Join" class="btn btn-secondary">Beitreten</button>
                     </form>
                 </div>
             </div>
