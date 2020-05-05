@@ -1,1 +1,11 @@
 <?php
+
+use PlanningPoker\Library\Flash;
+use PlanningPoker\Library\Text;
+
+if ($this->basic_params["authenticated"] == false) {
+    echo '<meta http-equiv="Refresh" content="0; url=' . $this->makeURL("") . '" />';
+    Flash::warning(Text::get("USER_LOGIN_REQUIRED"));
+} else {
+    echo '<meta http-equiv="Refresh" content="0; url=' . $this->makeURL("lobby/sessions") . '" />';
+}

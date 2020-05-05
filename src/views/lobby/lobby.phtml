@@ -1,5 +1,9 @@
-<?php use PlanningPoker\Library\Redirect;
-use PlanningPoker\Library\Session;
+<?php
+
+if (empty(\PlanningPoker\Library\Session::get("user"))) {
+    echo '<meta http-equiv="Refresh" content="0; url=' . $this->makeURL("lobby/sessions") . '" />';
+    \PlanningPoker\Library\Flash::danger("You need to be logged in!");
+} else {
 
 // TODO: Define this in a config file
 $cardSets = [
@@ -40,8 +44,13 @@ $idcards = $this->vars[":cards"] - 1;
 
 $_SESSION["lobby"] = $idlobby;
 
-?>
+foreach ($_POST as $postInput) {
+    if ($postInput != "") {
+        $url = $postInput;
+    }
+}
 
+?>
 
 <?php if($iduser == $idcreator): ?>
     <div class="container">
@@ -56,7 +65,7 @@ $_SESSION["lobby"] = $idlobby;
             <div class="col-md-6">
                 <div class="card" style="margin-bottom: 30px;">
                     <div class="card-body">
-                        <h1 class="float-right"> LobbyID: <?= $idlobby ?></h1>
+                        <h1 class="float-md-none"> LobbyID: <?= $idlobby ?></h1>
                     </div>
                 </div>
             </div>
@@ -69,12 +78,34 @@ $_SESSION["lobby"] = $idlobby;
                             <tr>
                                 <th scope="col">Participant</th>
                                 <th scope="col">Vote</th>
+                                <th scope="col"></th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td>Luca</td>
                                 <td>3</td>
+                                <td><button type="button" class="btn btn-danger">Kick</button></td>
+                            </tr>
+                            <tr>
+                                <td>Luca</td>
+                                <td>3</td>
+                                <td><button type="button" class="btn btn-danger">Kick</button></td>
+                            </tr>
+                            <tr>
+                                <td>Luca</td>
+                                <td>3</td>
+                                <td><button type="button" class="btn btn-danger">Kick</button></td>
+                            </tr>
+                            <tr>
+                                <td>Luca</td>
+                                <td>3</td>
+                                <td><button type="button" class="btn btn-danger">Kick</button></td>
+                            </tr>
+                            <tr>
+                                <td>Luca</td>
+                                <td>3</td>
+                                <td><button type="button" class="btn btn-danger">Kick</button></td>
                             </tr>
                         </tbody>
                     </table>
@@ -82,6 +113,7 @@ $_SESSION["lobby"] = $idlobby;
             </div>
             <div class="col-md-6">
                 <div class="card" style="margin-bottom: 30px;">
+                    <input type="hidden" id="lobbyid" name="lobbyid" value="<?= $idlobby ?>">
                     <nav>
                         <div class="nav nav-tabs" id="nav-tab" role="tablist">
                         <?php foreach($externals as $key=>$external): ?>
@@ -90,15 +122,19 @@ $_SESSION["lobby"] = $idlobby;
                         </div>
                     </nav>
                     <div class="tab-content" id="nav-tabContent" style="padding: 20px">
-                        <?php foreach($externals as $key=>$external): ?>
-                            <div class="tab-pane fade <?php if ($key == 0) { echo "show active";} ?>" id="nav-<?= strtolower($external) ?>" role="tabpanel" aria-labelledby="nav-<?= strtolower($external) ?>-tab">
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1"><?= $external?> Repository Address</label>
-                                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="https://github.com/Drinkler/Planning-Poker">
-                                </div>
+                    <?php foreach($externals as $key=>$external): ?>
+                        <div class="tab-pane fade <?php if ($key == 0) { echo "show active";} ?>" id="nav-<?= strtolower($external) ?>" role="tabpanel" aria-labelledby="nav-<?= strtolower($external) ?>-tab">
+                            <div class="form-group">
+                                <label for="<?= strtolower($external) ?>Input"><?= $external?> Repository Address</label>
+                                <input type="url" class="form-control" name="<?= strtolower($external) ?>Input" id="<?= strtolower($external) ?>Input" aria-describedby="emailHelp" placeholder="https://github.com/Drinkler/Planning-Poker">
                             </div>
-                        <?php endforeach; ?>
+                        <div style="padding: 20px">
+                            <button type="submit" class="btn btn-primary" onclick="fetchStoriesFrom<?= $external ?>()">Get stories from <?= $external ?></button>
+                        </div>
+                        </div>
+                    <?php endforeach; ?>
                     </div>
+                    <table id="stories" class="table"></table>
                 </div>
             </div>
         </div>
@@ -129,4 +165,4 @@ $_SESSION["lobby"] = $idlobby;
             </div>
         </form>
     </div>
-<?php endif; ?>
+<?php endif; }?>
