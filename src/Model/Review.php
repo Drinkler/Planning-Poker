@@ -13,7 +13,7 @@ use PlanningPoker\Library\Text;
  */
 class Review extends ModelBase
 {
-    private $_title, $_description, $date, $_rating, $name, $surname;
+    private $title, $description, $date, $rating, $name, $surname;
 
     /**
      * Review constructor.

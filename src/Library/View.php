@@ -54,8 +54,7 @@ class View
 
         $this->basic_js = array(
             'bower_components/jquery/dist/jquery.min.js',
-            'bower_components/bootstrap/dist/js/bootstrap.min.js',
-            'assets/script/ajax.js'
+            'bower_components/bootstrap/dist/js/bootstrap.min.js'
         );
     }
 
@@ -115,7 +114,7 @@ class View
      * @author Luca Stanger
      * @return void
      */
-    public function addParams($params) {
+    public function addParams(&$params) {
         if (!is_array($params)) {
             $params = (array) $params;
         }

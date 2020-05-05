@@ -8,6 +8,7 @@ use PlanningPoker\Library\Redirect;
 use PlanningPoker\Library\Session;
 use PlanningPoker\Library\Text;
 use PlanningPoker\Model\Lobby;
+use function PHPUnit\Framework\returnArgument;
 
 /**
  * Class LobbyController:
@@ -44,17 +45,22 @@ class LobbyController extends ControllerBase implements Controller
      * Creates a lobby
      * @access public
      * @example lobby/create
-     * @return void
+     * @return bool
      * @author Luca Stanger
      */
     public function createAction()
     {
         if (Session::get("signed_in")) {
             $user = Session::get("user");
+            if ($_POST["lobbyName"] == "") {
+                return false;
+            }
             Lobby::create($_REQUEST["lobbyName"], (int) $_REQUEST["cards"], (int) $user->getId());
             Flash::success(Text::get("REGISTER_LOBBY_CREATED"));
+            return true;
         } else {
             Flash::warning(Text::get("USER_LOGIN_REQUIRED"));
+            return false;
         }
     }
 
@@ -62,52 +68,50 @@ class LobbyController extends ControllerBase implements Controller
      * Joins or deletes a lobby
      * @access public
      * @example lobby/action
-     * @return void
+     * @return bool
      * @author Luca Stanger
      * @author Florian Drinkler
      */
     public function lobbyAction() {
-        // Prepare params
-        $params = array(
-            ":idlobby" => (isset($_POST["lobbyid"]) && $_POST["lobbyid"] ? $_POST["lobbyid"] : null),
-            ":iduser" => Session::get("user")->getId(),
-        );
+        // Check if user is logged in
+        $user = Session::get("user");
 
-        if ($_POST['action'] == 'Join') {
-            $message = array();
-            if (Lobby::join($params, $message)) {
-                Flash::success("Joined");
-            } else {
-                // Flash::danger($message["error"]);
+        if (!empty($user)) {
+            // Prepare params
+            $params = array(
+                ":idlobby" => (isset($_POST["lobbyid"]) && $_POST["lobbyid"] ? $_POST["lobbyid"] : null),
+                ":iduser" => Session::get("user")->getId(),
+            );
+
+            if (isset($_POST['action'])) {
+                if ($_POST['action'] == 'Join') {
+                    $message = array();
+                    if (Lobby::join($params, $message)) {
+                        Flash::success("Joined");
+                    } else {
+                        // Flash::danger($message["error"]);
+                    }
+                } else if ($_POST['action'] == 'Delete') {
+                    Lobby::deleteById($params[":idlobby"]);
+                }
             }
-        } else if ($_POST['action'] == 'Delete') {
-            Lobby::deleteById($params[":idlobby"]);
-        }
 
-        $tRet = array();
-        // Find creator id for this lobby
-        if (Lobby::getCreatorByLobbyID($params[":idlobby"], $tRet)) {
-            $params[":idcreator"] = $tRet[0][0];
-        }
-        // Find card set for this lobby
-        if (Lobby::getCardsByLobbyID($params[":idlobby"], $tRet)) {
-            $params[":cards"] = $tRet[0][0];
-        }
+            $tRet = array();
+            // Find creator id for this lobby
+            if (Lobby::getCreatorByLobbyID($params[":idlobby"], $tRet)) {
+                $params[":idcreator"] = $tRet[0][0];
+            }
+            // Find card set for this lobby
+            if (Lobby::getCardsByLobbyID($params[":idlobby"], $tRet)) {
+                $params[":cards"] = $tRet[0][0];
+            }
 
-        $this->view->setVars($params);
-    }
-
-    /**
-     * Joins a lobby
-     * @access public
-     * @example lobby/join
-     * @return void
-     * @author Luca Stanger
-     * @author Florian Drinkler
-     * @deprecated
-     */
-    public function joinAction()
-    {
+            $this->view->setVars($params);
+            return true;
+        } else {
+            Flash::danger("You need to be logged in!");
+            return false;
+        }
     }
 
     /**
