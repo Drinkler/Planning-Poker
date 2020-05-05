@@ -12,6 +12,8 @@ final class DatabaseTest extends TestCase
      * testCanBeConstructed: tests if an instance of PDO can be constructed
      * @return void
      * @author Luca Stanger
+     * @covers \PlanningPoker\Model\Database
+     * @covers \PlanningPoker\Model\PDOBase
      */
     public function testCanBeConstructed()
     {
@@ -35,6 +37,8 @@ final class DatabaseTest extends TestCase
      * testCanBeConstructedThroughConstructor: tests if an instance of PDO can be constructed
      * @return void
      * @author Luca Stanger
+     * @covers \PlanningPoker\Model\Database
+     * @covers \PlanningPoker\Model\PDOBase
      */
     public function testCanBeConstructedThroughConstructor() {
 

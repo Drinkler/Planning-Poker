@@ -13,7 +13,7 @@ class LobbyTest extends TestCase
     public static $lobby;
 
     /**
-     *
+     * @covers \PlanningPoker\Model\Lobby
      */
     public static function setUpBeforeClass(): void
     {
@@ -29,6 +29,7 @@ class LobbyTest extends TestCase
      * testCanBeConstructed: tests if an instance of Lobby can be constructed
      * @return void
      * @author Luca Stanger
+     * @covers \PlanningPoker\Model\Lobby
      */
     public function testCanBeConstructed() {
         $this->assertInstanceOf(
@@ -40,6 +41,7 @@ class LobbyTest extends TestCase
      * testShouldReturnName: tests if getName returns String
      * @return void
      * @author Luca Stanger
+     * @covers \PlanningPoker\Model\Lobby
      */
     public function testShouldReturnName() {
         $this->assertIsString(
@@ -56,6 +58,7 @@ class LobbyTest extends TestCase
      * testShouldReturnDeck: tests if getDeck returns int
      * @return void
      * @author Luca Stanger
+     * @covers \PlanningPoker\Model\Lobby
      */
     public function testShouldReturnDeck() {
         $this->assertIsInt(
@@ -72,6 +75,7 @@ class LobbyTest extends TestCase
      * testShouldReturnCreated: tests if getCreated returns string
      * @return void
      * @author Luca Stanger
+     * @covers \PlanningPoker\Model\Lobby
      */
     public function testShouldReturnCreated() {
         $this->assertIsString(
@@ -88,6 +92,7 @@ class LobbyTest extends TestCase
      * testShouldReturnCreatorName: tests if getCreatorName returns a string
      * @return void
      * @author Luca Stanger
+     * @covers \PlanningPoker\Model\Lobby
      */
     public function testShouldReturnCreatorName() {
         $this->assertIsString(
@@ -104,6 +109,7 @@ class LobbyTest extends TestCase
      * testShouldReturnCreatorSurname: tests if getCreatorSurname returns a string
      * @return void
      * @author Luca Stanger
+     * @covers \PlanningPoker\Model\Lobby
      */
     public function testShouldReturnCreatorSurname() {
         $this->assertIsString(
