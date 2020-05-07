@@ -2,13 +2,11 @@
 
 namespace PlanningPoker\Controller;
 
-use PlanningPoker\Library\Config;
 use PlanningPoker\Library\Flash;
 use PlanningPoker\Library\Redirect;
 use PlanningPoker\Library\Session;
 use PlanningPoker\Library\Text;
 use PlanningPoker\Model\Lobby;
-use function PHPUnit\Framework\returnArgument;
 
 /**
  * Class LobbyController:

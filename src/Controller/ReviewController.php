@@ -13,7 +13,7 @@ use PlanningPoker\Model\Review;
  * @package PlanningPoker\Controller
  * @author Florian Drinkler
  */
-class ReviewController extends ControllerBase
+class ReviewController extends ControllerBase implements Controller
 {
 
     /**

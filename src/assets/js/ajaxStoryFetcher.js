@@ -23,14 +23,30 @@ function fetchStoriesFromGitHub() {
 
     $.getJSON(curlURL, function (data) {
         data.forEach(element => {
-            let tr = document.createElement("tr");
-            let tdTitle = document.createElement("td");
-            let tdDescription = document.createElement("td");
-            tdTitle.innerHTML = element["title"];
-            tdDescription.innerHTML = element["body"];
-            tr.appendChild(tdTitle);
-            tr.appendChild(tdDescription);
-            tBody.appendChild(tr);
+            $.ajax({
+                url: "../ajax/storeIssue",
+                data: element,
+                success: function () {
+                    let tr = document.createElement("tr");
+                    let tdTitle = document.createElement("td");
+                    let tdDescription = document.createElement("td");
+                    tdTitle.innerHTML = element["title"];
+                    tdDescription.innerHTML = element["body"];
+                    tr.appendChild(tdTitle);
+                    tr.appendChild(tdDescription);
+                    tBody.appendChild(tr);
+                },
+                error: function () {
+                    let tr = document.createElement("tr");
+                    let tdTitle = document.createElement("td");
+                    let tdDescription = document.createElement("td");
+                    tdTitle.innerHTML = "Error";
+                    tdDescription.innerHTML = "Error";
+                    tr.appendChild(tdTitle);
+                    tr.appendChild(tdDescription);
+                    tBody.appendChild(tr);
+                }
+            })
         })
     })
 

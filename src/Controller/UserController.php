@@ -13,7 +13,7 @@ use PlanningPoker\Model\User;
  * @package PlanningPoker\Controller
  * @author Luca Stanger
  */
-class UserController extends ControllerBase
+class UserController extends ControllerBase implements Controller
 {
     /**
      * Logs in the posted user
