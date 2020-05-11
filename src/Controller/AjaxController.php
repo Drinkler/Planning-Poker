@@ -41,4 +41,18 @@ class AjaxController extends ControllerBase implements Controller
         echo json_encode($returnArray);
     }
 
+    function getCurrentIssueAction() {
+        $lobbyid = $_GET["idlobby"];
+
+        $returnArray = array();
+
+        Issue::getActiveIssueByLobbyId($lobbyid, $returnArray);
+
+        foreach ($returnArray as $key=>$item) {
+            $returnArray[$key] = (array) $item;
+        }
+
+        echo json_encode($returnArray);
+    }
+
 }

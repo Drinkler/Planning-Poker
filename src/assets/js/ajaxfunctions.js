@@ -85,6 +85,17 @@ function getParticipants(idlobby) {
     })
 }
 
-function createParticipantTile() {
-
+function getCurrentActiveIssue(idlobby) {
+    $.ajax({
+        url: `../ajax/getCurrentIssue?idlobby=${idlobby}`,
+        data: idlobby,
+        success: function (response) {
+            let titleElement = document.getElementById("title");
+            let description = document.getElementById("description");
+            JSON.parse(response).forEach(entry => {
+                titleElement.innerText = entry["\u0000PlanningPoker\\Model\\Issue\u0000title"];
+                description.innerText = entry["\u0000PlanningPoker\\Model\\Issue\u0000description"];
+            })
+        }
+    })
 }

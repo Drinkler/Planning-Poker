@@ -13,23 +13,20 @@ class Issue
     private $id;
     private $title;
     private $description;
-    private $number;
 
     /**
      * Issue constructor.
      * @param int $id
      * @param string $title
      * @param string $description
-     * @param string $number
      * @author Florian Drinkler
      * @author Luca Stanger
      */
-    public function __construct(int $id, string $title, string $description, string $number)
+    public function __construct(int $id, string $title, string $description)
     {
         $this->setId($id);
         $this->setTitle($title);
         $this->setDescription($description);
-        $this->setNumber($number);
     }
 
     /**
@@ -59,6 +56,32 @@ class Issue
             echo $exception->getMessage();
             return false;
         }
+    }
+
+    /**
+     * getActiveIssueByLobbyId: Returns the currently selected active issue
+     * @param $lobbyid
+     * @param array $_returnArray
+     * @return bool
+     * @author Luca Stanger
+     */
+    public static function getActiveIssueByLobbyId($lobbyid, &$_returnArray = array()) {
+        // Prepare params
+        $params = array(
+            ':idlobby' => $lobbyid
+        );
+
+        $query = /** @lang SQL */
+            "SELECT * FROM issue WHERE issue.idlobby = :idlobby AND active = 1";
+
+        $result = (new PDOBase)->getPdo()->query($query, $params);
+
+        foreach ($result as $item) {
+            array_push($_returnArray, new Issue($item["idlobby"], $item["title"], $item["body"]));
+        }
+
+        return true;
+
     }
 
     private function setTitle(string $title)

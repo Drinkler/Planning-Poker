@@ -120,14 +120,19 @@ foreach ($_POST as $postInput) {
             </div>
         </div>
     </div>
+    <script>
+        window.setInterval(function () {
+            getParticipants(<?= $idlobby ?>)
+        }, 1000);
+    </script>
 <?php else: ?>
     <div class="container">
         <div class="row">
             <div class="col-md-12">
                 <div class="card" style="margin-bottom: 30px;">
                     <div class="card-body">
-                        <h4 class="card-title">Current Story:</h4>
-                        <p class="card-text">Storydescription</p>
+                        <h4 class="card-title" id="title">Current Story:</h4>
+                        <p class="card-text" id="description">Storydescription</p>
                     </div>
                 </div>
             </div>
@@ -146,9 +151,10 @@ foreach ($_POST as $postInput) {
             </div>
         </form>
     </div>
+    <script>
+        window.setInterval(function () {
+            getCurrentActiveIssue(<?= $idlobby ?>);
+        }, 1000);
+    </script>
 <?php endif; }?>
-<script>
-    window.setInterval(function () {
-        getParticipants(<?= $idlobby ?>)
-    }, 1000);
-</script>
+
