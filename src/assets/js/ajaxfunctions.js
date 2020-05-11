@@ -54,3 +54,37 @@ function fetchStoriesFromGitHub() {
     navContent.innerHTML = "";
     navContent.appendChild(storyTable);
 }
+
+function getParticipants(idlobby) {
+    $.ajax({
+        url: `../ajax/getParticipants?idlobby=${idlobby}`,
+        data: idlobby,
+        success: function (response) {
+            let parts = document.getElementById("participants");
+            parts.innerText = "";
+            JSON.parse(response).forEach(entry => {
+                // console.log(entry)
+                let tr = document.createElement("tr");
+                let tdName = document.createElement("td");
+                let tdVote = document.createElement("td");
+                let tdButton = document.createElement("td");
+                // TODO: Refactor array index!!!!
+                tdName.innerText = entry["\u0000PlanningPoker\\Model\\User\u0000_username"];
+                tdVote.innerText = 0;
+                let button = document.createElement("button");
+                button.type = "button";
+                button.className = "btn btn-danger";
+                button.innerText = "Kick";
+                tdButton.appendChild(button);
+                tr.appendChild(tdName);
+                tr.appendChild(tdVote);
+                tr.appendChild(tdButton);
+                parts.appendChild(tr);
+            });
+        }
+    })
+}
+
+function createParticipantTile() {
+
+}

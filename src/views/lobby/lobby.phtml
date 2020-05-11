@@ -73,10 +73,12 @@ foreach ($_POST as $postInput) {
                 </div>
             </div>
         </div>
+        <script>
+        </script>
         <div class="row">
             <div class="col-md-6">
                 <div class="card" style="margin-bottom: 30px;">
-                    <table id="participants" class="table">
+                    <table class="table">
                         <thead>
                             <tr>
                                 <th scope="col">Participant</th>
@@ -84,32 +86,8 @@ foreach ($_POST as $postInput) {
                                 <th scope="col"></th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td>Luca</td>
-                                <td>3</td>
-                                <td><button type="button" class="btn btn-danger">Kick</button></td>
-                            </tr>
-                            <tr>
-                                <td>Luca</td>
-                                <td>3</td>
-                                <td><button type="button" class="btn btn-danger">Kick</button></td>
-                            </tr>
-                            <tr>
-                                <td>Luca</td>
-                                <td>3</td>
-                                <td><button type="button" class="btn btn-danger">Kick</button></td>
-                            </tr>
-                            <tr>
-                                <td>Luca</td>
-                                <td>3</td>
-                                <td><button type="button" class="btn btn-danger">Kick</button></td>
-                            </tr>
-                            <tr>
-                                <td>Luca</td>
-                                <td>3</td>
-                                <td><button type="button" class="btn btn-danger">Kick</button></td>
-                            </tr>
+                        <tbody id="participants">
+
                         </tbody>
                     </table>
                 </div>
@@ -169,3 +147,8 @@ foreach ($_POST as $postInput) {
         </form>
     </div>
 <?php endif; }?>
+<script>
+    window.setInterval(function () {
+        getParticipants(<?= $idlobby ?>)
+    }, 1000);
+</script>
