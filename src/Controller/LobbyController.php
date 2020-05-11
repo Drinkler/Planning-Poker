@@ -91,6 +91,8 @@ class LobbyController extends ControllerBase implements Controller
                     }
                 } else if ($_POST['action'] == 'Delete') {
                     Lobby::deleteById($params[":idlobby"]);
+                    Redirect::to("../lobby/sessions");
+                    return true;
                 }
             } else {
                 return false;
