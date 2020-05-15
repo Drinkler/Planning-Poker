@@ -23,7 +23,7 @@ class AjaxController extends ControllerBase implements Controller
      * @author Luca Stanger
      */
     function storeIssueAction() {
-        $issue = new Issue($_GET["id"], $_GET["title"], $_GET["body"], $_GET["number"]);
+        $issue = new Issue($_GET["id"], $_GET["title"], $_GET["body"]);
         $issue->saveToLobbyId($_SESSION["lobby"]);
     }
 
