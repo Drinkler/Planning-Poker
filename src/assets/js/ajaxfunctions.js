@@ -1,4 +1,3 @@
-
 function fetchStoriesFromGitHub() {
     let navContent = document.getElementById("nav-github");
     let url = document.getElementById("githubInput").value;

@@ -42,14 +42,13 @@ class View
             'bower_components\components-font-awesome\css\svg-with-js.min.css',
             'bower_components\components-font-awesome\css\v4-shims.min.css',
             'assets/fonts/ionicons.min.css',
-            'assets/css/Features-Clean.css',
-            'assets/css/Footer-Clean.css',
-            'assets/css/Login-Form-Clean.css',
-            'assets/css/Navigation-with-Button.css',
-            'assets/css/Registration-Form-with-Photo.css',
-            'assets/css/Social-Icons.css',
-            'assets/css/styles.css',
-            'assets/css/Testimonials.css'
+            'assets/css/Features-Clean.min.css',
+            'assets/css/Footer-Clean.min.css',
+            'assets/css/Login-Form-Clean.min.css',
+            'assets/css/Navigation-with-Button.min.css',
+            'assets/css/Registration-Form-with-Photo.min.css',
+            'assets/css/Social-Icons.min.css',
+            'assets/css/Testimonials.min.css'
         );
 
         $this->basic_js = array(
