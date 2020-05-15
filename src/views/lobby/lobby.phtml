@@ -137,19 +137,18 @@ foreach ($_POST as $postInput) {
                 </div>
             </div>
         </div>
-        <form name="card-form" id="card-form" method="post" action="<?= $this->makeURL("lobby/lobby") ?>" style="display: compact;">
             <div class="row">
                 <?php foreach ($cardSets[$idcards] as $key=>$card): ?>
-                    <div class="col-md-6" style="padding: 0;" onclick="document.forms['card-form'].submit();">
-                        <div class="card">
-                            <div class="card-body" style="padding: 20px;">
+                    <form class="col-md-6" name="card-form" id="card-form<?= $key ?>" method="get" action="<?= $this->makeURL("ajax/vote") ?>">
+                        <div class="card" style="padding: 0;" onclick="document.forms['card-form<?= $key ?>'].submit();">
+                            <div class="card-body">
                                 <h6 class="display-1 text-center card-title"><?= $card ?></h6>
+                                <input type="hidden" name="voteid" value="<?= $key ?>">
                             </div>
                         </div>
-                    </div>
+                    </form>
                 <?php endforeach; ?>
             </div>
-        </form>
     </div>
     <script>
         window.setInterval(function () {

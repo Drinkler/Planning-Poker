@@ -3,6 +3,8 @@
 
 namespace PlanningPoker\Controller;
 
+use PlanningPoker\Library\Redirect;
+use PlanningPoker\Library\Session;
 use PlanningPoker\Model\Issue;
 use PlanningPoker\Model\Participants;
 
@@ -53,6 +55,12 @@ class AjaxController extends ControllerBase implements Controller
         }
 
         echo json_encode($returnArray);
+    }
+
+    function voteAction() {
+        $vote = $_GET["voteid"];
+        $user = Session::get("User");
+
     }
 
 }
