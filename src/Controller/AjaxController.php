@@ -60,7 +60,6 @@ class AjaxController extends ControllerBase implements Controller
     function voteAction() {
         $vote = $_GET["voteid"];
         $user = Session::get("User");
-
     }
 
 }

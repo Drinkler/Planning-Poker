@@ -21,7 +21,7 @@ class Redirect
         if ($location) {
             if ($location === 404) {
                 header('HTTP/1.0 404 Not Found');
-                include 'src/views/_template/404.phtml';
+                include 'views/_template/404.phtml';
             } else {
                 header("Location: " . $location);
             }

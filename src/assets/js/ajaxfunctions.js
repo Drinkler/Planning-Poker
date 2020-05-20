@@ -14,7 +14,7 @@ function fetchStoriesFromGitHub() {
     thTitle.innerHTML = "Title";
     let thDescription = document.createElement("th");
     thDescription.setAttribute("scope", "col");
-    thDescription.innerHTML = "Title";
+    thDescription.innerHTML = "Description";
     thead.appendChild(thTitle);
     thead.appendChild(thDescription);
     storyTable.appendChild(thead);
