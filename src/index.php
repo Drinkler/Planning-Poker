@@ -69,7 +69,7 @@ try {
 }  catch (PlanningPoker\Library\NotFoundExpression $e) {
     http_response_code(404);
     //echo 'Page not found: '.$controllerClassName.'::'.$actionMethodName;
-    \PlanningPoker\Library\Redirect::to(404);
+    \PlanningPoker\Library\Redirect::to("../index/notFound");
 } catch (\Exception $e) {
     http_response_code(500);
     echo 'Exception: <b>'.$e->getMessage().'</b><br><pre>'.$e->getTraceAsString().'</pre>';

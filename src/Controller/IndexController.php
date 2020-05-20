@@ -14,4 +14,7 @@ use PlanningPoker\Model\User;
 class IndexController extends ControllerBase implements Controller
 {
 
+    public function notFoundAction() {
+
+    }
 }
