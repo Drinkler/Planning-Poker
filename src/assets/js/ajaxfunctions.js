@@ -1,7 +1,7 @@
 /**
  * Function for activation of stories
- * @param element contains the html element
- * @param storyId contains the lobby id
+ * @param {HTMLButtonElement} element contains the html element
+ * @param {int} storyId contains the lobby id
  * @author Luca Stanger
  * @access public
  */
@@ -20,7 +20,11 @@ function activateStory(element, storyId) {
 }
 
 /**
- *
+ * Get all stories from github
+ * @repository
+ * @username
+ * @author Luca Stanger
+ * @access public
  */
 function fetchStoriesFromGitHub() {
     let navContent = document.getElementById("nav-github");
@@ -55,6 +59,7 @@ function fetchStoriesFromGitHub() {
                     let tr = document.createElement("tr");
                     let tdTitle = document.createElement("td");
                     let tdDescription = document.createElement("td");
+                    let tdButton = document.createElement("td");
                     let activationButton = document.createElement("button");
                     tdTitle.innerHTML = element["title"];
                     tdDescription.innerHTML = element["body"];
@@ -63,9 +68,10 @@ function fetchStoriesFromGitHub() {
                     activationButton.addEventListener("click", function () {
                         activateStory(this, element["id"])
                     });
+                    tdButton.appendChild(activationButton);
                     tr.appendChild(tdTitle);
                     tr.appendChild(tdDescription);
-                    tr.appendChild(activationButton);
+                    tr.appendChild(tdButton);
                     tBody.appendChild(tr);
                 },
                 error: function () {
@@ -90,6 +96,8 @@ function fetchStoriesFromGitHub() {
 /**
  *
  * @param idlobby
+ * @author Luca Stanger
+ * @access public
  */
 function getParticipants(idlobby) {
     $.ajax({
@@ -123,7 +131,9 @@ function getParticipants(idlobby) {
 
 /**
  *
- * @param idlobby
+ * @param idlobby contains the lobby id
+ * @author Luca Stanger
+ * @access public
  */
 function getCurrentActiveIssue(idlobby) {
     $.ajax({
