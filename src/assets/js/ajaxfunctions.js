@@ -1,14 +1,32 @@
-function activateStory() {
-    alert("Test");
+/**
+ * Function for activation of stories
+ * @param element contains the html element
+ * @param storyId contains the lobby id
+ * @author Luca Stanger
+ * @access public
+ */
+function activateStory(element, storyId) {
+    // Get all 'green' buttons
+    let previousButtons = document.getElementsByClassName("btn-success");
+    // Iterate over all 'green' buttons and create initial class
+    [].forEach.call(previousButtons, function (p) {
+        p.classList.replace("btn-success", "btn-outline-primary");
+        p.innerHTML = "Set Active";
+    });
+    // Change class of submitted element
+    element.classList.replace("btn-outline-primary", "btn-success");
+    // Change Test of submitted element
+    element.innerHTML = "Active";
 }
 
+/**
+ *
+ */
 function fetchStoriesFromGitHub() {
     let navContent = document.getElementById("nav-github");
     let url = document.getElementById("githubInput").value;
     let username = url.split("/")[3];
     let repository = url.split("/")[4];
-
-
     let curlURL = `https://api.github.com/repos/${username}/${repository}/issues`;
     let storyTable = document.createElement("table");
     storyTable.className = "table";
@@ -22,7 +40,6 @@ function fetchStoriesFromGitHub() {
     let thButton = document.createElement("th");
     thButton.setAttribute("scope", "col");
     thButton.innerHTML = "";
-    thButton.addEventListener("click", function () {activateStory}, false);
     thead.appendChild(thTitle);
     thead.appendChild(thDescription);
     thead.appendChild(thButton);
@@ -42,7 +59,10 @@ function fetchStoriesFromGitHub() {
                     tdTitle.innerHTML = element["title"];
                     tdDescription.innerHTML = element["body"];
                     activationButton.innerHTML = "Set Active";
-                    activationButton.className = "btn btn-outline-primary activate";
+                    activationButton.className = "btn btn-outline-primary activate text-center";
+                    activationButton.addEventListener("click", function () {
+                        activateStory(this, element["id"])
+                    });
                     tr.appendChild(tdTitle);
                     tr.appendChild(tdDescription);
                     tr.appendChild(activationButton);
@@ -67,6 +87,10 @@ function fetchStoriesFromGitHub() {
     navContent.appendChild(storyTable);
 }
 
+/**
+ *
+ * @param idlobby
+ */
 function getParticipants(idlobby) {
     $.ajax({
         url: `../ajax/getParticipants?idlobby=${idlobby}`,
@@ -97,6 +121,10 @@ function getParticipants(idlobby) {
     })
 }
 
+/**
+ *
+ * @param idlobby
+ */
 function getCurrentActiveIssue(idlobby) {
     $.ajax({
         url: `../ajax/getCurrentIssue?idlobby=${idlobby}`,
