@@ -48,11 +48,11 @@ class View
             'assets/css/Navigation-with-Button.min.css',
             'assets/css/Registration-Form-with-Photo.min.css',
             'assets/css/Social-Icons.min.css',
-            'assets/css/Testimonials.min.css'
+            'assets/css/Testimonials.min.css',
         );
 
         $this->basic_js = array(
-            'bower_components/jquery/dist/jquery.min.js',
+            'bower_components\jquery\dist\jquery.min.js',
             'bower_components/bootstrap/dist/js/bootstrap.min.js'
         );
     }

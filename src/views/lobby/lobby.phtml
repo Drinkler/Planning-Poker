@@ -86,9 +86,7 @@ foreach ($_POST as $postInput) {
                                 <th scope="col"></th>
                             </tr>
                         </thead>
-                        <tbody id="participants">
-
-                        </tbody>
+                        <tbody id="participants"></tbody>
                     </table>
                 </div>
             </div>
@@ -125,6 +123,7 @@ foreach ($_POST as $postInput) {
             getParticipants(<?= $idlobby ?>)
         }, 1000);
     </script>
+
 <?php else: ?>
     <div class="container">
         <div class="row">
