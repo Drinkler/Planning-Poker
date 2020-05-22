@@ -1,0 +1,12 @@
+{
+  "name": "PlanningPoker",
+  "repository": "https://github.com/Drinkler/Planning-Poker",
+  "version": "0.1.0",
+  "devDependencies": {
+    "grunt": "~0.4.2",
+    "load-grunt-tasks": "~0.2.0",
+    "grunt-contrib-uglify-es": "latest",
+    "csso": "latest",
+    "bower": "^1.8.8"
+  }
+}
