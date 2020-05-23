@@ -6,7 +6,6 @@
  * @access public
  */
 function activateStory(element, storyId) {
-
     // create ajax call
     $.ajax({
         url: `../ajax/activateStory?story=${storyId}`,
@@ -24,9 +23,25 @@ function activateStory(element, storyId) {
             // Change Test of submitted element
             element.innerHTML = "Active";
         },
-        error: function() {}
+        error: function() {
+            console.log("Something went wrong :(")
+        }
     })
+}
 
+function vote(element) {
+    console.log(element);
+    console.log(`../ajax/vote?value=${encodeURIComponent(element.innerText)}`);
+    // create ajax call
+    $.ajax({
+        url: `../ajax/vote?value=${encodeURIComponent(element.innerText)}`,
+        success: function () {
+            console.log("In");
+        },
+        error: function () {
+            console.log("Something went wrong :(")
+        }
+    })
 }
 
 /**

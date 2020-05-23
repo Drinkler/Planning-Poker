@@ -138,14 +138,16 @@ foreach ($_POST as $postInput) {
         </div>
             <div class="row">
                 <?php foreach ($cardSets[$idcards] as $key=>$card): ?>
-                    <form class="col-md-6" name="card-form" id="card-form<?= $key ?>" method="get" action="<?= $this->makeURL("ajax/vote") ?>">
-                        <div class="card" style="padding: 0;" onclick="document.forms['card-form<?= $key ?>'].submit();">
+                    <!-- <form class="col-md-6" name="card-form" id="card-form<?= $key ?>" method="get" action="<?= $this->makeURL("ajax/vote") ?>"> -->
+                    <div class="col-md-6">
+                        <div class="card vote-tile" style="padding: 0;">
                             <div class="card-body">
                                 <h6 class="display-1 text-center card-title"><?= $card ?></h6>
                                 <input type="hidden" name="voteid" value="<?= $key ?>">
                             </div>
                         </div>
-                    </form>
+                    </div>
+                    <!-- </form> -->
                 <?php endforeach; ?>
             </div>
     </div>
@@ -153,6 +155,9 @@ foreach ($_POST as $postInput) {
         window.setInterval(function () {
             getCurrentActiveIssue(<?= $idlobby ?>);
         }, 1000);
+    </script>
+    <script>
+        [].forEach.call(document.getElementsByClassName("vote-tile"), function (vt) {vt.addEventListener("click", function () {vote(this)})});
     </script>
 <?php endif; }?>
 

@@ -94,8 +94,9 @@ class AjaxController extends ControllerBase implements Controller
      * @author Luca Stanger
      */
     function voteAction() {
-        $vote = $_GET["voteid"];
+        $vote = $_GET["value"];
         $user = Session::get("User");
+        // TODO: Safespot
     }
 
 }
