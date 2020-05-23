@@ -3,10 +3,12 @@
 
 namespace PlanningPoker\Controller;
 
+use PlanningPoker\Library\Flash;
 use PlanningPoker\Library\Redirect;
 use PlanningPoker\Library\Session;
 use PlanningPoker\Model\Issue;
 use PlanningPoker\Model\Participants;
+use PlanningPoker\Model\Vote;
 
 /**
  * Class AjaxController:
@@ -95,8 +97,10 @@ class AjaxController extends ControllerBase implements Controller
      */
     function voteAction() {
         $vote = $_GET["value"];
-        $user = Session::get("User");
-        // TODO: Safespot
+        $user = Session::get("user")->getId();
+        $lobby = Session::get("lobby");
+
+        Vote::vote($lobby, $user, $vote);
     }
 
 }

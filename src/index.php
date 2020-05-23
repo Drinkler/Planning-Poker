@@ -64,8 +64,6 @@ try {
             $view->render();
         }
     }
-
-
 }  catch (PlanningPoker\Library\NotFoundExpression $e) {
     http_response_code(404);
     //echo 'Page not found: '.$controllerClassName.'::'.$actionMethodName;

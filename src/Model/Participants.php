@@ -50,13 +50,13 @@ class Participants extends ModelBase
 
         // Prepare query
         $query = /** @lang SQL */
-            "SELECT participants.*, user.* FROM participants, user WHERE participants.iduser = user.iduser AND participants.idlobby = :idlobby";
+            "SELECT participants.*, user.*, vote.* FROM participants, user, vote WHERE participants.iduser = user.iduser AND participants.idlobby = :idlobby AND participants.iduser = vote.iduser AND participants.idlobby = vote.idlobby";
 
         // Execute query
         $result = (new PDOBase)->getPdo()->query($query, $params);
 
         foreach ($result as $value) {
-            array_push($_returnArray, new User($value["iduser"], $value["name"], $value["surname"], $value["email"]));
+            array_push($_returnArray, new User($value["iduser"], $value["name"], $value["surname"], $value["email"], $value["vote"]));
         }
 
         return true;

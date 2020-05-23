@@ -139,7 +139,7 @@ function getParticipants(idlobby) {
                 let tdButton = document.createElement("td");
                 // TODO: Refactor array index!!!!
                 tdName.innerText = entry["\u0000PlanningPoker\\Model\\User\u0000_username"];
-                tdVote.innerText = 0;
+                tdVote.innerText = entry["\u0000PlanningPoker\\Model\\User\u0000_vote"]
                 let button = document.createElement("button");
                 button.type = "button";
                 button.className = "btn btn-danger";

@@ -13,23 +13,24 @@ use PlanningPoker\Library\Text;
  */
 class User extends ModelBase
 {
-    private $_id, $_name, $_surname, $_email, $_created, $_username;
+    private $_id, $_name, $_surname, $_email, $_created, $_username, $_vote;
 
     /**
      * User constructor.
-     * @param $_id
-     * @param $_name
-     * @param $_surname
-     * @param $_email
+     * @param int $_id
+     * @param string $_name
+     * @param string $_surname
+     * @param string $_email
+     * @param int $_vote
      * @author Luca Stanger
-     * @return void
      */
-    public function __construct($_id, $_name, $_surname, $_email)
+    public function __construct($_id, $_name, $_surname, $_email, $_vote = 0)
     {
         $this->_id = $_id;
         $this->_name = $_name;
         $this->_surname = $_surname;
         $this->_email = $_email;
+        $this->_vote = $_vote;
         $this->_username = $this->_name . " " . $this->_surname;
     }
 
