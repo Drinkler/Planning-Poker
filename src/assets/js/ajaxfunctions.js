@@ -6,17 +6,30 @@
  * @access public
  */
 function activateStory(element, storyId) {
-    // Get all 'green' buttons
-    let previousButtons = document.getElementsByClassName("btn-success");
-    // Iterate over all 'green' buttons and create initial class
-    [].forEach.call(previousButtons, function (p) {
-        p.classList.replace("btn-success", "btn-outline-primary");
-        p.innerHTML = "Set Active";
-    });
-    // Change class of submitted element
-    element.classList.replace("btn-outline-primary", "btn-success");
-    // Change Test of submitted element
-    element.innerHTML = "Active";
+
+    // create ajax call
+    $.ajax({
+        url: `../ajax/activateStory?story=${storyId}`,
+        data: storyId,
+        success: function () {
+
+        },
+        error: function() {},
+        done: function () {
+            // Get all 'green' buttons
+            let previousButtons = document.getElementsByClassName("btn-success");
+            // Iterate over all 'green' buttons and create initial class
+            [].forEach.call(previousButtons, function (p) {
+                p.classList.replace("btn-success", "btn-outline-primary");
+                p.innerHTML = "Set Active";
+            });
+            // Change class of submitted element
+            element.classList.replace("btn-outline-primary", "btn-success");
+            // Change Test of submitted element
+            element.innerHTML = "Active";
+        }
+    })
+
 }
 
 /**
