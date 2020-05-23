@@ -12,10 +12,6 @@ function activateStory(element, storyId) {
         url: `../ajax/activateStory?story=${storyId}`,
         data: storyId,
         success: function () {
-
-        },
-        error: function() {},
-        done: function () {
             // Get all 'green' buttons
             let previousButtons = document.getElementsByClassName("btn-success");
             // Iterate over all 'green' buttons and create initial class
@@ -27,7 +23,8 @@ function activateStory(element, storyId) {
             element.classList.replace("btn-outline-primary", "btn-success");
             // Change Test of submitted element
             element.innerHTML = "Active";
-        }
+        },
+        error: function() {}
     })
 
 }
