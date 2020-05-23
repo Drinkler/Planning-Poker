@@ -26,6 +26,10 @@ class AjaxController extends ControllerBase implements Controller
     function activateStoryAction() {
         $story = $_GET["story"];
         $lobby = Session::get("lobby");
+
+        Issue::revokeActive($lobby);
+
+        Issue::activate($lobby, $story);
     }
 
     /**

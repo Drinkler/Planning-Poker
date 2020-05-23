@@ -59,6 +59,49 @@ class Issue
     }
 
     /**
+     * revokeActive: Resets all actives of the submitted lobby
+     * @param $lobbyid
+     * @return bool
+     * @author Luca Stanger
+     */
+    public static function revokeActive($lobbyid) {
+        // Prepare params
+        $params = array(
+            ':idlobby' => $lobbyid
+        );
+
+        $query = /** @lang SQL */
+            "UPDATE issue SET active = 0 WHERE idlobby = :idlobby;";
+
+        (new PDOBase)->getPdo()->queryWithoutFetch($query, $params);
+
+        return true;
+
+    }
+
+    /**
+     * Activate: Sets the submitted issue to active
+     * @param $lobbyid int contains the lobby id
+     * @param $issueid int contains the issue id
+     * @return bool
+     * @author Luca Stanger
+     */
+    public static function activate($lobbyid, $issueid) {
+        // Prepare params
+        $params = array(
+            ':idlobby' => $lobbyid,
+            ':idissue' => $issueid
+        );
+
+        $query = /** @lang SQL */
+            "UPDATE issue SET active = 1 WHERE idlobby = :idlobby AND idissue = :idissue";
+
+        (new PDOBase)->getPdo()->queryWithoutFetch($query, $params);
+
+        return true;
+    }
+
+    /**
      * getActiveIssueByLobbyId: Returns the currently selected active issue
      * @param $lobbyid
      * @param array $_returnArray
