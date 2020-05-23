@@ -16,6 +16,17 @@ use PlanningPoker\Model\Participants;
  */
 class AjaxController extends ControllerBase implements Controller
 {
+    /**
+     * Activate a story for a specific lobby
+     * @access public
+     * @example ajax/storeIssue
+     * @return void
+     * @author Luca Stanger
+     */
+    function activateStoryAction() {
+        $story = $_GET["story"];
+        $lobby = Session::get("lobby");
+    }
 
     /**
      * Stores an Issue into the database
@@ -29,6 +40,13 @@ class AjaxController extends ControllerBase implements Controller
         $issue->saveToLobbyId($_SESSION["lobby"]);
     }
 
+    /**
+     *
+     * @access public
+     * @example ajax/getParticipants
+     * @return void
+     * @author Luca Stanger
+     */
     function getParticipantsAction() {
         $lobbyid = $_GET["idlobby"];
 
@@ -43,6 +61,13 @@ class AjaxController extends ControllerBase implements Controller
         echo json_encode($returnArray);
     }
 
+    /**
+     *
+     * @access public
+     * @example ajax/getCurrentIssue
+     * @return void
+     * @author Luca Stanger
+     */
     function getCurrentIssueAction() {
         $lobbyid = $_GET["idlobby"];
 
@@ -57,6 +82,13 @@ class AjaxController extends ControllerBase implements Controller
         echo json_encode($returnArray);
     }
 
+    /**
+     *
+     * @access public
+     * @example ajax/vote
+     * @return void
+     * @author Luca Stanger
+     */
     function voteAction() {
         $vote = $_GET["voteid"];
         $user = Session::get("User");
