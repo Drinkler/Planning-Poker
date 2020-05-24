@@ -29,6 +29,10 @@ function activateStory(element, storyId) {
     })
 }
 
+/**
+ *
+ * @param element
+ */
 function vote(element) {
     console.log(element);
     console.log(`../ajax/vote?value=${encodeURIComponent(element.innerText)}`);
@@ -36,12 +40,26 @@ function vote(element) {
     $.ajax({
         url: `../ajax/vote?value=${encodeURIComponent(element.innerText)}`,
         success: function () {
-            console.log("In");
+            changeTileColor(element);
         },
         error: function () {
             console.log("Something went wrong :(")
         }
     })
+}
+
+/**
+ *
+ */
+function changeTileColor(htmlElement) {
+
+    let tiles = document.getElementsByClassName(htmlElement.classList.value);
+
+    [].forEach.call(tiles, function (p) {
+        p.style.backgroundColor = "white";
+    });
+
+    htmlElement.style.backgroundColor = "#8f8f8f";
 }
 
 /**
