@@ -45,7 +45,7 @@ class Issue
 
         // Prepare query
         $query = /** @lang SQL */
-            "INSERT INTO issue (idissue, idlobby, title, body) VALUES (:idissue, :idlobby, :title, :description)";
+            "INSERT INTO issue (idgithub, idlobby, title, body) VALUES (:idissue, :idlobby, :title, :description)";
 
         try {
             // Execute query
@@ -79,6 +79,20 @@ class Issue
 
     }
 
+    public static function resetVotes($lobbyid) {
+        // Prepare params
+        $params = array(
+          ':idlobby' => $lobbyid
+        );
+
+        $query = /** @lang SQL */
+            "UPDATE vote SET vote = 0 WHERE idlobby = :idlobby";
+
+        (new PDOBase)->getPdo()->queryWithoutFetch($query, $params);
+
+        return true;
+    }
+
     /**
      * Activate: Sets the submitted issue to active
      * @param $lobbyid int contains the lobby id
@@ -94,7 +108,7 @@ class Issue
         );
 
         $query = /** @lang SQL */
-            "UPDATE issue SET active = 1 WHERE idlobby = :idlobby AND idissue = :idissue";
+            "UPDATE issue SET active = 1 WHERE idlobby = :idlobby AND idgithub = :idissue";
 
         (new PDOBase)->getPdo()->queryWithoutFetch($query, $params);
 

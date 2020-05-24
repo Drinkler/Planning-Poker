@@ -29,8 +29,13 @@ class AjaxController extends ControllerBase implements Controller
         $story = $_GET["story"];
         $lobby = Session::get("lobby");
 
+        // Set all votes back to zero if switching an issue
+        Issue::resetVotes($lobby);
+
+        // Reset active status for all issues to ensure only 1 issue is active
         Issue::revokeActive($lobby);
 
+        // Activate submitted issue for all users
         Issue::activate($lobby, $story);
     }
 
