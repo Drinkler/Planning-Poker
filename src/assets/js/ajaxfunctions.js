@@ -34,8 +34,6 @@ function activateStory(element, storyId) {
  * @param element
  */
 function vote(element) {
-    console.log(element);
-    console.log(`../ajax/vote?value=${encodeURIComponent(element.innerText)}`);
     // create ajax call
     $.ajax({
         url: `../ajax/vote?value=${encodeURIComponent(element.innerText)}`,
@@ -176,11 +174,25 @@ function getCurrentActiveIssue(idlobby) {
         url: `../ajax/getCurrentIssue?idlobby=${idlobby}`,
         data: idlobby,
         success: function (response) {
+
+            const oldTitle = $('#title')[0].innerText;
+            const oldDesc = $('#description')[0].innerText;
+
             let titleElement = document.getElementById("title");
             let description = document.getElementById("description");
             JSON.parse(response).forEach(entry => {
-                titleElement.innerText = entry["\u0000PlanningPoker\\Model\\Issue\u0000title"];
-                description.innerText = entry["\u0000PlanningPoker\\Model\\Issue\u0000description"];
+                if((entry["\u0000PlanningPoker\\Model\\Issue\u0000title"]) !== oldTitle) {
+                    if (entry["\u0000PlanningPoker\\Model\\Issue\u0000description"] !== oldDesc) {
+                        let tiles = document.getElementsByClassName("vote-tile");
+
+                        [].forEach.call(tiles, function (p) {
+                            p.style.backgroundColor = "white";
+                        })
+
+                        titleElement.innerText = entry["\u0000PlanningPoker\\Model\\Issue\u0000title"];
+                        description.innerText = entry["\u0000PlanningPoker\\Model\\Issue\u0000description"];
+                    }
+                }
             })
         }
     })
