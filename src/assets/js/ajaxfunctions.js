@@ -59,7 +59,7 @@ function changeTileColor(htmlElement) {
         p.style.backgroundColor = "white";
     });
 
-    htmlElement.style.backgroundColor = "#8f8f8f";
+    htmlElement.style.backgroundColor = "#d9d9d9";
 }
 
 /**

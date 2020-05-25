@@ -140,7 +140,7 @@ foreach ($_POST as $postInput) {
                 <?php foreach ($cardSets[$idcards] as $key=>$card): ?>
                     <!-- <form class="col-md-6" name="card-form" id="card-form<?= $key ?>" method="get" action="<?= $this->makeURL("ajax/vote") ?>"> -->
                     <div class="col-md-6">
-                        <div class="card vote-tile" style="padding: 0;">
+                        <div class="card vote-tile pointer" style="padding: 0;">
                             <div class="card-body">
                                 <h6 class="display-1 text-center card-title"><?= $card ?></h6>
                                 <input type="hidden" name="voteid" value="<?= $key ?>">

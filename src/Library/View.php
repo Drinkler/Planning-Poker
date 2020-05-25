@@ -49,6 +49,7 @@ class View
             'assets/css/Registration-Form-with-Photo.min.css',
             'assets/css/Social-Icons.min.css',
             'assets/css/Testimonials.min.css',
+            'assets\css\Mouseover.min.css'
         );
 
         $this->basic_js = array(
