@@ -16,7 +16,7 @@
                         <th scope="row"> <?= $key ?></th>
                         <td><?= $lobby["uname"] ?></td>
                         <td><?= $lobby["name"] ?></td>
-                        <td><?= $lobby["created"] ?></td>
+                        <td><?= date("Y-m-d H:i:s", strtotime($lobby["created"]. ' UTC')) ?></td>
                         <td>
                             <div class="">
                                 <form method="post" action="<?= $this->makeURL("lobby/lobby") ?>" style="display:inline;">
