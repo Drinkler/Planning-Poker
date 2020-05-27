@@ -15,6 +15,6 @@ class IndexController extends ControllerBase implements Controller
 {
 
     public function notFoundAction() {
-
+        return true;
     }
 }
