@@ -74,7 +74,7 @@ class Lobby extends ModelBase
                 return false;
             }
         } else {
-            echo 'Wrong input is given.';
+            return false;
         }
     }
 
@@ -88,26 +88,49 @@ class Lobby extends ModelBase
      * @author Florian Drinkler
      */
     public static function join($_params, &$_returnArray = array()) {
-        // Prepare query to check if user is already in this lobby
-        $query =
-            /** @lang SQL */
-            "SELECT * FROM participants WHERE iduser = :iduser AND idlobby = :idlobby";
+        // Confirm if lobby exists
+        $params = array(
+          ":idlobby" => $_params[":idlobby"]
+        );
+        $query = /** @lang SQL */
+            "SELECT * FROM lobby WHERE idlobby = :idlobby";
         try {
-            $result = (new PDOBase)->getPdo()->query($query, $_params);
-            if (!isset($result[0])) {
+            $result = (new PDOBase)->getPdo()->query($query, $params);
+            if (!empty($result)) {
+                // Prepare query to check if user is already in this lobby
                 $query =
                     /** @lang SQL */
-                    "INSERT INTO participants (iduser, idlobby) VALUES (:iduser, :idlobby)";
+                    "SELECT * FROM participants WHERE iduser = :iduser AND idlobby = :idlobby";
                 try {
-                    (new PDOBase)->getPdo()->queryWithoutFetch($query, $_params);
-                    return true;
+                    $result = (new PDOBase)->getPdo()->query($query, $_params);
+                    if (!isset($result[0])) {
+                        $query =
+                            /** @lang SQL */
+                            "INSERT INTO participants (iduser, idlobby) VALUES (:iduser, :idlobby)";
+                        try {
+                            (new PDOBase)->getPdo()->queryWithoutFetch($query, $_params);
+                            return true;
+                        } catch (\Exception $exception) {
+                            echo $exception->getMessage();
+                            return false;
+                        }
+                    } else {
+                        $_returnArray = array(
+                            "error" => "User is already a participant"
+                        );
+                        return true;
+                    }
                 } catch (\Exception $exception) {
                     echo $exception->getMessage();
+                    $_returnArray = array(
+                        "error" => $exception->getMessage()
+                    );
                     return false;
                 }
-            } else {
+            }
+            else {
                 $_returnArray = array(
-                  "error" => "User is already a participant"
+                    "error" => "Lobby doesn't exist!"
                 );
                 return false;
             }

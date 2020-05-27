@@ -58,6 +58,9 @@ try {
 
     // If the submitted url is an ajax request, dont render the view
     if ((substr($url, 0, 5) !== 'ajax/')) {
+        if (!$tRet) {
+            Redirect::to("../index/index");
+        }
         // Added specific cases for login and logout
         if ($url == "user/logout" || $url == "user/login" || $url == "user/confirm" || $url == "user/delete" || $url == "lobby/action") {
             $view->renderWithoutHeaderAndFooter();

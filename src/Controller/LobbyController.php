@@ -20,7 +20,7 @@ class LobbyController extends ControllerBase implements Controller
      * Submits all active lobbies to the view
      * @access public
      * @example lobby/sessions
-     * @return void
+     * @return bool
      * @author Luca Stanger
      * @author Florian Drinkler
      */
@@ -37,6 +37,7 @@ class LobbyController extends ControllerBase implements Controller
         if (!empty($vars)) {
             $this->view->setVars($vars);
         }
+        return true;
     }
 
     /**
@@ -87,7 +88,8 @@ class LobbyController extends ControllerBase implements Controller
                     if (Lobby::join($params, $message)) {
                         Flash::success("Joined");
                     } else {
-                        // Flash::danger($message["error"]);
+                        Flash::danger($message["error"]);
+                        return false;
                     }
                 } else if ($_POST['action'] == 'Delete') {
                     Lobby::deleteById($params[":idlobby"]);

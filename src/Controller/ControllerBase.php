@@ -22,7 +22,7 @@ abstract class ControllerBase implements Controller
      * index method for any controller class
      */
     public function indexAction() {
-
+        return true;
     }
 
     /**
