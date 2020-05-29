@@ -1,5 +1,5 @@
 %!TEX root = ../dokumentation.tex
-\chapter{Datenbank}
+\chapter{Datenbank}\label{ch:datenbank}
 \href{https://aws.amazon.com/de/rds/mariadb/}{aws}
 
 Zum Hosten der Datenbank wird eine AWS RDS for MariaDB mit der MariaDB Version 10.2.21 verwendet. Dadurch das die Datenbank in der Cloud gehostet ist, kann jeder Entwickler daraufzugreifen. Um jedoch Berechtigt zu sein darauf zuzugreifen unterstüzt AWS sogenannte Security Groups. Diese Gruppen bindet man einer Ressource wie z.B. der Datenbank oder dem Elastibeanstalk Server zu. In einer Security Group wird spezifiziert welche IPs und sonstige Ressourcen Zugriff haben. Da während der Entwicklungszeit die IP Adresse von Luca sich ständig geändert hat, haben wir von überall Zugriff erlaubt. Dies stellt natürlich ein erhöhtes Sicherheitsrisiko dar, dennoch braucht man Anmeldedaten für die Datenbank. Nach der Entwicklungsphase wurde dieser Zugang entfernt.
