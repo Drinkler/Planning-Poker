@@ -255,8 +255,9 @@ class Lobby extends ModelBase
 
     /**
      * FindByCreator: return all lobbies from Creator
-     * @author Florian Drinkler
+     * @param array $_returnArray
      * @return bool
+     * @author Florian Drinkler
      */
     public static function findByCreator(&$_returnArray = array())
     {

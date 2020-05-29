@@ -3,10 +3,9 @@
 
 namespace PlanningPoker\Controller;
 
-use PlanningPoker\Library\Flash;
-use PlanningPoker\Library\Redirect;
 use PlanningPoker\Library\Session;
 use PlanningPoker\Model\Issue;
+use PlanningPoker\Model\Lobby;
 use PlanningPoker\Model\Participants;
 use PlanningPoker\Model\Vote;
 
@@ -39,6 +38,44 @@ class AjaxController extends ControllerBase implements Controller
         Issue::activate($lobby, $story);
     }
 
+    /**
+     * get average card score
+     * @access public
+     * @return void
+     * @example ajax/avg
+     * @author Luca Stanger
+     */
+    function avgAction() {
+        $lobby = Session::get("lobby");
+
+        $returnArray = array();
+
+        if (Vote::getAvgScore($lobby, $returnArray)) {
+            echo $returnArray[0]["amount"];
+        } else {
+            echo 0;
+        }
+
+    }
+
+    /**
+     * get most played card
+     * @access public
+     * @return void
+     * @example ajax/mostPlayedCards
+     * @author Luca Stanger
+     */
+    function mostPlayedCardsAction() {
+        $lobby = Session::get("lobby");
+
+        $returnArray = array();
+
+        if (Vote::getMostPlayedCards($lobby, $returnArray)) {
+            echo $returnArray[0];
+        } else {
+            echo 0;
+        }
+    }
     /**
      * Stores an Issue into the database
      * @access public

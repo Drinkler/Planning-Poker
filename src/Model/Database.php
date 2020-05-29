@@ -274,22 +274,4 @@ class Database
     {
         $this->_password = $password;
     }
-
-    /**
-     * @return mixed
-     */
-    public function getConn()
-    {
-        return $this->_conn;
-    }
-
-    /**
-     * @param mixed $conn
-     */
-    public function setConn($conn)
-    {
-        $this->_conn = $conn;
-    }
-
-
 }

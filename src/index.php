@@ -7,7 +7,11 @@ use PlanningPoker\Library\View;
 
 require_once "init.php";
 
-// TODO: REFERENZ NACHTRAGEN!
+
+/**
+ * Eigenes kleines PHP Framework gebaut
+ * Quelle: https://poe-php.de/oop/mvc-einfuehrung-framework
+ */
 
 spl_autoload_register(function ($class_name) {
     if (substr($class_name, 0, 14) !== 'PlanningPoker\\') {
