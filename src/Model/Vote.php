@@ -77,6 +77,7 @@ class Vote
     }
 
     /**
+     * TODO: Not fully functional yet
      * getAllVotesSortedByLobby: Returns an array of issues
      * @param $lobby int contains the lobby id
      * @access public
@@ -102,6 +103,57 @@ class Vote
 
             return true;
 
+        } catch (\Exception $exception) {
+            echo $exception->getMessage();
+            return false;
+        }
+    }
+
+    /**
+     * getAvgScore: returns the average score
+     * @param int $_id lobbyid
+     * @param array $_returnArray
+     * @return bool
+     */
+    public static function getAvgScore($_id, &$_returnArray = array()) {
+        // Prepare params
+        $params = array(
+            ":idlobby" => $_id
+        );
+
+        // Prepare query
+        $query = /** @lang */
+            "SELECT AVG(vote) as amount FROM vote WHERE idlobby = :idlobby";
+
+        try {
+            $_returnArray = (new PDOBase)->getPdo()->query($query, $params);
+            return true;
+        } catch (\Exception $exception) {
+            echo $exception->getMessage();
+            return false;
+        }
+
+    }
+
+    /**
+     * getMostPlayedCards: returns the most played card
+     * @param $_id
+     * @param array $_returnArray
+     * @return bool
+     */
+    public static function getMostPlayedCards($_id, &$_returnArray = array()) {
+        // Prepare params
+        $params = array(
+            ":idlobby" => $_id
+        );
+
+        // Prepare query
+        $query = /** @lang */
+            "";
+
+        try {
+            $_returnArray = (new PDOBase)->getPdo()->query($query, $params);
+            return true;
         } catch (\Exception $exception) {
             echo $exception->getMessage();
             return false;

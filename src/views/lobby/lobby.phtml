@@ -117,10 +117,23 @@ foreach ($_POST as $postInput) {
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 id="avg">Average score:</h4>
+                        <br>
+                        <h4 id="most">Most played card:</h4><a></a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <script>
         window.setInterval(function () {
-            getParticipants(<?= $idlobby ?>)
+            getParticipants(<?= $idlobby ?>);
+            getAvg(<?= $idlobby ?>);
+            getMostPlayedCards(<?= $idlobby ?>);
         }, 1000);
     </script>
 

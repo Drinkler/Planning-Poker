@@ -30,8 +30,10 @@ function activateStory(element, storyId) {
 }
 
 /**
- *
+ * Function for voting
  * @param element
+ * @author Luca Stanger
+ * @access public
  */
 function vote(element) {
     // create ajax call
@@ -47,7 +49,9 @@ function vote(element) {
 }
 
 /**
- *
+ * Change tile color of submitted html Element
+ * @author Luca Stanger
+ * @access public
  */
 function changeTileColor(htmlElement) {
 
@@ -59,6 +63,45 @@ function changeTileColor(htmlElement) {
 
     htmlElement.style.backgroundColor = "#d9d9d9";
 }
+
+/**
+ * Sets the avg value of all card votes
+ * @author Luca Stanger
+ * @access public
+ */
+function getAvg(idlobby) {
+    // create ajax call
+    $.ajax({
+        url: `../ajax/avg?lobby=${idlobby}`,
+        success: function (response) {
+            const avg = parseFloat(String(response).replace(",",".")).toFixed(2);
+            document.getElementById("avg").innerText = `Average Score: ${avg}`;
+        },
+        error: function (response) {
+            console.log(response)
+        }
+    })
+}
+
+/**
+ * Sets the most played card
+ * @author Luca Stanger
+ * @access public
+ */
+function getMostPlayedCards(idlobby) {
+    // create ajax call
+    $.ajax({
+        url: `../ajax/mostPlayedCards?lobby=${idlobby}`,
+        success: function (response) {
+            // Fix SQL Query with GROUP BY on nvarchar col
+            //document.getElementById("most").innerText = `Most played card: ${response}`;
+        },
+        error: function (response) {
+            console.log(response)
+        }
+    })
+}
+
 
 /**
  * Get all stories from github

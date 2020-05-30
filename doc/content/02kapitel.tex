@@ -1,29 +1,61 @@
 %!TEX root = ../dokumentation.tex
-\chapter{Entwicklung}
+\chapter{Entwicklung}\label{ch:entwicklung}
 Für die Entwicklung der Software wurde von Florian die IDE Visual Studio Code verwendet und von Luca die IDE Jetbrains PhpStorm.
 Zum Verwalten der Datenbank wurde die Software Jetbrains DataGrip.
 
-\section{Toolchain}
+\section{Toolchain}\label{sec:toolchain}
+Zur Entwicklung der Anwendung wurde die folgende Toolchain verwendet:
 
-\section{Bibliotheken/Frameworks}
-\subsection{Bower}
-\subsection{Composer}
-\subsection{phpunit}
+\begin{table}[htb]
+\centering
+\begin{tabular}{p{5cm}  p{9cm}}
+\hline
+\textbf{Softwarename} & \textbf{Zweck der Software}\\
+\hline
+PHPStorm & IDE zur Entwicklung fortgeschrittener Webanwendungen basierend auf PHP\\
+\hline
+Visual Studio Code & Modulare IDE für Entwickler\\ 
+\hline
+DataGrip & Datenbank-IDE, die auf die speziellen Bedürfnisse professioneller SQL-Entwickler zugeschnitten ist\\
+\hline
+Travis & Webbasiertes CI/CD Tool\\
+\hline
+GitHub & Versionsverwaltung\\
+\hline
+Bower & Package Manager für Webanwendungen\\
+\hline
+Composer & Dependency Manager für PHP \\
+\hline
+PHPUnit & Unit-Test Framework für PHP \\ 
+\hline
+\end{tabular}
+\caption{Auflistung der verwendeten Toolchain}
+\end{table}
 
-\section{MVC}
-\subsection{.htaccess}
-\subsection{Model}
-\subsection{View}
-\subsection{Controller}
+\section{Bibliotheken/Frameworks}\label{sec:bibliotheken/frameworks}
+Als Frontend-CSS-Framework wurde Bootstrap in der Version 4.4.1 verwendet. Die Entscheidung hierfür ist durch bestehende Erfahrung, aus Projekten der vorherigen Studienprojekte, gefallen.
+\subsection{Bower}\label{subsec:bower}
+Um einen Fehlerfreien Build der CI/CD Pipeline zu gewährleisten, wurde der freie Paket Manager \emph{Bower} verwendet. Hierdurch kann der Pipeline gewährleistet werden, dass benötigte Komponenten wie Bootstrap, jQuery sowie dem Font-Awesome Package jederzeit in dem finalen Build vorhanden sind.
+\subsection{Composer}\label{subsec:composer}
+Um die Abhängigkeit des Unit-Test Frameworks PHPUnit zu gewährleisten, wird das Framework via Composer nachgeladen. Darüber hinaus wird sichergestellt, dass mindestens eine PHP Version größer gleich 7.3.0 verwendet wird.
+\subsection{PHPUnit}\label{subsec:phpunit}
+Aufgrund der Anforderung der Testbarkeit des Projekts wird das Unit-Test Framework PHPUnit verwendet. Zur Gewährleistung der Testfunktionalität wurden zwei Unit-Test Klassen erstellt. Diese werden bei jedem Build ausgeführt und testen einen minimalen Teil der Anwendung.
+\section{MVC}\label{sec:mvc}
+Als Grundgerüst der Anwendung wurde sich für das MVC Pattern entschieden. Hierbei ist die Entscheidung auf eine komplexere Variante als dem in der Vorlesung vorgestellten MVC gefallen. Grund hierfür waren das persönliche Interesse an der Umsetzung einer etwas komplexeren Anwendung. Hierdurch konnte eine außerordentlich klare Struktur im Projekt sichergestellt werden.
+\subsection{Zusammenspiel .htaccess und index.php}\label{subsec:.htaccess}
+Um die Umsetzung des MVC Patterns zu realisieren ist im Projekt-Root eine .htaccess Datei angelegt worden. Diese sorgt für die korrekte Umleitung aller Anfragen auf die index.php, welche mit Hilfe der Funktion spl\_{}autoload\_{}register alle benötigten Klassen nachlädt. In der index.php wird die URL aufgebrochen und anschließend der gewollte Controller aufgerufen.
+\subsection{Model}\label{subsec:model}
+\subsection{View}\label{subsec:view}
+\subsection{Controller}\label{subsec:controller}
 
-\section{Funktionalität}
+\section{Funktionalität}\label{sec:funktionalität}
 
-\subsection{Login/Register}
+\subsection{Login/Register}\label{subsec:login/register}
 passwort hashing
 confirm ohne email wegen email server in aws.
 logik der registrierung und anmeldung
 
-\subsection{Lobby}
+\subsection{Lobby}\label{subsec:lobby}
 
 \subsubsection{Scrum Master}
 \subsubsection{Spieler}
