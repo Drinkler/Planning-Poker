@@ -1,13 +1,71 @@
 %!TEX root = ../dokumentation.tex
-\chapter{Hosting}\label{ch:hosting}
+\chapter{Datenbank}
 
-\section{Anbieter}
-Zuerst wurde der Anbieter \href{https://azure.microsoft.com/de-de/}{Microsoft Azure} zum Hosten der Datenbank und des PHP Servers vorgezogen. Als Student erhält man, über das \href{https://education.github.com/pack}{Github Student Developer Pack}, ein jährliches Budget von 100\$ ohne Angabe einer Kreditkarte bzw. Bezahlmethode. Azure wurde bereits bei einem Projekt aus dem dritten Semester als Anbieter verwendet. Jedoch mit dem Studentenabonnement konnten aus unbekannten Gründen keine Server und Datenbanken in Europa erstellt werden.\\
-Aus Neugier und Interesse wurde danach der Anbieter \href{https://aws.amazon.com/de/}{Amazon Web Services (AWS)} verwendet. Ebenso erhält man, über das Github Student Developer Pack, ein Budget von 100\$ (damals 150\$).\\
-Alle, in diesem Projekt, verwendeten Services sind in dem 12 monatigem \href{https://aws.amazon.com/de/free/}{kostenlosem Kontigent von AWS} inbegriffen.
+\section{Hosting}
+Zum Hosten der Datenbank wird die \href{https://aws.amazon.com/de/rds/mariadb/}{Amazon RDS for MariaDB} mit der MariaDB Version 10.2.21 verwendet. \\
+\glqq\href{https://aws.amazon.com/de/rds/}{Amazon Relational Database Service (Amazon RDS)} ist ein Webservice, der das Einrichten, Betreiben und Skalieren einer relationalen Datenbank in der AWS Cloud vereinfacht.\grqq Amazon RDS unterstützt bis zu sechs verschiedene Datenbank-Engines, z.B. MySQL, PostgreSQL oder auch MariaDB. \cite{AWSRDS}
 
-\section{PHP Server}
-Der PHP Server wird mit \href{https://aws.amazon.com/de/elasticbeanstalk/}{AWS Elastic Beanstalk} gehostet. \glqq AWS Elastic Beanstalk ist ein benutzerfreundlicher Service zum Bereitstellen und Skalieren von Webanwendungen und -Services\grqq. Anwendungen können mit Java, .NET, Node.js, Python, Ruby, Go, Docker und auch PHP bereitgestellt werden. Der Quellcode der Anwendung wird hochgeladen und Elastic Beanstalk übernimmt die automatische Bereitstellung. \cite{AWSEB}\\
-Die Planning Poker Anwendung wird auf einem AWS Elastik Beanstalk 64bit Amazon Linux/2.9.4 Server mit der PHP Version 7.3 gehostet.
+Der Vorteil einer Cloud-basierten Datenbank ist, dass jeder Entwickler problemlos darauf zugreifen kann.\\
+Um auf diese Datenbank zugreifen zu können, unterstützt AWS sogenannte Security Groups. Diese Gruppen dienen als virtuelle Firewall. Man bindet sie einer Ressource wie z.B. der Datenbank oder dem Elastic Beanstalk Server zu. In einer Security Group wird spezifiziert welche IPs und sonstige Ressourcen Zugriff haben.\\
+Da während der Entwicklungszeit die IP Adresse eines Entwicklers sich täglich geändert hat, wurde Zugriff von Überall erlaubt. Dies stellt natürlich ein erhöhtes Sicherheitsrisiko dar, dennoch braucht man Anmeldedaten für die Datenbank. Nach der Entwicklungsphase wurde dieser Zugang entfernt.
 
-Damit der Elastic Beanstalk Server alle richtigen Konfigurationen durchführen kann, können \href{https://docs.aws.amazon.com/de_de/elasticbeanstalk/latest/dg/ebextensions.html}{Konfigurationsdateien} zum Quellcode hinzugefügt werden. Diese findet man in dem \href{https://github.com/Drinkler/Planning-Poker/tree/master/.ebextensions}{\lstinline{.ebextensions} Ordner}. In diesem Ordner befinden sich \lstinline{.config} Dateien. Durch die \lstinline{project.config} Datei werden alle benötigten Komponenten auf dem Server installiert.
+\section{Verwendung von \$\_SERVER}
+Damit die Anmeldedaten für die Datenbank nicht blank im Quellcode zu finden sind, wurden diese in dem \$\_SERVER Array des Webservers gespeichert. Dieses Verfahren wurde gewählt, da ein öffentliches Github Repository erstellt wurde und somit sonst für jeden sichtbar wäre.
+
+Um die Daten auf dem lokalen Xampp Server verwenden zu können, werden diese in der \lstinline{httpd-xampp.conf} gespeichert. Im folgenden Codeblock werden die Anmeldedaten im Modul \lstinline{env_module} definiert.
+
+\begin{lstlisting}[language=bash]
+#
+# XAMPP settings
+#
+
+<IfModule env_module>
+    ...
+    SetEnv RDS_DB_NAME "planning_poker"
+    SetEnv RDS_HOSTNAME "planning-poker.cztpemauxamy.eu-central-1.rds.amazonaws.com"
+    SetEnv RDS_PASSWORD "<password>"
+    SetEnv RDS_PORT "3306"
+    SetEnv RDS_USERNAME "admin"
+</IfModule>
+\end{lstlisting}
+
+Nun kann man innerhalb des Programmcodes auf das \$\_SERVER Array zugreifen um die zuvor definierten Werte aufzurufen. Dieser Codeblock, aus der Datei Model/ModelBase.php, zeigt die Funktion zur Erstellung der Datenbankverbindung. 
+
+\begin{lstlisting}[language=PHP]
+/**
+* GetPDO: returns a PDO Connection
+* @author Luca Stanger
+* @return Database
+*/
+public function getPdo()
+{
+	if (self::$_db === null) {
+		self::$_db = new \PlanningPoker\Model\Database(
+			$_SERVER['RDS_HOSTNAME'],
+			$_SERVER['RDS_PORT'],
+			$_SERVER['RDS_DB_NAME'],
+			$_SERVER['RDS_USERNAME'],
+			$_SERVER['RDS_PASSWORD'],
+			'utf8'
+		);
+	}
+
+	return self::$_db;
+}
+\end{lstlisting}
+
+Damit der AWS Elastic Beanstalk Server ebenfalls auf die Daten über \$\_SERVER zugreifen kann, werden diese unter den Konfigurationseinstellung in AWS als Umgebungseigenschaften definiert.
+
+\section{Schema}
+In der Abbildung \ref{datenbank} ist das Schema der Datenbank zu sehen.
+
+\begin{figure}[H]
+	\centering
+  \includegraphics[width=0.8\textwidth]{images/database.png}
+	\caption{Visualisierung der Datenbank}
+	\label{datenbank}
+\end{figure}
+
+Zu sehen sind die einzelnen Tabellen der Datenbank mit Verknüpfungen zu anderen Tabellen. In einer Tabelle sind die einzelnen Spalten beschrieben. Primärschlüssel haben einen goldenen Schlüssel, Fremdschlüssel eine rote Raute und normale Spalten eine blaue Raute. Außerdem werden die Typen der Spalten gezeigt. Alle Verbindungen in diesem Schema beschreiben eine 1:N Beziehung mit ON DELETE CASCADE.
+
+Der Vorteil dieses Schemas ist, das keine überflüssigen Daten vorhanden bleiben. Wenn z.B. ein Benutzer sich löscht, werden automatisch alle Daten dieses Benutzers aus den verbundenen Tabellen gelöscht. Dessen Reviews, Votes, Participations und erstellten Lobbies. Dadurch das eine Lobby gelöscht wird, werden die Issues dieser Lobby, die Votes und Participations gelöscht.
