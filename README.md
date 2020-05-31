@@ -14,8 +14,8 @@ You can find a hosted version of this project here: http://planning-poker.eba-gv
 
 # Prerequisites
 To run this project locally, you must have a php development server running atleast version 7.3.0 .
-On a Windows development environment, we recommend using XAMPP: https://www.apachefriends.org/de/index.html     \ 
-On a Mac OsX development environment, we recommend using Scotch Box: https://box.scotch.io/     \
+On a Windows development environment, we recommend using XAMPP: https://www.apachefriends.org/de/index.html .
+On a Mac OsX development environment, we recommend using Scotch Box: https://box.scotch.io/ .
 
 ## Database 
 To connect to the databse, special environment params within the dev environment are required. Interested inquiries can be sent to the authors of this project.
