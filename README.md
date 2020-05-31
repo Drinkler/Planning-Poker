@@ -9,7 +9,7 @@
 ## About
 Planning-Poker is a web based php app. The project emerged from the requirements of a study project. During the implementation we tried to use current best practices of software development and to get to know new ones.
 
-## Website 
+## Website :computer:
 You can find a hosted version of this project here: http://planning-poker.eba-gveiarhp.eu-central-1.elasticbeanstalk.com/
 
 # Prerequisites
@@ -53,19 +53,19 @@ You can now execute the composer.json
 $ composer install
 ```
 
-# Built With
+# Built With :hammer_and_wrench:
 * [PHP](https://www.php.net/) - Backend Development Language
 * [HTML](https://wiki.selfhtml.org/wiki/HTML) - Frontend Markup Language
 * [CSS & SCSS](https://wiki.selfhtml.org/wiki/CSS) - Cascading Style Sheet Language
 * [Bower](https://bower.io/) - Package Manager
 * [Composer](https://getcomposer.org/) - PHP Dependency Management
 
-# Authors
+# Authors :busts_in_silhouette:
 * **Luca Stanger** - Frontend development & serverside development - [Student @ DHBW Stuttgart](https://www.dhbw-stuttgart.de/home/)
 * **Florian Drinker** - Backend development & deployment - [Student @ DHBW Stuttgart](https://www.dhbw-stuttgart.de/home/)
 
-# Copyright 
-Copyright 2020 Florian Drinkler, Luca Stanger
+# Copyright :copyright:
+Copyright :copyright: 2020 Florian Drinkler, Luca Stanger
 
-# License
+# License :page_facing_up:
 This project is licensed under the **GNU General Public License v3.0** - see the [LICENSE.MD](https://github.com/Drinkler/Planning-Poker/blob/master/LICENSE) file for details
