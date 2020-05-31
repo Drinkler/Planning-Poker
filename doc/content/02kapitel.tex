@@ -10,7 +10,7 @@ Zur Entwicklung der Anwendung wurde die folgende Toolchain verwendet:
 \hline
 \textbf{Softwarename} & \textbf{Zweck der Software}\\
 \hline
-PHPStorm & IDE zur Entwicklung fortgeschrittener Webanwendungen basierend auf PHP\\
+PHPStorm & IDE zur Entwicklung fortgeschrittener Webanwendungen, basierend auf PHP\\
 \hline
 Visual Studio Code & Modulare IDE für Entwickler\\ 
 \hline
@@ -33,15 +33,15 @@ XDebug & Serverseitiges Debugging Tool für PHP \\
 \end{table}
 
 \section{Bibliotheken/Frameworks}\label{sec:bibliotheken/frameworks}
-Als Frontend-CSS-Framework wurde Bootstrap in der Version 4.4.1 verwendet. Die Entscheidung hierfür ist durch bestehende Erfahrung, aus Projekten der vorherigen Studienprojekte, gefallen.
+Als Frontend-CSS-Framework wurde Bootstrap in der Version 4.4.1 verwendet. Die Entscheidung hierfür ist durch bestehende Erfahrungen, aus Projekten der vorherigen Studienprojekte, gefallen.
 \subsection{Bower}\label{subsec:bower}
-Um einen Fehlerfreien Build der CI/CD Pipeline zu gewährleisten, wurde der freie Paket Manager \emph{Bower} verwendet. Hierdurch kann der Pipeline gewährleistet werden, dass benötigte Komponenten wie Bootstrap, jQuery sowie dem Font-Awesome Package jederzeit in dem finalen Build vorhanden sind.
+Um einen fehlerfreien Build der CI/CD Pipeline zu gewährleisten, wurde der freie Paket Manager \emph{Bower} verwendet. Hierdurch kann der Pipeline gewährleistet werden, dass benötigte Komponenten wie Bootstrap, jQuery sowie dem Font-Awesome Package jederzeit in dem finalen Build vorhanden sind.
 \subsection{Composer}\label{subsec:composer}
 Um die Abhängigkeit des Unit-Test Frameworks PHPUnit zu gewährleisten, wird das Framework via Composer nachgeladen. Darüber hinaus wird sichergestellt, dass mindestens eine PHP Version größer gleich 7.3.0 verwendet wird.
 \subsection{PHPUnit}\label{subsec:phpunit}
 Aufgrund der Anforderung der Testbarkeit des Projekts wird das Unit-Test Framework PHPUnit verwendet. Zur Gewährleistung der Testfunktionalität wurden zwei Unit-Test Klassen erstellt. Diese werden bei jedem Build ausgeführt und testen einen minimalen Teil der Anwendung.
 \section{MVC}\label{sec:mvc}
-Als Grundgerüst der Anwendung wurde sich für das MVC Pattern entschieden. Hierbei ist die Entscheidung auf eine komplexere Variante als dem in der Vorlesung vorgestellten MVC gefallen. Grund hierfür waren das persönliche Interesse an der Umsetzung einer etwas komplexeren Anwendung. Hierdurch konnte eine außerordentlich klare Struktur im Projekt sichergestellt werden.
+Als Grundgerüst der Anwendung wurde sich für das MVC Pattern entschieden. Hierbei ist die Entscheidung auf eine komplexere Variante als dem in der Vorlesung vorgestellten MVC gefallen. Grund hierfür war das persönliche Interesse an der Umsetzung einer etwas komplexeren Anwendung. Hierdurch konnte eine außerordentlich klare Struktur im Projekt sichergestellt werden.
 \subsection{Zusammenspiel .htaccess und index.php}\label{subsec:.htaccess}
 Um die Umsetzung des MVC Patterns zu realisieren ist im Projekt-Root eine .htaccess Datei angelegt worden. Diese sorgt für die korrekte Umleitung aller Anfragen auf die index.php, welche mit Hilfe der Funktion spl\_{}autoload\_{}register alle benötigten Klassen nachlädt. In der index.php wird die URL aufgebrochen und anschließend der gewollte Controller aufgerufen.
 \subsection{Model}\label{subsec:model}
@@ -51,10 +51,10 @@ Um die Daten aus Modelabfragen präsentieren zu können, werden einzelne Viewtem
 
 Um ein angemessenes Feedback der Anwendung an den User zu geben, rendert das Header Template Meldungen, sog. \emph{Flashes}. Diese Idee entstand aus dem \hyperlink{https://sachinchoolur.github.io/angular-flash/}{Angular Flash System}.
 \subsection{Controller}\label{subsec:controller}
-Alle Controller müssen den Interface \emph{Controller} implementieren, um Zugriff auf die Funktion setView zu erhalten. Darüber hinaus muss die Abstrakte Klasse \emph{ControllerBase} verwendet werden, um Zugriff auf Elementare Funktionen zu erhalten. Jeder Controller besitzt Methoden, welche anhand dynamischer Ermittlung der index.php aufgerufen werden können. Die zu beachtende Syntax hierbei ist, dass jede Methode den Suffix \emph{Action} beinhalten muss. Anderseits ist kein generischer Aufruf dieser Methoden möglich. 
+Alle Controller müssen den Interface \emph{Controller} implementieren, um Zugriff auf die Funktion setView zu erhalten. Darüber hinaus muss die Abstrakte Klasse \emph{ControllerBase} verwendet werden, um Zugriff auf elementare Funktionen zu erhalten. Jeder Controller besitzt Methoden, die anhand dynamischer Ermittlung der index.php aufgerufen werden können. Die zu beachtende Syntax hierbei ist, dass jede Methode den Suffix \emph{Action} beinhalten muss. Anderseits ist kein generischer Aufruf dieser Methoden möglich. 
 
 \subsection{Spezialfall Ajax in MVC}\label{subsec:ajax}
-Nach eigenem Kenntnissstand wurde zunächst versucht, Ajax Aufrufe wie gewohnt auf ein PHP Script auszuführen. Da dieses jedoch in MVC auf Grund der Umleitungen der .htaccess Datei nicht funktionieren kann, stand die Idee zunächst vor dem Aus. Nach langer Recherche und vielen Tests ist die Idee eines \emph{AjaxControllers} entstanden, welcher die in JavaScript entstandenen asynchronen Aufrufe verarbeiten kann. Über die PHP Funktion echo ist somit ein asynchroner Datentransfer im MVC Pattern ermöglicht worden. Dies findet unter anderem Anwendung in der Aktualisierung der Teilnehmer einer Lobby oder der korrekten Anzeige einer Story in der Spieleransicht. 
+Nach eigenem Kenntnisstand wurde zunächst versucht, Ajax Aufrufe wie gewohnt auf ein PHP Script auszuführen. Da dieses jedoch in MVC auf Grund der Umleitungen der .htaccess Datei nicht funktionieren kann, stand die Idee zunächst vor dem Aus. Nach langer Recherche und vielen Tests ist die Idee eines \emph{AjaxControllers} entstanden, der die in JavaScript entstandenen asynchronen Aufrufe verarbeiten kann. Über die PHP Funktion echo ist somit ein asynchroner Datentransfer im MVC Pattern ermöglicht worden. Dies findet unter anderem Anwendung in der Aktualisierung der Teilnehmer einer Lobby oder der korrekten Anzeige einer Story in der Spieleransicht. 
 
 \subsection{Performance}\label{subsec:performance}
 Um die Ladezeit einer Seite zu beschleunigen, wurden UglifyJS sowie CSSO verwendet, um die Größe aller Asset Dateien so gering wie möglich zu halten. Bei der Entscheidungsfindung dieser Tools war selbstverständlich bekannt, dass die Komprimierung von Dateien in solch geringen Größen einen nur marginalen Vorteilen bieten wird.
@@ -62,7 +62,7 @@ Um die Ladezeit einer Seite zu beschleunigen, wurden UglifyJS sowie CSSO verwend
 \section{Funktionalität}\label{sec:funktionalität}
 
 \subsection{Login/Register}\label{subsec:login/register}
-Zur Registrierung eines Benutzer wird der Vorname, Nachname, eine E-Mail und ein Passwort benötigt. Nach Erfolgreicher Registrierung muss man seine E-Mail Bestätigen. In diesem Projekt wird dies mit einem automatisch generierten Link, der die E-Mail sowie einen eindeutigen String beinhaltet, gelöst. Gedacht war es, diesen Link per E-Mail an den Benutzer zu senden. \href{https://aws.amazon.com/de/ses/}{Amazon Simple Email Service} bot sich als Lösung gut an. Doch um dies Umzusetzen benötigte man eine Domain, sowie das ausfüllen eines Fragebogens mit Fragen z.B. wie ein Kunde sich bei Problemen an uns wenden kann.\\
+Zur Registrierung eines Benutzer wird der Vorname, Nachname, eine E-Mail und ein Passwort benötigt. Nach erfolgreicher Registrierung muss man seine E-Mail bestätigen. In diesem Projekt wird dies mit einem automatisch generierten Link, der die E-Mail sowie einen eindeutigen String beinhaltet, gelöst. Gedacht war es, diesen Link per E-Mail an den Benutzer zu senden. \href{https://aws.amazon.com/de/ses/}{Amazon Simple Email Service} bot sich als Lösung gut an. Doch um dies umzusetzen benötigte man eine Domain, sowie das Ausfüllen eines Fragebogens mit Fragen, z.B. wie ein Kunde sich bei Problemen an uns wenden kann.\\
 Zum Anmelden wird eine E-Mail und ein Passwort benötigt.\\
 Das Passwort wird mit der \lstinline{password_hash} Funktion in der Datenbank gespeichert und ist somit für keinen Entwickler einsehbar.
 
