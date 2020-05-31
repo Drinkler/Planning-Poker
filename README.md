@@ -1,4 +1,4 @@
-# Planning-Poker :black_joker:
+# Planning-Poker :black_joker: 
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/593c2cb72b1540b491176debcae6f180)](https://www.codacy.com/manual/Drinkler/Planning-Poker?utm_source=github.com&utm_medium=referral&utm_content=Drinkler/Planning-Poker&utm_campaign=Badge_Grade)
 [![Website](https://img.shields.io/website?down_color=lightgrey&down_message=offline&up_color=green&up_message=online&url=http%3A%2F%2Fplanning-poker.eba-gveiarhp.eu-central-1.elasticbeanstalk.com%2F)](http://planning-poker.eba-gveiarhp.eu-central-1.elasticbeanstalk.com/)
