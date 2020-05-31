@@ -1,8 +1,18 @@
 %!TEX root = ../dokumentation.tex
 \chapter{Continuous Integration}\label{ch:continuous-integration}
-Als CI wurde am Anfang AWS CodePipeline verwendet. Dies bot eine einfach Einbindung zwischen Github und AWS Elastikbeanstalk. Sobald Der Master des Github Repositories einen neuen Push erhalten hat, wurde automatisch der neue Code auf den Server geladen. Jedoch als später Tests zum Projekt hinzugefügt wurden, wollten wir, dass automatisch die Tests vor dem Deploy ausgeführt werden. Dazu wäre AWS CodeBuild eine Möglichkeit gewesen. Doch persönlich wurde bereits mit Travis-CI gearbeitet, was eine kostenlose und einfach implementierte Version darstellt. Für Travis CI muss man nur dem Programm Berechtigungen für das Github Repository geben, sowie eine .travis.yml Datei im Root des Repositories vorhanden sein. In dieser yml-Datei spezifiziert man Befehle die in einer bestimmten Reihenfolge ablaufen. Außerdem wurde AWS CodePipeline nicht mehr benötigt, da Travis CI eine eigene kostenlose Deploy Möglichkeit bereitstellt.
-Dadurch wird nach jedem Push auf den Master des Github Repositories bei Travis CI eine virtuelle Umgebung aufgebaut die die definierten Befehle ausführt. Schlägt ein Build fehl wird es gestoppt. Den Status des Builds erkennt man an der build Badge in der ReadMe Datei. Sehen Sie hier den letzten Build des Projektes: https://travis-ci.com/github/Drinkler/Planning-Poker.
-\includegraphics[width=\textwidth]{images/continuous_integration.png}
+Am Anfang des Projektes wurde \href{https://aws.amazon.com/de/codepipeline/}{AWS CodePipeline} als Continuous Integration (CI) verwendet. Dies stellte eine einfache Lösung dar, da unter anderem Github als Drittanbieter verfügbar ist. Somit wurde bei jeder Code-Änderung auf dem Master Branch des Github Repositories das neue Projekt auf den Server geladen.\\
+Jedoch als später Tests mit PHPUnit hinzugefügt wurden, wollte man das vor jedem Build das Projekt getestet wird.\\
+Dazu wäre \href{https://aws.amazon.com/de/codebuild/}{AWS CodeBuild} eine Möglichkeit gewesen. Doch, da bereits persönlich mit dem kostenlosem CI Tool \href{https://travis-ci.com/}{Travis CI} gearbeitet wurde, wurde dies ausgewählt.
 
-travis ci - aws codedeploy -> encrypted keys
-github app / actions
+Für die Verwendung von Travis CI benötigt es die Berechtigung auf das Github Repository zuzugreifen. Außerdem muss eine \href{https://github.com/Drinkler/Planning-Poker/blob/master/.travis.yml}{\lstinline{.travis.yml}} Datei im Root des Repositories liegen. In dieser yml-Datei werden die \href{https://docs.travis-ci.com/user/job-lifecycle/}{nacheinander ablaufenden Befehle} definiert. In diesen Schritten wird das Projekt gebaut und getestet. Schlägt der Build fehl, wird er abgebrochen und der Code wird nicht auf den Server geladen. Durch die Möglichkeit mit \href{https://docs.travis-ci.com/user/deployment/codedeploy/}{AWS CodeDeploy} wird das Projekt automatisch, nach einem erfolgreichem Build, hochgeladen.\\
+Travis CI klont das Repository in eine neue virtuelle Umgebung und führt diesen Build aus. Der letzte Build des Projektes ist \href{https://travis-ci.com/github/Drinkler/Planning-Poker}{hier} zu finden.\\
+Um keine Anmeldedaten des Deploy Schrittes im Quellcode stehen zu haben, wurden die \href{https://docs.travis-ci.com/user/environment-variables/}{Travis CI Umgebungsvariablen} verwendet.
+
+Die Abbildung \ref{ci} zeigt den Ablauf zwischen den einzelnen Schritten von der Entwicklung bis zur Veröffentlichung. Ein lokales Git repräsentiert einen Entwickler. Dies ist für andere Projekte variierbar.
+
+\begin{figure}[H]
+	\centering
+  \includegraphics[width=\textwidth]{images/continuous_integration.png}
+	\caption{Continuous Integration Prozess}
+	\label{ci}
+\end{figure}
