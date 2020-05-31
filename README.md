@@ -5,6 +5,13 @@
 [![Build Status](https://travis-ci.com/Drinkler/Planning-Poker.svg?branch=master)](https://travis-ci.com/Drinkler/Planning-Poker)
 [![codecov](https://codecov.io/gh/Drinkler/Planning-Poker/branch/master/graph/badge.svg)](https://codecov.io/gh/Drinkler/Planning-Poker)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/drinkler/Planning-Poker)](https://github.com/Drinkler/Planning-Poker/releases/latest)
+[![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/drinkler/Planning-Poker)](https://github.com/Drinkler/Planning-Poker/tree/v1.0.0)
+[![GitHub issues](https://img.shields.io/github/issues/drinkler/Planning-Poker)](https://github.com/Drinkler/Planning-Poker/issues)
+[![GitHub Release Date](https://img.shields.io/github/release-date/drinkler/Planning-Poker)](https://github.com/Drinkler/Planning-Poker/releases)
+![GitHub All Releases](https://img.shields.io/github/downloads/drinkler/Planning-Poker/total)
+![GitHub stars](https://img.shields.io/github/stars/drinkler/Planning-Poker?style=social)
+![PHP from Travis config](https://img.shields.io/travis/php-v/drinkler/Planning-Poker/master)
 
 ## About
 Planning-Poker is a web based php app. The project emerged from the requirements of a study project. During the implementation we tried to use current best practices of software development and to get to know new ones.
