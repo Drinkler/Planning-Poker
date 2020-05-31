@@ -60,9 +60,9 @@ Um die Ladezeit einer Seite zu beschleunigen, wurden UglifyJS sowie CSSO verwend
 \section{Funktionalität}\label{sec:funktionalität}
 
 \subsection{Login/Register}\label{subsec:login/register}
-passwort hashing
-confirm ohne email wegen email server in aws.
-logik der registrierung und anmeldung
+Zur Registrierung eines Benutzer wird der Vorname, Nachname, eine E-Mail und ein Passwort benötigt. Nach Erfolgreicher Registrierung muss man seine E-Mail Bestätigen. In diesem Projekt wird dies mit einem automatisch generierten Link, der die E-Mail sowie einen eindeutigen String beinhaltet, gelöst. Gedacht war es, diesen Link per E-Mail an den Benutzer zu senden. \href{https://aws.amazon.com/de/ses/}{Amazon Simple Email Service} bot sich als Lösung gut an. Doch um dies Umzusetzen benötigte man eine Domain, sowie das ausfüllen eines Fragebogens mit Fragen z.B. wie ein Kunde sich bei Problemen an uns wenden kann.\\
+Zum Anmelden wird eine E-Mail und ein Passwort benötigt.\\
+Das Passwort wird mit der \lstinline{password_hash} Funktion in der Datenbank gespeichert und ist somit für keinen Entwickler einsehbar.
 
 \subsection{Lobby}\label{subsec:lobby}
 Die Funktionalität der Lobby ist in zwei Bereiche unterteilt. Einerseits die Lobby, die von jedem Spieler eingesehen werden kann. Hier wird das gewählte Kartenset präsentiert und es sind Abstimmungen mit Maus oder Touch möglich. Darüber hinaus existiert eine Master-View, welche dem Lobby-Besitzer automatisch zur Verfügung gestellt wird. In dieser ist es dem Besitzer möglich, die aktuelle Story über eine GitHub-API aus einem bestehenden Public-Repository auszuwählen. Des weiteren wird eine Übersicht mit Mitspielern angezeigt. Im untersten Teil der Lobby wird eine live Spielstatistik angezeigt. Hier werden Durchschnittswert aller gewählten Karten angezeigt sowie die meist gespielte Karte. Bei der Erstellung der SQL-Abfrage für meist gespielte Karten ist es zu einem bisher nicht behebbaren Fehler gekommen, weshalb die Funktion bisher nicht gänzlich funktioniert. Grund hierfür ist der Datentyp nvarchar der Spalte vote in der gleichnamigen Tabelle. Nach einiger Zeit des Testens wurde herausgefunden, dass man ein GROUP BY Statement nicht auf nvarchar Spalten ausführen kann. 
