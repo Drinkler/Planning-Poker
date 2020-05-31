@@ -14,8 +14,8 @@ You can find a hosted version of this project here: http://planning-poker.eba-gv
 
 # Prerequisites
 To run this project locally, you must have a php development server running atleast version 7.3.0 .
-On a Windows development environment, we recommend using XAMPP: https://www.apachefriends.org/de/index.html
-On a Mac OsX development environment, we recommend using Scotch Box: https://box.scotch.io/
+On a Windows development environment, we recommend using XAMPP: https://www.apachefriends.org/de/index.html     \ 
+On a Mac OsX development environment, we recommend using Scotch Box: https://box.scotch.io/     \
 
 ## Database 
 To connect to the databse, special environment params within the dev environment are required. Interested inquiries can be sent to the authors of this project.
@@ -43,7 +43,7 @@ To ensure further compatibility of the project, composer is used.
 To quickly install Composer in the current directory, run the following script in your terminal.
 ```
 $ php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
-$php -r "if (hash_file('sha384', 'composer-setup.php') === 'e0012edf3e80b6978849f5eff0d4b4e4c79ff1609dd1e613307e16318854d24ae64f26d17af3ef0bf7cfb710ca74755a') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+$ php -r "if (hash_file('sha384', 'composer-setup.php') === 'e0012edf3e80b6978849f5eff0d4b4e4c79ff1609dd1e613307e16318854d24ae64f26d17af3ef0bf7cfb710ca74755a') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
 $ php composer-setup.php
 $ php -r "unlink('composer-setup.php');"
 ```
@@ -68,4 +68,4 @@ $ composer install
 Copyright 2020 Florian Drinkler, Luca Stanger
 
 # License
-This project is licensed under the **Apache License 2.0** - see the [LICENSE.MD](https://github.com/lucastanger/Spanning-Tree-Simulation/blob/master/LICENSE) file for details
+This project is licensed under the **GNU General Public License v3.0** - see the [LICENSE.MD](https://github.com/Drinkler/Planning-Poker/blob/master/LICENSE) file for details
